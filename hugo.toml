@@ -14,6 +14,27 @@ svg = "transp.png"
 # name = "twitter"
 # url = "https://twitter.com"
 
+
+[params.browserconfig]
+  TileColor = "#2d89ef" # default windows 10 blue tile color
+
+[[params.socialIcons]]
+name = "github"
+url = "https://github.com/ByteShifters"
+
+[[params.socialIcons]]
+name = "twitter"
+url = "https://twitter.com/ByteShifters"
+
+[[params.socialIcons]]
+name = "instagram"
+url = "https://instagram.com/ByteShifters"
+
+[[params.socialIcons]]
+name = "email"
+url = "mailto:us@byteshifters.com"
+languageCode = 'en-us'
+
 [[params.socialIcons]]
 name = "Rss"
 url = "index.xml"
@@ -76,3 +97,5 @@ ignoreErrors = ["additional-script-loading-error"] # ignore error of loading add
 
 paginate = 5
  _build.list = "never"
+
+
