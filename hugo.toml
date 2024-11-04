@@ -2,18 +2,9 @@
 baseURL = 'https://byteshifters.com/'
 languageCode = 'en-us'
 title = 'ByteShifters'
-theme = "hugo-blog-awesome"
+theme = "ByteShifters"
 
 svg = "transp.png"
-
-# [[params.socialIcons]]
-# name = "github"
-# url = "https://github.com/hugo-sid"
-
-# [[params.socialIcons]]
-# name = "twitter"
-# url = "https://twitter.com"
-
 
 [params.browserconfig]
   TileColor = "#2d89ef" # default windows 10 blue tile color
