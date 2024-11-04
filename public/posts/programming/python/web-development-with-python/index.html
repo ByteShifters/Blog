@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en-us"><head><meta charset="utf-8">
+<meta http-equiv="content-type" content="text/html">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title itemprop="name">Web Development with Python | ByteShifters</title>
+<meta property="og:title" content="Web Development with Python | ByteShifters" />
+<meta name="twitter:title" content="Web Development with Python | ByteShifters" />
+<meta itemprop="name" content="Web Development with Python | ByteShifters" />
+<meta name="application-name" content="Web Development with Python | ByteShifters" />
+<meta property="og:site_name" content="" />
+
+<meta name="description" content="">
+<meta itemprop="description" content="" />
+<meta property="og:description" content="" />
+<meta name="twitter:description" content="" />
+
+<meta property="og:locale" content="en-us" />
+<meta name="language" content="en-us" />
+
+
+
+
+
+    
+    
+    
+
+    <meta property="og:type" content="article" />
+    <meta property="og:article:published_time" content=2024-09-11T00:00:00Z />
+    <meta property="article:published_time" content=2024-09-11T00:00:00Z />
+    <meta property="og:url" content="https://byteshifters.com/posts/programming/python/web-development-with-python/" />
+
+    
+    <meta property="og:article:author" content="ByteShifters" />
+    <meta property="article:author" content="ByteShifters" />
+    <meta name="author" content="ByteShifters" />
+    
+    
+
+    
+
+    <script defer type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "Article",
+        "headline": "Web Development with Python",
+        "author": {
+        "@type": "Person",
+        "name": ""
+        },
+        "datePublished": "2024-09-11",
+        "description": "",
+        "wordCount":  899 ,
+        "mainEntityOfPage": "True",
+        "dateModified": "2024-09-11",
+        "image": {
+        "@type": "imageObject",
+        "url": ""
+        },
+        "publisher": {
+        "@type": "Organization",
+        "name": "ByteShifters"
+        }
+    }
+    </script>
+
+
+<meta name="generator" content="Hugo 0.122.0">
+
+    
+    <meta property="og:title" content="Web Development with Python" />
+<meta property="og:description" content="Introduction to Web Frameworks Understanding Web Frameworks
+Web frameworks simplify the process of building web applications by providing a structure and tools for common web development tasks.
+Flask: A lightweight, micro-framework that gives you the flexibility to structure your app as you want. Django: A full-fledged framework that comes with built-in features and a &ldquo;batteries-included&rdquo; philosophy, providing an out-of-the-box admin interface, ORM, and more. Setting Up a Flask or Django Project" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://byteshifters.com/posts/programming/python/web-development-with-python/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2024-09-11T00:00:00+00:00" />
+<meta property="article:modified_time" content="2024-09-11T00:00:00+00:00" />
+
+
+
+    
+    <meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Web Development with Python"/>
+<meta name="twitter:description" content="Introduction to Web Frameworks Understanding Web Frameworks
+Web frameworks simplify the process of building web applications by providing a structure and tools for common web development tasks.
+Flask: A lightweight, micro-framework that gives you the flexibility to structure your app as you want. Django: A full-fledged framework that comes with built-in features and a &ldquo;batteries-included&rdquo; philosophy, providing an out-of-the-box admin interface, ORM, and more. Setting Up a Flask or Django Project"/>
+
+
+    
+    <link rel="icon" type="image/png+xml" href="/icons/logo32.png">
+
+    <link rel="canonical" href="https://byteshifters.com/posts/programming/python/web-development-with-python/">
+    <link href="/style.min.a65edcf99b5d9c11dd8dc9c13f2e80eec76933d8449c8579cefe3c64191b71d4.css" rel="stylesheet">
+    <link href="/code-highlight.min.3dea1c7a362e3a7df3392c75d19c1efa95b2e82aa030c322a07a6caf50cb8e9a.css" rel="stylesheet">
+
+    
+    <link rel="icon" type="image/png+xml" href="/icons/logo32.png">
+    
+    
+    <link rel="icon" type="image/png" sizes="32x32" href="/icons/logo32.png">
+    
+
+
+
+
+<link rel="manifest" href="https://byteshifters.com/site.webmanifest">
+
+<meta name="msapplication-config" content="/browserconfig.xml">
+<meta name="msapplication-TileColor" content="#2d89ef">
+<meta name="theme-color" content="#cccccc">
+
+    
+    <link rel="icon" type="image/png"  sizes="32x32" href="/icons/logo32.png">
+
+</head>
+<body data-theme = "" class="notransition">
+
+<script src="/js/theme.min.8961c317c5b88b953fe27525839672c9343f1058ab044696ca225656c8ba2ab0.js" integrity="sha256-iWHDF8W4i5U/4nUlg5ZyyTQ/EFirBEaWyiJWVsi6KrA="></script>
+
+<div class="navbar" role="navigation">
+    <nav class="menu" aria-label="Main Navigation">
+        <a href="https://byteshifters.com/" class="logo">
+            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" 
+viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" 
+stroke-linejoin="round" class="feather feather-home">
+<title></title>
+<path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+<polyline points="9 22 9 12 15 12 15 22"></polyline>
+</svg>
+        </a>
+        <input type="checkbox" id="menu-trigger" class="menu-trigger" />
+        <label for="menu-trigger">
+            <span class="menu-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" stroke="currentColor" fill="none" viewBox="0 0 14 14"><title>Menu</title><path stroke-linecap="round" stroke-linejoin="round" d="M10.595 7L3.40726 7"></path><path stroke-linecap="round" stroke-linejoin="round" d="M10.5096 3.51488L3.49301 3.51488"></path><path stroke-linecap="round" stroke-linejoin="round" d="M10.5096 10.4851H3.49301"></path><path stroke-linecap="round" stroke-linejoin="round" d="M0.5 12.5V1.5C0.5 0.947715 0.947715 0.5 1.5 0.5H12.5C13.0523 0.5 13.5 0.947715 13.5 1.5V12.5C13.5 13.0523 13.0523 13.5 12.5 13.5H1.5C0.947715 13.5 0.5 13.0523 0.5 12.5Z"></path></svg>
+            </span>
+        </label>
+
+        <div class="trigger">
+            <ul class="trigger-container">
+                
+                
+                <li>
+                    <a class="menu-link " href="/">
+                        Home
+                    </a>
+                    
+                </li>
+                
+                <li>
+                    <a class="menu-link " href="/posts/">
+                        Posts
+                    </a>
+                    
+                </li>
+                
+                <li>
+                    <a class="menu-link " href="/contact/">
+                        Contact
+                    </a>
+                    
+                </li>
+                
+                <li class="menu-separator">
+                    <span>|</span>
+                </li>
+                
+                
+            </ul>
+            <a id="mode" href="#">
+                <svg xmlns="http://www.w3.org/2000/svg" class="mode-sunny" width="21" height="21" viewBox="0 0 14 14" stroke-width="1">
+<title>LIGHT</title><g><circle cx="7" cy="7" r="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></circle><line x1="7" y1="0.5" x2="7" y2="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="2.4" x2="3.82" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="0.5" y1="7" x2="2.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="11.6" x2="3.82" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="7" y1="13.5" x2="7" y2="11.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="11.6" x2="10.18" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="13.5" y1="7" x2="11.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="2.4" x2="10.18" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line></g></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" class="mode-moon" width="21" height="21" viewBox="0 0 14 14" stroke-width="1">
+<title>DARK</title><g><circle cx="7" cy="7" r="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></circle><line x1="7" y1="0.5" x2="7" y2="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="2.4" x2="3.82" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="0.5" y1="7" x2="2.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="11.6" x2="3.82" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="7" y1="13.5" x2="7" y2="11.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="11.6" x2="10.18" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="13.5" y1="7" x2="11.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="2.4" x2="10.18" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line></g></svg>
+            </a>
+        </div>
+    </nav>
+</div>
+
+<div class="wrapper post">
+    <main class="page-content" aria-label="Content">
+        <article>
+            <header class="header">
+                <h1 class="header-title">Web Development with Python</h1>
+                
+                
+                <div class="post-meta">
+                    <time datetime="2024-09-11T00:00:00&#43;00:00" itemprop="datePublished"> Sep 11, 2024 </time>
+                </div>
+                
+                
+                <div class="tags-list"><a href="https://byteshifters.com/tags/python/">#Python</a>
+                            </div>
+            </header>
+            
+    
+    <details class="toc" ZgotmplZ>
+        <summary><b></b></summary>
+        <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#introduction-to-web-frameworks"><strong>Introduction to Web Frameworks</strong></a></li>
+        <li><a href="#flask-basics"><strong>Flask Basics</strong></a></li>
+        <li><a href="#django-basics"><strong>Django Basics</strong></a></li>
+        <li><a href="#restful-apis"><strong>RESTful APIs</strong></a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    </details>
+            <div class="page-content">
+                <h3 id="introduction-to-web-frameworks"><strong>Introduction to Web Frameworks</strong></h3>
+<ul>
+<li>
+<p><strong>Understanding Web Frameworks</strong><br>
+Web frameworks simplify the process of building web applications by providing a structure and tools for common web development tasks.</p>
+<ul>
+<li><strong>Flask</strong>: A lightweight, micro-framework that gives you the flexibility to structure your app as you want.</li>
+<li><strong>Django</strong>: A full-fledged framework that comes with built-in features and a &ldquo;batteries-included&rdquo; philosophy, providing an out-of-the-box admin interface, ORM, and more.</li>
+</ul>
+</li>
+<li>
+<p><strong>Setting Up a Flask or Django Project</strong><br>
+Depending on your choice, here&rsquo;s how to get started:</p>
+<ul>
+<li>
+<p><strong>Flask Setup</strong>:</p>
+<pre tabindex="0"><code>pip install Flask
+
+# Create a basic Flask app (app.py)
+from flask import Flask
+
+app = Flask(__name__)
+
+@app.route(&#39;/&#39;)
+def home():
+    return &#34;Hello, Flask!&#34;
+
+if __name__ == &#39;__main__&#39;:
+    app.run(debug=True)
+</code></pre></li>
+<li>
+<p><strong>Django Setup</strong>:</p>
+<pre tabindex="0"><code>pip install Django
+
+# Create a Django project
+django-admin startproject myproject
+
+# Navigate to the project directory
+cd myproject
+
+# Start the development server
+python manage.py runserver
+
+# Access your Django app at http://127.0.0.1:8000/
+</code></pre></li>
+</ul>
+</li>
+</ul>
+<h3 id="flask-basics"><strong>Flask Basics</strong></h3>
+<ul>
+<li>
+<p><strong>Routes, Views, Templates, and Static Files</strong><br>
+Flask routes map URLs to Python functions, known as views, which return the content to be displayed. Templates are used to separate the content from the presentation, and static files like CSS and JavaScript are served from a dedicated directory.</p>
+<p><strong>Example</strong>:</p>
+<pre tabindex="0"><code>from flask import Flask, render_template
+
+app = Flask(__name__)
+
+@app.route(&#39;/&#39;)
+def home():
+    return render_template(&#39;index.html&#39;)
+
+if __name__ == &#39;__main__&#39;:
+    app.run(debug=True)
+</code></pre><p>Place your HTML files in a <code>templates</code> directory and static assets in a <code>static</code> directory.</p>
+</li>
+<li>
+<p><strong>Handling Forms and User Input</strong><br>
+Flask handles form data using the <code>request</code> object.</p>
+<p><strong>Example</strong>:</p>
+<pre tabindex="0"><code>from flask import Flask, render_template, request
+
+app = Flask(__name__)
+
+@app.route(&#39;/&#39;, methods=[&#39;GET&#39;, &#39;POST&#39;])
+def home():
+    if request.method == &#39;POST&#39;:
+        username = request.form[&#39;username&#39;]
+        return f&#34;Hello, {username}!&#34;
+    return render_template(&#39;index.html&#39;)
+
+if __name__ == &#39;__main__&#39;:
+    app.run(debug=True)
+</code></pre></li>
+<li>
+<p><strong>Working with Flask Extensions</strong><br>
+Flask has a rich ecosystem of extensions for adding functionality like database support, authentication, and more.</p>
+<p><strong>Example</strong>: Using <code>Flask-SQLAlchemy</code> for database interaction:</p>
+<pre tabindex="0"><code>from flask import Flask
+from flask_sqlalchemy import SQLAlchemy
+
+app = Flask(__name__)
+app.config[&#39;SQLALCHEMY_DATABASE_URI&#39;] = &#39;sqlite:///example.db&#39;
+db = SQLAlchemy(app)
+
+class User(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(80), nullable=False)
+
+db.create_all()
+
+@app.route(&#39;/&#39;)
+def home():
+    users = User.query.all()
+    return f&#34;Users: {users}&#34;
+
+if __name__ == &#39;__main__&#39;:
+    app.run(debug=True)
+</code></pre></li>
+</ul>
+<h3 id="django-basics"><strong>Django Basics</strong></h3>
+<ul>
+<li>
+<p><strong>Django Project Structure</strong><br>
+Django projects are structured with a clear separation of concerns, making it easy to scale and maintain applications. The key components are:</p>
+<ul>
+<li><strong><code>manage.py</code></strong>: A command-line utility for administrative tasks.</li>
+<li><strong><code>settings.py</code></strong>: Configuration for the Django project.</li>
+<li><strong><code>urls.py</code></strong>: URL routing configuration.</li>
+<li><strong>Apps</strong>: Modular components of a Django project.</li>
+</ul>
+</li>
+<li>
+<p><strong>Models, Views, and Templates (MVT Pattern)</strong><br>
+Django follows the MVT (Model-View-Template) pattern:</p>
+<ul>
+<li>
+<p><strong>Models</strong>: Represent the data structure of your application.
+<strong>Example</strong>:</p>
+<pre tabindex="0"><code>from django.db import models
+
+class User(models.Model):
+    name = models.CharField(max_length=100)
+    age = models.IntegerField()
+</code></pre></li>
+<li>
+<p><strong>Views</strong>: Handle the logic for processing requests and returning responses.
+<strong>Example</strong>:</p>
+<pre tabindex="0"><code>from django.shortcuts import render
+from .models import User
+
+def home(request):
+    users = User.objects.all()
+    return render(request, &#39;index.html&#39;, {&#39;users&#39;: users})
+</code></pre></li>
+<li>
+<p><strong>Templates</strong>: Define the HTML structure and presentation.</p>
+<pre tabindex="0"><code>&lt;!-- index.html --&gt;
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;User List&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Users&lt;/h1&gt;
+    &lt;ul&gt;
+        {% for user in users %}
+            &lt;li&gt;{{ user.name }} ({{ user.age }} years old)&lt;/li&gt;
+        {% endfor %}
+    &lt;/ul&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre></li>
+</ul>
+</li>
+<li>
+<p><strong>Django ORM and Migrations</strong><br>
+Django ORM allows you to interact with the database using Python objects, and migrations are used to propagate changes to your models to the database schema.</p>
+<p><strong>Example</strong>:</p>
+<pre tabindex="0"><code># After defining your models, create and apply migrations
+python manage.py makemigrations
+python manage.py migrate
+
+# Now you can interact with the database through Django&#39;s ORM
+from myapp.models import User
+User.objects.create(name=&#39;Alice&#39;, age=30)
+users = User.objects.all()
+</code></pre></li>
+</ul>
+<h3 id="restful-apis"><strong>RESTful APIs</strong></h3>
+<ul>
+<li>
+<p><strong>Building REST APIs with Flask</strong><br>
+Flask can be used to build RESTful APIs by defining routes that return JSON responses.</p>
+<p><strong>Example</strong>:</p>
+<pre tabindex="0"><code>from flask import Flask, jsonify, request
+
+app = Flask(__name__)
+
+users = []
+
+@app.route(&#39;/users&#39;, methods=[&#39;GET&#39;])
+def get_users():
+    return jsonify(users)
+
+@app.route(&#39;/users&#39;, methods=[&#39;POST&#39;])
+def add_user():
+    user = request.get_json()
+    users.append(user)
+    return jsonify(user), 201
+
+if __name__ == &#39;__main__&#39;:
+    app.run(debug=True)
+</code></pre></li>
+<li>
+<p><strong>Building REST APIs with Django REST Framework</strong><br>
+Django REST Framework (DRF) is a powerful toolkit for building Web APIs in Django.</p>
+<p><strong>Example</strong>:</p>
+<pre tabindex="0"><code># Install Django REST Framework
+pip install djangorestframework
+
+# Add &#39;rest_framework&#39; to your INSTALLED_APPS in settings.py
+
+from rest_framework import serializers, viewsets
+from myapp.models import User
+
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = [&#39;id&#39;, &#39;name&#39;, &#39;age&#39;]
+
+class UserViewSet(viewsets.ModelViewSet):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+
+# In urls.py, register the viewset with a router
+from rest_framework.routers import DefaultRouter
+from myapp.views import UserViewSet
+
+router = DefaultRouter()
+router.register(r&#39;users&#39;, UserViewSet)
+
+urlpatterns = [
+    path(&#39;&#39;, include(router.urls)),
+]
+</code></pre></li>
+<li>
+<p><strong>Understanding HTTP Methods</strong><br>
+RESTful APIs typically use the following HTTP methods:</p>
+<ul>
+<li><strong><code>GET</code></strong>: Retrieve data from the server.</li>
+<li><strong><code>POST</code></strong>: Submit new data to the server.</li>
+<li><strong><code>PUT</code></strong>: Update existing data on the server.</li>
+<li><strong><code>DELETE</code></strong>: Remove data from the server.</li>
+</ul>
+<p><strong>Example</strong>:</p>
+<pre tabindex="0"><code>@app.route(&#39;/users/&lt;int:id&gt;&#39;, methods=[&#39;GET&#39;, &#39;PUT&#39;, &#39;DELETE&#39;])
+def handle_user(id):
+    if request.method == &#39;GET&#39;:
+        user = next((u for u in users if u[&#39;id&#39;] == id), None)
+        if user:
+            return jsonify(user)
+        return jsonify({&#39;error&#39;: &#39;User not found&#39;}), 404
+
+    if request.method == &#39;PUT&#39;:
+        user = next((u for u in users if u[&#39;id&#39;] == id), None)
+        if user:
+            user.update(request.get_json())
+            return jsonify(user)
+        return jsonify({&#39;error&#39;: &#39;User not found&#39;}), 404
+
+    if request.method == &#39;DELETE&#39;:
+        global users
+        users = [u for u in users if u[&#39;id&#39;] != id]
+        return &#39;&#39;, 204
+</code></pre></li>
+<li>
+<p><strong>JSON Serialization and Deserialization</strong><br>
+JSON (JavaScript Object Notation) is commonly used for data exchange in web applications. Python provides built-in support for JSON through the <code>json</code> module.</p>
+<p><strong>Example</strong>:</p>
+<pre tabindex="0"><code>import json
+
+# Serialization: Python object to JSON string
+user = {&#39;name&#39;: &#39;Alice&#39;, &#39;age&#39;: 30}
+user_json = json.dumps(user)
+print(user_json)  # Output: {&#34;name&#34;: &#34;Alice&#34;, &#34;age&#34;: 30}
+
+# Deserialization: JSON string to Python object
+user_data = json.loads(user_json)
+print(user_data)  # Output: {&#39;name&#39;: &#39;Alice&#39;, &#39;age&#39;: 30}
+</code></pre></li>
+</ul>
+
+            </div>
+        </article></main>
+</div>
+<footer class="footer">
+    <span class="footer_item"> </span>
+    &nbsp;
+
+    <div class="footer_social-icons">
+<a href="index.xml" target="_blank" rel="noopener noreferrer me"
+    title="Rss">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+    stroke-linecap="round" stroke-linejoin="round">
+    <path d="M4 11a9 9 0 0 1 9 9" />
+    <path d="M4 4a16 16 0 0 1 16 16" />
+    <circle cx="5" cy="19" r="1" />
+</svg>
+</a>
+</div>
+    <small class="footer_copyright">
+        
+        byteshifters.com
+        
+    </small>
+</footer><a href="#" title="" id="totop">
+    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor" stroke="currentColor" viewBox="0 96 960 960">
+    <path d="M283 704.739 234.261 656 480 410.261 725.739 656 677 704.739l-197-197-197 197Z"/>
+</svg>
+
+</a>
+
+
+    
+
+
+
+
+
+
+    
+    <script src="https://byteshifters.com/js/main.min.35f435a5d8eac613c52daa28d8af544a4512337d3e95236e4a4978417b8dcb2f.js" integrity="sha256-NfQ1pdjqxhPFLaoo2K9USkUSM30&#43;lSNuSkl4QXuNyy8="></script>
+
+    
+
+</body>
+</html>

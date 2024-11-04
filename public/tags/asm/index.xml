@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>ASM on ByteShifters</title>
+    <link>https://byteshifters.com/tags/asm/</link>
+    <description>Recent content in ASM on ByteShifters</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 21 Sep 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://byteshifters.com/tags/asm/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Introduction to ARM Architecture</title>
+      <link>https://byteshifters.com/posts/programming/introduction-to-arm-architecture/</link>
+      <pubDate>Sat, 21 Sep 2024 00:00:00 +0000</pubDate>
+      
+      <guid>https://byteshifters.com/posts/programming/introduction-to-arm-architecture/</guid>
+      
+      <description>Introduction to ARM Architecture ARM is a widely-used architecture in various devices due to its efficiency and power-saving features. Understanding ARM assembly provides you with the ability to write low-level code that directly interacts with hardware.
+ARM Versions ARM has several versions, including ARMv7 (32-bit) and ARMv8 (64-bit). Each version introduces new instructions and capabilities.
+Basic Concepts Registers Registers are crucial for ARM assembly programming. Each register has specific roles:</description>
+      
+    </item>
+    
+    <item>
+      <title>Introduction to x64 ASM</title>
+      <link>https://byteshifters.com/posts/programming/x64-asm/introduction-to-x64-asm/</link>
+      <pubDate>Sat, 21 Sep 2024 00:00:00 +0000</pubDate>
+      
+      <guid>https://byteshifters.com/posts/programming/x64-asm/introduction-to-x64-asm/</guid>
+      
+      <description>1. Introduction to Assembly and x64 Architecture What is Assembly Language? Assembly language is a low-level programming language that is closely related to machine code. Each instruction corresponds directly to machine instructions executed by the CPU. Unlike high-level languages, assembly is architecture-specific, meaning that assembly code written for one architecture (e.g., x86) won&amp;rsquo;t work on another (e.g., ARM).
+In this tutorial, we&amp;rsquo;ll focus on x64 assembly, the 64-bit extension of the x86 architecture.</description>
+      
+    </item>
+    
+  </channel>
+</rss>

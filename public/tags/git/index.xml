@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Git on ByteShifters</title>
+    <link>https://byteshifters.com/tags/git/</link>
+    <description>Recent content in Git on ByteShifters</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 30 Aug 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://byteshifters.com/tags/git/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Git, Zero to Hero</title>
+      <link>https://byteshifters.com/posts/git/version-control/</link>
+      <pubDate>Fri, 30 Aug 2024 00:00:00 +0000</pubDate>
+      
+      <guid>https://byteshifters.com/posts/git/version-control/</guid>
+      
+      <description>Introduction to Git Git is a powerful distributed version control system that enables multiple developers to collaborate on projects, track changes, and manage code effectively. It maintains a complete history of changes, making it easy to revert to previous versions when necessary.
+Installing Git Windows: Download the installer from git-scm.com. macOS: Install via Homebrew: brew install git Linux: Use your package manager, e.g.: sudo apt-get install git # For Debian-based systemssudo yum install git # For Red Hat-based systems Configuring Git After installation, configure your Git environment:</description>
+      
+    </item>
+    
+  </channel>
+</rss>

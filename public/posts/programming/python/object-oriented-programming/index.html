@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en-us"><head><meta charset="utf-8">
+<meta http-equiv="content-type" content="text/html">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title itemprop="name">Object-Oriented Programming (OOP) | ByteShifters</title>
+<meta property="og:title" content="Object-Oriented Programming (OOP) | ByteShifters" />
+<meta name="twitter:title" content="Object-Oriented Programming (OOP) | ByteShifters" />
+<meta itemprop="name" content="Object-Oriented Programming (OOP) | ByteShifters" />
+<meta name="application-name" content="Object-Oriented Programming (OOP) | ByteShifters" />
+<meta property="og:site_name" content="" />
+
+<meta name="description" content="">
+<meta itemprop="description" content="" />
+<meta property="og:description" content="" />
+<meta name="twitter:description" content="" />
+
+<meta property="og:locale" content="en-us" />
+<meta name="language" content="en-us" />
+
+
+
+
+
+    
+    
+    
+
+    <meta property="og:type" content="article" />
+    <meta property="og:article:published_time" content=2024-09-11T00:00:00Z />
+    <meta property="article:published_time" content=2024-09-11T00:00:00Z />
+    <meta property="og:url" content="https://byteshifters.com/posts/programming/python/object-oriented-programming/" />
+
+    
+    <meta property="og:article:author" content="ByteShifters" />
+    <meta property="article:author" content="ByteShifters" />
+    <meta name="author" content="ByteShifters" />
+    
+    
+
+    
+
+    <script defer type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "Article",
+        "headline": "Object-Oriented Programming (OOP)",
+        "author": {
+        "@type": "Person",
+        "name": ""
+        },
+        "datePublished": "2024-09-11",
+        "description": "",
+        "wordCount":  728 ,
+        "mainEntityOfPage": "True",
+        "dateModified": "2024-09-11",
+        "image": {
+        "@type": "imageObject",
+        "url": ""
+        },
+        "publisher": {
+        "@type": "Organization",
+        "name": "ByteShifters"
+        }
+    }
+    </script>
+
+
+<meta name="generator" content="Hugo 0.122.0">
+
+    
+    <meta property="og:title" content="Object-Oriented Programming (OOP)" />
+<meta property="og:description" content="Classes and Objects Classes and objects are fundamental concepts in OOP. A class defines a blueprint for creating objects, while an object is an instance of a class.
+Defining Classes and Creating Objects
+A class is defined using the class keyword. Objects are created by calling the class as if it were a function.
+Example:
+class Dog:def __init__(self, name, age):self.name = nameself.age = agedef bark(self):return f&#34;{self." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://byteshifters.com/posts/programming/python/object-oriented-programming/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2024-09-11T00:00:00+00:00" />
+<meta property="article:modified_time" content="2024-09-11T00:00:00+00:00" />
+
+
+
+    
+    <meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Object-Oriented Programming (OOP)"/>
+<meta name="twitter:description" content="Classes and Objects Classes and objects are fundamental concepts in OOP. A class defines a blueprint for creating objects, while an object is an instance of a class.
+Defining Classes and Creating Objects
+A class is defined using the class keyword. Objects are created by calling the class as if it were a function.
+Example:
+class Dog:def __init__(self, name, age):self.name = nameself.age = agedef bark(self):return f&#34;{self."/>
+
+
+    
+    <link rel="icon" type="image/png+xml" href="/icons/logo32.png">
+
+    <link rel="canonical" href="https://byteshifters.com/posts/programming/python/object-oriented-programming/">
+    <link href="/style.min.a65edcf99b5d9c11dd8dc9c13f2e80eec76933d8449c8579cefe3c64191b71d4.css" rel="stylesheet">
+    <link href="/code-highlight.min.3dea1c7a362e3a7df3392c75d19c1efa95b2e82aa030c322a07a6caf50cb8e9a.css" rel="stylesheet">
+
+    
+    <link rel="icon" type="image/png+xml" href="/icons/logo32.png">
+    
+    
+    <link rel="icon" type="image/png" sizes="32x32" href="/icons/logo32.png">
+    
+
+
+
+
+<link rel="manifest" href="https://byteshifters.com/site.webmanifest">
+
+<meta name="msapplication-config" content="/browserconfig.xml">
+<meta name="msapplication-TileColor" content="#2d89ef">
+<meta name="theme-color" content="#cccccc">
+
+    
+    <link rel="icon" type="image/png"  sizes="32x32" href="/icons/logo32.png">
+
+</head>
+<body data-theme = "" class="notransition">
+
+<script src="/js/theme.min.8961c317c5b88b953fe27525839672c9343f1058ab044696ca225656c8ba2ab0.js" integrity="sha256-iWHDF8W4i5U/4nUlg5ZyyTQ/EFirBEaWyiJWVsi6KrA="></script>
+
+<div class="navbar" role="navigation">
+    <nav class="menu" aria-label="Main Navigation">
+        <a href="https://byteshifters.com/" class="logo">
+            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" 
+viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" 
+stroke-linejoin="round" class="feather feather-home">
+<title></title>
+<path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+<polyline points="9 22 9 12 15 12 15 22"></polyline>
+</svg>
+        </a>
+        <input type="checkbox" id="menu-trigger" class="menu-trigger" />
+        <label for="menu-trigger">
+            <span class="menu-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" stroke="currentColor" fill="none" viewBox="0 0 14 14"><title>Menu</title><path stroke-linecap="round" stroke-linejoin="round" d="M10.595 7L3.40726 7"></path><path stroke-linecap="round" stroke-linejoin="round" d="M10.5096 3.51488L3.49301 3.51488"></path><path stroke-linecap="round" stroke-linejoin="round" d="M10.5096 10.4851H3.49301"></path><path stroke-linecap="round" stroke-linejoin="round" d="M0.5 12.5V1.5C0.5 0.947715 0.947715 0.5 1.5 0.5H12.5C13.0523 0.5 13.5 0.947715 13.5 1.5V12.5C13.5 13.0523 13.0523 13.5 12.5 13.5H1.5C0.947715 13.5 0.5 13.0523 0.5 12.5Z"></path></svg>
+            </span>
+        </label>
+
+        <div class="trigger">
+            <ul class="trigger-container">
+                
+                
+                <li>
+                    <a class="menu-link " href="/">
+                        Home
+                    </a>
+                    
+                </li>
+                
+                <li>
+                    <a class="menu-link " href="/posts/">
+                        Posts
+                    </a>
+                    
+                </li>
+                
+                <li>
+                    <a class="menu-link " href="/contact/">
+                        Contact
+                    </a>
+                    
+                </li>
+                
+                <li class="menu-separator">
+                    <span>|</span>
+                </li>
+                
+                
+            </ul>
+            <a id="mode" href="#">
+                <svg xmlns="http://www.w3.org/2000/svg" class="mode-sunny" width="21" height="21" viewBox="0 0 14 14" stroke-width="1">
+<title>LIGHT</title><g><circle cx="7" cy="7" r="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></circle><line x1="7" y1="0.5" x2="7" y2="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="2.4" x2="3.82" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="0.5" y1="7" x2="2.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="11.6" x2="3.82" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="7" y1="13.5" x2="7" y2="11.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="11.6" x2="10.18" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="13.5" y1="7" x2="11.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="2.4" x2="10.18" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line></g></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" class="mode-moon" width="21" height="21" viewBox="0 0 14 14" stroke-width="1">
+<title>DARK</title><g><circle cx="7" cy="7" r="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></circle><line x1="7" y1="0.5" x2="7" y2="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="2.4" x2="3.82" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="0.5" y1="7" x2="2.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="11.6" x2="3.82" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="7" y1="13.5" x2="7" y2="11.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="11.6" x2="10.18" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="13.5" y1="7" x2="11.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="2.4" x2="10.18" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line></g></svg>
+            </a>
+        </div>
+    </nav>
+</div>
+
+<div class="wrapper post">
+    <main class="page-content" aria-label="Content">
+        <article>
+            <header class="header">
+                <h1 class="header-title">Object-Oriented Programming (OOP)</h1>
+                
+                
+                <div class="post-meta">
+                    <time datetime="2024-09-11T00:00:00&#43;00:00" itemprop="datePublished"> Sep 11, 2024 </time>
+                </div>
+                
+                
+                <div class="tags-list"><a href="https://byteshifters.com/tags/python/">#Python</a>
+                            </div>
+            </header>
+            
+    
+    <details class="toc" ZgotmplZ>
+        <summary><b></b></summary>
+        <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#classes-and-objects"><strong>Classes and Objects</strong></a></li>
+        <li><a href="#class-attributes-and-methods"><strong>Class Attributes and Methods</strong></a></li>
+        <li><a href="#inheritance"><strong>Inheritance</strong></a></li>
+        <li><a href="#encapsulation-abstraction-and-polymorphism"><strong>Encapsulation, Abstraction, and Polymorphism</strong></a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    </details>
+            <div class="page-content">
+                <h3 id="classes-and-objects"><strong>Classes and Objects</strong></h3>
+<p>Classes and objects are fundamental concepts in OOP. A class defines a blueprint for creating objects, while an object is an instance of a class.</p>
+<ul>
+<li>
+<p><strong>Defining Classes and Creating Objects</strong><br>
+A class is defined using the <code>class</code> keyword. Objects are created by calling the class as if it were a function.</p>
+<p><strong>Example</strong>:</p>
+<pre tabindex="0"><code>class Dog:
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+
+    def bark(self):
+        return f&#34;{self.name} barks!&#34;
+
+my_dog = Dog(&#34;Buddy&#34;, 3)
+print(my_dog.bark())  # Output: Buddy barks!
+</code></pre></li>
+<li>
+<p><strong>Understanding <code>self</code> and <code>__init__</code> Method</strong></p>
+<ul>
+<li><strong><code>self</code></strong>: Refers to the instance of the class and is used to access attributes and methods of the class.</li>
+<li><strong><code>__init__</code></strong>: The constructor method that is called when an object is instantiated. It initializes the object&rsquo;s attributes.</li>
+</ul>
+<p><strong>Example</strong>:</p>
+<pre tabindex="0"><code>class Cat:
+    def __init__(self, name, color):
+        self.name = name
+        self.color = color
+
+    def meow(self):
+        return f&#34;{self.name} says meow!&#34;
+
+my_cat = Cat(&#34;Whiskers&#34;, &#34;gray&#34;)
+print(my_cat.meow())  # Output: Whiskers says meow!
+</code></pre></li>
+</ul>
+<h3 id="class-attributes-and-methods"><strong>Class Attributes and Methods</strong></h3>
+<p>Class attributes and methods belong to the class itself rather than any individual object.</p>
+<ul>
+<li>
+<p><strong>Instance Attributes and Methods</strong><br>
+Instance attributes are specific to an object, while instance methods operate on those attributes.</p>
+<p><strong>Example</strong>:</p>
+<pre tabindex="0"><code>class Person:
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+
+    def greet(self):
+        return f&#34;Hello, my name is {self.name} and I am {self.age} years old.&#34;
+
+person = Person(&#34;Alice&#34;, 30)
+print(person.greet())  # Output: Hello, my name is Alice and I am 30 years old.
+</code></pre></li>
+<li>
+<p><strong>Class Attributes and Methods</strong></p>
+<ul>
+<li>
+<p><strong>Class Attributes</strong>: Shared across all instances of the class.</p>
+<pre tabindex="0"><code>class Dog:
+    species = &#34;Canis familiaris&#34;  # Class attribute
+
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+
+print(Dog.species)  # Output: Canis familiaris
+</code></pre></li>
+<li>
+<p><strong>Class Methods</strong>: Defined with the <code>@classmethod</code> decorator, take <code>cls</code> as the first parameter.</p>
+<pre tabindex="0"><code>class Dog:
+    species = &#34;Canis familiaris&#34;
+
+    @classmethod
+    def get_species(cls):
+        return cls.species
+
+print(Dog.get_species())  # Output: Canis familiaris
+</code></pre></li>
+<li>
+<p><strong>Static Methods</strong>: Defined with the <code>@staticmethod</code> decorator, do not take <code>self</code> or <code>cls</code> as parameters.</p>
+<pre tabindex="0"><code>class Math:
+    @staticmethod
+    def add(x, y):
+        return x + y
+
+print(Math.add(5, 3))  # Output: 8
+</code></pre></li>
+</ul>
+</li>
+</ul>
+<h3 id="inheritance"><strong>Inheritance</strong></h3>
+<p>Inheritance allows one class (subclass) to inherit attributes and methods from another class (superclass).</p>
+<ul>
+<li>
+<p><strong>Inheriting Classes and Method Overriding</strong><br>
+A subclass can override methods from its superclass to provide specific implementations.</p>
+<p><strong>Example</strong>:</p>
+<pre tabindex="0"><code>class Animal:
+    def speak(self):
+        return &#34;Animal speaks&#34;
+
+class Dog(Animal):
+    def speak(self):
+        return &#34;Dog barks&#34;
+
+my_dog = Dog()
+print(my_dog.speak())  # Output: Dog barks
+</code></pre></li>
+<li>
+<p><strong>Using <code>super()</code> Function</strong><br>
+The <code>super()</code> function is used to call methods from the superclass.</p>
+<p><strong>Example</strong>:</p>
+<pre tabindex="0"><code>class Animal:
+    def __init__(self, name):
+        self.name = name
+
+    def speak(self):
+        return &#34;Animal speaks&#34;
+
+class Dog(Animal):
+    def __init__(self, name, breed):
+        super().__init__(name)
+        self.breed = breed
+
+    def speak(self):
+        return f&#34;{super().speak()} and Dog barks&#34;
+
+my_dog = Dog(&#34;Buddy&#34;, &#34;Golden Retriever&#34;)
+print(my_dog.speak())  # Output: Animal speaks and Dog barks
+</code></pre></li>
+</ul>
+<h3 id="encapsulation-abstraction-and-polymorphism"><strong>Encapsulation, Abstraction, and Polymorphism</strong></h3>
+<ul>
+<li>
+<p><strong>Encapsulation</strong><br>
+Encapsulation is the concept of wrapping data (attributes) and methods (functions) into a single unit (class). It hides the internal state and requires all interaction to be performed through an object&rsquo;s methods.</p>
+<p><strong>Example</strong>:</p>
+<pre tabindex="0"><code>class Account:
+    def __init__(self, balance):
+        self.__balance = balance  # Private attribute
+
+    def deposit(self, amount):
+        self.__balance += amount
+
+    def get_balance(self):
+        return self.__balance
+
+acc = Account(1000)
+acc.deposit(500)
+print(acc.get_balance())  # Output: 1500
+</code></pre></li>
+<li>
+<p><strong>Abstraction</strong><br>
+Abstraction involves hiding the complex implementation details and showing only the essential features of an object. In Python, this can be achieved using abstract classes and methods.</p>
+<p><strong>Example</strong>:</p>
+<pre tabindex="0"><code>from abc import ABC, abstractmethod
+
+class AbstractShape(ABC):
+    @abstractmethod
+    def area(self):
+        pass
+
+class Rectangle(AbstractShape):
+    def __init__(self, width, height):
+        self.width = width
+        self.height = height
+
+    def area(self):
+        return self.width * self.height
+
+rect = Rectangle(5, 3)
+print(rect.area())  # Output: 15
+</code></pre></li>
+<li>
+<p><strong>Polymorphism</strong><br>
+Polymorphism allows objects of different classes to be treated as objects of a common superclass. It also means that different classes can have methods with the same name but different implementations.</p>
+<p><strong>Example</strong>:</p>
+<pre tabindex="0"><code>class Cat:
+    def speak(self):
+        return &#34;Meow&#34;
+
+class Dog:
+    def speak(self):
+        return &#34;Woof&#34;
+
+animals = [Cat(), Dog()]
+
+for animal in animals:
+    print(animal.speak())  # Output: Meow \n Woof
+</code></pre></li>
+<li>
+<p><strong>Method Overloading and Operator Overloading</strong></p>
+<ul>
+<li><strong>Method Overloading</strong>: Python does not support method overloading directly, but you can achieve similar behavior using default arguments or variable-length arguments.</li>
+<li><strong>Operator Overloading</strong>: You can define special methods in a class to enable the use of operators with objects of that class.</li>
+</ul>
+<p><strong>Example</strong> (Operator Overloading):</p>
+<pre tabindex="0"><code>class Vector:
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
+
+    def __add__(self, other):
+        return Vector(self.x + other.x, self.y + other.y)
+
+    def __str__(self):
+        return f&#34;Vector({self.x}, {self.y})&#34;
+
+v1 = Vector(1, 2)
+v2 = Vector(3, 4)
+v3 = v1 + v2
+print(v3)  # Output: Vector(4, 6)
+</code></pre></li>
+</ul>
+
+            </div>
+        </article></main>
+</div>
+<footer class="footer">
+    <span class="footer_item"> </span>
+    &nbsp;
+
+    <div class="footer_social-icons">
+<a href="index.xml" target="_blank" rel="noopener noreferrer me"
+    title="Rss">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+    stroke-linecap="round" stroke-linejoin="round">
+    <path d="M4 11a9 9 0 0 1 9 9" />
+    <path d="M4 4a16 16 0 0 1 16 16" />
+    <circle cx="5" cy="19" r="1" />
+</svg>
+</a>
+</div>
+    <small class="footer_copyright">
+        
+        byteshifters.com
+        
+    </small>
+</footer><a href="#" title="" id="totop">
+    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor" stroke="currentColor" viewBox="0 96 960 960">
+    <path d="M283 704.739 234.261 656 480 410.261 725.739 656 677 704.739l-197-197-197 197Z"/>
+</svg>
+
+</a>
+
+
+    
+
+
+
+
+
+
+    
+    <script src="https://byteshifters.com/js/main.min.35f435a5d8eac613c52daa28d8af544a4512337d3e95236e4a4978417b8dcb2f.js" integrity="sha256-NfQ1pdjqxhPFLaoo2K9USkUSM30&#43;lSNuSkl4QXuNyy8="></script>
+
+    
+
+</body>
+</html>

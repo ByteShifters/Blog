@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en-us"><head><meta charset="utf-8">
+<meta http-equiv="content-type" content="text/html">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title itemprop="name">Custom linux kernel Hooks with eBPF | ByteShifters</title>
+<meta property="og:title" content="Custom linux kernel Hooks with eBPF | ByteShifters" />
+<meta name="twitter:title" content="Custom linux kernel Hooks with eBPF | ByteShifters" />
+<meta itemprop="name" content="Custom linux kernel Hooks with eBPF | ByteShifters" />
+<meta name="application-name" content="Custom linux kernel Hooks with eBPF | ByteShifters" />
+<meta property="og:site_name" content="" />
+
+<meta name="description" content="">
+<meta itemprop="description" content="" />
+<meta property="og:description" content="" />
+<meta name="twitter:description" content="" />
+
+<meta property="og:locale" content="en-us" />
+<meta name="language" content="en-us" />
+
+
+
+
+
+    
+    
+    
+
+    <meta property="og:type" content="article" />
+    <meta property="og:article:published_time" content=2024-10-02T00:00:00Z />
+    <meta property="article:published_time" content=2024-10-02T00:00:00Z />
+    <meta property="og:url" content="https://byteshifters.com/posts/programming/ebpf/custom-ebpf-hooks-linux/custom-ebpf-hooks-in-linux-kernel/" />
+
+    
+    <meta property="og:article:author" content="ByteShifters" />
+    <meta property="article:author" content="ByteShifters" />
+    <meta name="author" content="ByteShifters" />
+    
+    
+
+    
+
+    <script defer type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "Article",
+        "headline": "Custom linux kernel Hooks with eBPF",
+        "author": {
+        "@type": "Person",
+        "name": ""
+        },
+        "datePublished": "2024-10-02",
+        "description": "",
+        "wordCount":  1038 ,
+        "mainEntityOfPage": "True",
+        "dateModified": "2024-10-02",
+        "image": {
+        "@type": "imageObject",
+        "url": ""
+        },
+        "publisher": {
+        "@type": "Organization",
+        "name": "ByteShifters"
+        }
+    }
+    </script>
+
+
+<meta name="generator" content="Hugo 0.122.0">
+
+    
+    <meta property="og:title" content="Custom linux kernel Hooks with eBPF" />
+<meta property="og:description" content="Introduction to eBPF: Developing Custom Hooks in the Linux Kernel eBPF (Extended Berkeley Packet Filter) is a powerful Linux kernel technology that enables the development of custom tracing, networking, and security tools. By creating highly efficient and flexible hooks into the kernel, eBPF allows for deep insights into system behavior and high-performance packet filtering.
+In this guide, we’ll cover the fundamentals of developing eBPF hooks, exploring the tools required, and providing code snippets to help you get started on your journey with eBPF." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://byteshifters.com/posts/programming/ebpf/custom-ebpf-hooks-linux/custom-ebpf-hooks-in-linux-kernel/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2024-10-02T00:00:00+00:00" />
+<meta property="article:modified_time" content="2024-10-02T00:00:00+00:00" />
+
+
+
+    
+    <meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Custom linux kernel Hooks with eBPF"/>
+<meta name="twitter:description" content="Introduction to eBPF: Developing Custom Hooks in the Linux Kernel eBPF (Extended Berkeley Packet Filter) is a powerful Linux kernel technology that enables the development of custom tracing, networking, and security tools. By creating highly efficient and flexible hooks into the kernel, eBPF allows for deep insights into system behavior and high-performance packet filtering.
+In this guide, we’ll cover the fundamentals of developing eBPF hooks, exploring the tools required, and providing code snippets to help you get started on your journey with eBPF."/>
+
+
+    
+    <link rel="icon" type="image/png+xml" href="/icons/logo32.png">
+
+    <link rel="canonical" href="https://byteshifters.com/posts/programming/ebpf/custom-ebpf-hooks-linux/custom-ebpf-hooks-in-linux-kernel/">
+    <link href="/style.min.a65edcf99b5d9c11dd8dc9c13f2e80eec76933d8449c8579cefe3c64191b71d4.css" rel="stylesheet">
+    <link href="/code-highlight.min.3dea1c7a362e3a7df3392c75d19c1efa95b2e82aa030c322a07a6caf50cb8e9a.css" rel="stylesheet">
+
+    
+    <link rel="icon" type="image/png+xml" href="/icons/logo32.png">
+    
+    
+    <link rel="icon" type="image/png" sizes="32x32" href="/icons/logo32.png">
+    
+
+
+
+
+<link rel="manifest" href="https://byteshifters.com/site.webmanifest">
+
+<meta name="msapplication-config" content="/browserconfig.xml">
+<meta name="msapplication-TileColor" content="#2d89ef">
+<meta name="theme-color" content="#cccccc">
+
+    
+    <link rel="icon" type="image/png"  sizes="32x32" href="/icons/logo32.png">
+
+</head>
+<body data-theme = "" class="notransition">
+
+<script src="/js/theme.min.8961c317c5b88b953fe27525839672c9343f1058ab044696ca225656c8ba2ab0.js" integrity="sha256-iWHDF8W4i5U/4nUlg5ZyyTQ/EFirBEaWyiJWVsi6KrA="></script>
+
+<div class="navbar" role="navigation">
+    <nav class="menu" aria-label="Main Navigation">
+        <a href="https://byteshifters.com/" class="logo">
+            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" 
+viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" 
+stroke-linejoin="round" class="feather feather-home">
+<title></title>
+<path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+<polyline points="9 22 9 12 15 12 15 22"></polyline>
+</svg>
+        </a>
+        <input type="checkbox" id="menu-trigger" class="menu-trigger" />
+        <label for="menu-trigger">
+            <span class="menu-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" stroke="currentColor" fill="none" viewBox="0 0 14 14"><title>Menu</title><path stroke-linecap="round" stroke-linejoin="round" d="M10.595 7L3.40726 7"></path><path stroke-linecap="round" stroke-linejoin="round" d="M10.5096 3.51488L3.49301 3.51488"></path><path stroke-linecap="round" stroke-linejoin="round" d="M10.5096 10.4851H3.49301"></path><path stroke-linecap="round" stroke-linejoin="round" d="M0.5 12.5V1.5C0.5 0.947715 0.947715 0.5 1.5 0.5H12.5C13.0523 0.5 13.5 0.947715 13.5 1.5V12.5C13.5 13.0523 13.0523 13.5 12.5 13.5H1.5C0.947715 13.5 0.5 13.0523 0.5 12.5Z"></path></svg>
+            </span>
+        </label>
+
+        <div class="trigger">
+            <ul class="trigger-container">
+                
+                
+                <li>
+                    <a class="menu-link " href="/">
+                        Home
+                    </a>
+                    
+                </li>
+                
+                <li>
+                    <a class="menu-link " href="/posts/">
+                        Posts
+                    </a>
+                    
+                </li>
+                
+                <li>
+                    <a class="menu-link " href="/contact/">
+                        Contact
+                    </a>
+                    
+                </li>
+                
+                <li class="menu-separator">
+                    <span>|</span>
+                </li>
+                
+                
+            </ul>
+            <a id="mode" href="#">
+                <svg xmlns="http://www.w3.org/2000/svg" class="mode-sunny" width="21" height="21" viewBox="0 0 14 14" stroke-width="1">
+<title>LIGHT</title><g><circle cx="7" cy="7" r="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></circle><line x1="7" y1="0.5" x2="7" y2="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="2.4" x2="3.82" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="0.5" y1="7" x2="2.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="11.6" x2="3.82" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="7" y1="13.5" x2="7" y2="11.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="11.6" x2="10.18" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="13.5" y1="7" x2="11.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="2.4" x2="10.18" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line></g></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" class="mode-moon" width="21" height="21" viewBox="0 0 14 14" stroke-width="1">
+<title>DARK</title><g><circle cx="7" cy="7" r="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></circle><line x1="7" y1="0.5" x2="7" y2="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="2.4" x2="3.82" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="0.5" y1="7" x2="2.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="11.6" x2="3.82" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="7" y1="13.5" x2="7" y2="11.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="11.6" x2="10.18" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="13.5" y1="7" x2="11.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="2.4" x2="10.18" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line></g></svg>
+            </a>
+        </div>
+    </nav>
+</div>
+
+<div class="wrapper post">
+    <main class="page-content" aria-label="Content">
+        <article>
+            <header class="header">
+                <h1 class="header-title">Custom linux kernel Hooks with eBPF</h1>
+                
+                
+                <div class="post-meta">
+                    <time datetime="2024-10-02T00:00:00&#43;00:00" itemprop="datePublished"> Oct 2, 2024 </time>
+                </div>
+                
+                
+                <div class="tags-list"><a href="https://byteshifters.com/tags/system-security/">#System Security</a>
+                            <a href="https://byteshifters.com/tags/low-level/">#Low level</a>
+                            <a href="https://byteshifters.com/tags/rootkits/">#Rootkits</a>
+                            <a href="https://byteshifters.com/tags/malware/">#Malware</a>
+                            </div>
+            </header>
+            
+    
+    <details class="toc" ZgotmplZ>
+        <summary><b></b></summary>
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#understanding-ebpf">Understanding eBPF</a>
+      <ul>
+        <li><a href="#what-is-ebpf">What is eBPF?</a></li>
+        <li><a href="#how-ebpf-programs-work">How eBPF Programs Work</a></li>
+        <li><a href="#ebpf-hooks">eBPF Hooks</a></li>
+      </ul>
+    </li>
+    <li><a href="#tools-for-developing-ebpf-hooks">Tools for Developing eBPF Hooks</a>
+      <ul>
+        <li><a href="#llvmclang">LLVM/Clang</a></li>
+        <li><a href="#bcc-bpf-compiler-collection">BCC (BPF Compiler Collection)</a></li>
+        <li><a href="#bpftool">bpftool</a></li>
+        <li><a href="#libbpf">libbpf</a></li>
+      </ul>
+    </li>
+    <li><a href="#example-counting-system-calls-with-ebpf">Example: Counting System Calls with eBPF</a>
+      <ul>
+        <li><a href="#compiling-the-ebpf-program">Compiling the eBPF Program</a></li>
+        <li><a href="#attaching-the-ebpf-program-using-bcc">Attaching the eBPF Program Using BCC</a></li>
+        <li><a href="#debugging-and-performance-tuning">Debugging and Performance Tuning</a></li>
+        <li><a href="#performance-optimization-tips">Performance Optimization Tips</a></li>
+      </ul>
+    </li>
+    <li><a href="#conclusion">Conclusion</a></li>
+  </ul>
+</nav>
+    </details>
+            <div class="page-content">
+                <h1 id="introduction-to-ebpf-developing-custom-hooks-in-the-linux-kernel">Introduction to eBPF: Developing Custom Hooks in the Linux Kernel</h1>
+<p>eBPF (Extended Berkeley Packet Filter) is a powerful Linux kernel technology that enables the development of custom tracing, networking, and security tools. By creating highly efficient and flexible hooks into the kernel, eBPF allows for deep insights into system behavior and high-performance packet filtering.</p>
+<p>In this guide, we’ll cover the fundamentals of developing eBPF hooks, exploring the tools required, and providing code snippets to help you get started on your journey with eBPF.</p>
+<h2 id="understanding-ebpf">Understanding eBPF</h2>
+<h3 id="what-is-ebpf">What is eBPF?</h3>
+<p>eBPF extends the original BPF (Berkeley Packet Filter) by introducing a versatile in-kernel virtual machine that allows users to run bytecode safely in a sandboxed environment. Originally, BPF was used to filter network packets, but eBPF has evolved into a general-purpose framework for observing and modifying kernel behavior dynamically.</p>
+<p>The benefits of eBPF include:</p>
+<ul>
+<li><strong>Safety</strong>: eBPF programs are verified before execution, ensuring they don&rsquo;t crash the kernel or cause instability.</li>
+<li><strong>Performance</strong>: eBPF programs are JIT-compiled into native code and executed in kernel space, minimizing the overhead.</li>
+<li><strong>Flexibility</strong>: eBPF can be used for a variety of use cases, including tracing, networking, and security applications.</li>
+</ul>
+<h3 id="how-ebpf-programs-work">How eBPF Programs Work</h3>
+<p>eBPF programs are typically written in a restricted C-like language. They are compiled into eBPF bytecode using the LLVM/Clang compiler and then loaded into the kernel. Once in the kernel, eBPF programs can be attached to different types of hooks and executed in response to specific events.</p>
+<h3 id="ebpf-hooks">eBPF Hooks</h3>
+<p>eBPF hooks are the points in the kernel where eBPF programs are attached. These hooks allow eBPF programs to execute when specific kernel or user-space events occur. Some common eBPF hook types include:</p>
+<ul>
+<li><strong>Kprobes</strong>: Dynamic kernel probes that trace kernel function entries and exits.</li>
+<li><strong>Uprobes</strong>: User-space probes that trace function calls in user-space applications.</li>
+<li><strong>Tracepoints</strong>: Static probes that trace specific kernel events.</li>
+<li><strong>XDP (eXpress Data Path)</strong>: High-performance hooks for processing network packets at the lowest point in the networking stack.</li>
+<li><strong>cgroup-bpf</strong>: Hooks that enforce eBPF programs on specific control groups (cgroups), enabling resource management and security policies.</li>
+</ul>
+<p>By attaching eBPF programs to these hooks, you can create powerful custom tools to monitor, analyze, and even modify system behavior in real time.</p>
+<h2 id="tools-for-developing-ebpf-hooks">Tools for Developing eBPF Hooks</h2>
+<p>To start developing eBPF hooks, you&rsquo;ll need the following tools:</p>
+<h3 id="llvmclang">LLVM/Clang</h3>
+<p>LLVM and Clang are essential for compiling eBPF programs. Clang is a C language compiler and is part of the LLVM project. It compiles eBPF source code into eBPF bytecode, which can then be loaded into the kernel.</p>
+<p>Example command to compile an eBPF program:</p>
+<pre tabindex="0"><code>clang -O2 -target bpf -c my_ebpf_program.c -o my_ebpf_program.o
+</code></pre><h3 id="bcc-bpf-compiler-collection">BCC (BPF Compiler Collection)</h3>
+<p>BCC is a toolkit that simplifies the process of writing, compiling, and debugging eBPF programs. It includes various Python libraries, helper functions, and tools like <code>bcc-tools</code> for managing eBPF programs.</p>
+<h3 id="bpftool">bpftool</h3>
+<p><code>bpftool</code> is a command-line utility for managing eBPF programs and maps. It can load, unload, inspect, and query eBPF objects and is invaluable for troubleshooting and verifying your eBPF programs.</p>
+<h3 id="libbpf">libbpf</h3>
+<p><code>libbpf</code> is a low-level C library for loading and managing eBPF programs and maps. It provides a straightforward C API for interacting with eBPF and is the recommended way to interface with eBPF when developing in C.</p>
+<h2 id="example-counting-system-calls-with-ebpf">Example: Counting System Calls with eBPF</h2>
+<p>The following example demonstrates a simple eBPF program that counts the number of system calls made by different processes. This eBPF program uses a hash map to store the count of system calls per process.</p>
+<p><strong>eBPF Program: syscall_count.c</strong></p>
+<pre tabindex="0"><code>#include &lt;uapi/linux/ptrace.h&gt;
+#include &lt;linux/sched.h&gt;
+
+BPF_HASH(syscall_count, u32); // Define a BPF hash map to store syscall counts
+
+int count_syscalls(struct pt_regs *ctx) {
+    u32 pid = bpf_get_current_pid_tgid();  // Get the current process ID
+    u64 *count = syscall_count.lookup(&amp;pid);  // Lookup the count for this PID
+
+    if (!count) {
+        u64 init_val = 1;
+        syscall_count.update(&amp;pid, &amp;init_val);  // Initialize the count if PID is not present
+    } else {
+        (*count)++;  // Increment the syscall count
+        syscall_count.update(&amp;pid, count);  // Update the count in the hash map
+    }
+
+    return 0;
+}
+</code></pre><h3 id="compiling-the-ebpf-program">Compiling the eBPF Program</h3>
+<p>Compile the eBPF program using Clang with the following command:</p>
+<pre tabindex="0"><code>clang -O2 -target bpf -c syscall_count.c -o syscall_count.o
+</code></pre><h3 id="attaching-the-ebpf-program-using-bcc">Attaching the eBPF Program Using BCC</h3>
+<p>In this example, we use Python with BCC to load and attach the <code>count_syscalls</code> eBPF program to a kprobe on the <code>__x64_sys_execve</code> kernel function, which is triggered when a process executes a new program.</p>
+<pre tabindex="0"><code>from bcc import BPF
+import time
+
+# Load eBPF program from the source file
+b = BPF(src_file=&#34;syscall_count.c&#34;)
+
+# Attach the eBPF program to the kprobe for the `__x64_sys_execve` function
+b.attach_kprobe(event=&#34;__x64_sys_execve&#34;, fn_name=&#34;count_syscalls&#34;)
+
+# Print syscall counts every 5 seconds
+while True:
+    print(&#34;=== Syscall Counts ===&#34;)
+    for k, v in b[&#34;syscall_count&#34;].items():
+        print(f&#34;PID {k.value}: {v.value} syscalls&#34;)
+    time.sleep(5)
+</code></pre><h3 id="debugging-and-performance-tuning">Debugging and Performance Tuning</h3>
+<p>Debugging eBPF programs can be challenging due to their execution in kernel space. However, the following techniques can assist in troubleshooting and optimizing your programs:</p>
+<ol>
+<li><strong>Print Debug Messages</strong>: Use <code>bpf_trace_printk</code> to print messages from your eBPF program to the trace buffer. You can view these messages using <code>cat /sys/kernel/debug/tracing/trace_pipe</code>.</li>
+<li><strong>Verify eBPF Programs</strong>: Use <code>bpftool</code> to verify and inspect eBPF programs. This helps identify issues like unsupported instructions or invalid memory access.</li>
+<li><strong>Monitor with BCC</strong>: Use BCC&rsquo;s Python API to print debug information and access eBPF maps dynamically.</li>
+</ol>
+<h3 id="performance-optimization-tips">Performance Optimization Tips</h3>
+<p>To ensure your eBPF programs run efficiently, consider these performance optimization tips:</p>
+<ul>
+<li><strong>Minimize Loops and Branches</strong>: Complex control flows can increase execution time and may be restricted by the eBPF verifier.</li>
+<li><strong>Optimize Data Structures</strong>: Use appropriate BPF map types, such as hash maps or array maps, depending on your use case.</li>
+<li><strong>Limit Memory Usage</strong>: Use the Least Recently Used (LRU) eviction policy in BPF maps to prevent excessive memory consumption.</li>
+<li><strong>Use Hardware Offloading</strong>: For networking-related eBPF programs, hardware offloading can improve performance by processing packets directly on network cards.</li>
+</ul>
+<h2 id="conclusion">Conclusion</h2>
+<p>This guide provided an overview of eBPF, its hooks, and the tools necessary to develop and debug eBPF programs. With the example of a syscall counting program, you can see how easy it is to get started with eBPF and build custom observability or performance tools. As you explore further, you’ll find that eBPF opens up endless possibilities for creating efficient, safe, and powerful solutions for tracing, networking, and security in the Linux kernel.</p>
+
+            </div>
+        </article></main>
+</div>
+<footer class="footer">
+    <span class="footer_item"> </span>
+    &nbsp;
+
+    <div class="footer_social-icons">
+<a href="index.xml" target="_blank" rel="noopener noreferrer me"
+    title="Rss">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+    stroke-linecap="round" stroke-linejoin="round">
+    <path d="M4 11a9 9 0 0 1 9 9" />
+    <path d="M4 4a16 16 0 0 1 16 16" />
+    <circle cx="5" cy="19" r="1" />
+</svg>
+</a>
+</div>
+    <small class="footer_copyright">
+        
+        byteshifters.com
+        
+    </small>
+</footer><a href="#" title="" id="totop">
+    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor" stroke="currentColor" viewBox="0 96 960 960">
+    <path d="M283 704.739 234.261 656 480 410.261 725.739 656 677 704.739l-197-197-197 197Z"/>
+</svg>
+
+</a>
+
+
+    
+
+
+
+
+
+
+    
+    <script src="https://byteshifters.com/js/main.min.35f435a5d8eac613c52daa28d8af544a4512337d3e95236e4a4978417b8dcb2f.js" integrity="sha256-NfQ1pdjqxhPFLaoo2K9USkUSM30&#43;lSNuSkl4QXuNyy8="></script>
+
+    
+
+</body>
+</html>

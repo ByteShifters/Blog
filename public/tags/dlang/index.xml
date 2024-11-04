@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Dlang on ByteShifters</title>
+    <link>https://byteshifters.com/tags/dlang/</link>
+    <description>Recent content in Dlang on ByteShifters</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 04 Oct 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://byteshifters.com/tags/dlang/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Custom Encryption Algorithm in Dlang</title>
+      <link>https://byteshifters.com/posts/programming/algorithms/dlang/encryption-algorithm-in-dlang/</link>
+      <pubDate>Fri, 04 Oct 2024 00:00:00 +0000</pubDate>
+      
+      <guid>https://byteshifters.com/posts/programming/algorithms/dlang/encryption-algorithm-in-dlang/</guid>
+      
+      <description>Implementing a Custom Encryption Algorithm in D Language In this blog post, we will implement a custom encryption algorithm in the D programming language. The encryption process will involve encrypting a message, decrypting it back to its original form, and displaying the results. Furthermore, we will analyze static analysis tools available in various programming languages and evaluate their effectiveness against malware detection.
+Overview of the Encryption Algorithm Encryption algorithms are critical in securing data, ensuring confidentiality and integrity.</description>
+      
+    </item>
+    
+  </channel>
+</rss>

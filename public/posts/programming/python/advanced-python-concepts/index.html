@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en-us"><head><meta charset="utf-8">
+<meta http-equiv="content-type" content="text/html">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title itemprop="name">Advanced Python Concepts | ByteShifters</title>
+<meta property="og:title" content="Advanced Python Concepts | ByteShifters" />
+<meta name="twitter:title" content="Advanced Python Concepts | ByteShifters" />
+<meta itemprop="name" content="Advanced Python Concepts | ByteShifters" />
+<meta name="application-name" content="Advanced Python Concepts | ByteShifters" />
+<meta property="og:site_name" content="" />
+
+<meta name="description" content="">
+<meta itemprop="description" content="" />
+<meta property="og:description" content="" />
+<meta name="twitter:description" content="" />
+
+<meta property="og:locale" content="en-us" />
+<meta name="language" content="en-us" />
+
+
+
+
+
+    
+    
+    
+
+    <meta property="og:type" content="article" />
+    <meta property="og:article:published_time" content=2024-09-11T00:00:00Z />
+    <meta property="article:published_time" content=2024-09-11T00:00:00Z />
+    <meta property="og:url" content="https://byteshifters.com/posts/programming/python/advanced-python-concepts/" />
+
+    
+    <meta property="og:article:author" content="ByteShifters" />
+    <meta property="article:author" content="ByteShifters" />
+    <meta name="author" content="ByteShifters" />
+    
+    
+
+    
+
+    <script defer type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "Article",
+        "headline": "Advanced Python Concepts",
+        "author": {
+        "@type": "Person",
+        "name": ""
+        },
+        "datePublished": "2024-09-11",
+        "description": "",
+        "wordCount":  603 ,
+        "mainEntityOfPage": "True",
+        "dateModified": "2024-09-11",
+        "image": {
+        "@type": "imageObject",
+        "url": ""
+        },
+        "publisher": {
+        "@type": "Organization",
+        "name": "ByteShifters"
+        }
+    }
+    </script>
+
+
+<meta name="generator" content="Hugo 0.122.0">
+
+    
+    <meta property="og:title" content="Advanced Python Concepts" />
+<meta property="og:description" content="Decorators Decorators are a way to modify or extend the behavior of functions or classes without changing their code.
+Function Decorators
+Function decorators are used to wrap another function, allowing you to execute code before or after the wrapped function, or even modify its behavior.
+Example:
+def my_decorator(func):def wrapper():print(&#34;Something is happening before the function is called.&#34;)func()print(&#34;Something is happening after the function is called.&#34;)return wrapper@my_decoratordef say_hello():print(&#34;Hello!" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://byteshifters.com/posts/programming/python/advanced-python-concepts/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2024-09-11T00:00:00+00:00" />
+<meta property="article:modified_time" content="2024-09-11T00:00:00+00:00" />
+
+
+
+    
+    <meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Advanced Python Concepts"/>
+<meta name="twitter:description" content="Decorators Decorators are a way to modify or extend the behavior of functions or classes without changing their code.
+Function Decorators
+Function decorators are used to wrap another function, allowing you to execute code before or after the wrapped function, or even modify its behavior.
+Example:
+def my_decorator(func):def wrapper():print(&#34;Something is happening before the function is called.&#34;)func()print(&#34;Something is happening after the function is called.&#34;)return wrapper@my_decoratordef say_hello():print(&#34;Hello!"/>
+
+
+    
+    <link rel="icon" type="image/png+xml" href="/icons/logo32.png">
+
+    <link rel="canonical" href="https://byteshifters.com/posts/programming/python/advanced-python-concepts/">
+    <link href="/style.min.a65edcf99b5d9c11dd8dc9c13f2e80eec76933d8449c8579cefe3c64191b71d4.css" rel="stylesheet">
+    <link href="/code-highlight.min.3dea1c7a362e3a7df3392c75d19c1efa95b2e82aa030c322a07a6caf50cb8e9a.css" rel="stylesheet">
+
+    
+    <link rel="icon" type="image/png+xml" href="/icons/logo32.png">
+    
+    
+    <link rel="icon" type="image/png" sizes="32x32" href="/icons/logo32.png">
+    
+
+
+
+
+<link rel="manifest" href="https://byteshifters.com/site.webmanifest">
+
+<meta name="msapplication-config" content="/browserconfig.xml">
+<meta name="msapplication-TileColor" content="#2d89ef">
+<meta name="theme-color" content="#cccccc">
+
+    
+    <link rel="icon" type="image/png"  sizes="32x32" href="/icons/logo32.png">
+
+</head>
+<body data-theme = "" class="notransition">
+
+<script src="/js/theme.min.8961c317c5b88b953fe27525839672c9343f1058ab044696ca225656c8ba2ab0.js" integrity="sha256-iWHDF8W4i5U/4nUlg5ZyyTQ/EFirBEaWyiJWVsi6KrA="></script>
+
+<div class="navbar" role="navigation">
+    <nav class="menu" aria-label="Main Navigation">
+        <a href="https://byteshifters.com/" class="logo">
+            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" 
+viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" 
+stroke-linejoin="round" class="feather feather-home">
+<title></title>
+<path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+<polyline points="9 22 9 12 15 12 15 22"></polyline>
+</svg>
+        </a>
+        <input type="checkbox" id="menu-trigger" class="menu-trigger" />
+        <label for="menu-trigger">
+            <span class="menu-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" stroke="currentColor" fill="none" viewBox="0 0 14 14"><title>Menu</title><path stroke-linecap="round" stroke-linejoin="round" d="M10.595 7L3.40726 7"></path><path stroke-linecap="round" stroke-linejoin="round" d="M10.5096 3.51488L3.49301 3.51488"></path><path stroke-linecap="round" stroke-linejoin="round" d="M10.5096 10.4851H3.49301"></path><path stroke-linecap="round" stroke-linejoin="round" d="M0.5 12.5V1.5C0.5 0.947715 0.947715 0.5 1.5 0.5H12.5C13.0523 0.5 13.5 0.947715 13.5 1.5V12.5C13.5 13.0523 13.0523 13.5 12.5 13.5H1.5C0.947715 13.5 0.5 13.0523 0.5 12.5Z"></path></svg>
+            </span>
+        </label>
+
+        <div class="trigger">
+            <ul class="trigger-container">
+                
+                
+                <li>
+                    <a class="menu-link " href="/">
+                        Home
+                    </a>
+                    
+                </li>
+                
+                <li>
+                    <a class="menu-link " href="/posts/">
+                        Posts
+                    </a>
+                    
+                </li>
+                
+                <li>
+                    <a class="menu-link " href="/contact/">
+                        Contact
+                    </a>
+                    
+                </li>
+                
+                <li class="menu-separator">
+                    <span>|</span>
+                </li>
+                
+                
+            </ul>
+            <a id="mode" href="#">
+                <svg xmlns="http://www.w3.org/2000/svg" class="mode-sunny" width="21" height="21" viewBox="0 0 14 14" stroke-width="1">
+<title>LIGHT</title><g><circle cx="7" cy="7" r="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></circle><line x1="7" y1="0.5" x2="7" y2="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="2.4" x2="3.82" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="0.5" y1="7" x2="2.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="11.6" x2="3.82" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="7" y1="13.5" x2="7" y2="11.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="11.6" x2="10.18" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="13.5" y1="7" x2="11.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="2.4" x2="10.18" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line></g></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" class="mode-moon" width="21" height="21" viewBox="0 0 14 14" stroke-width="1">
+<title>DARK</title><g><circle cx="7" cy="7" r="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></circle><line x1="7" y1="0.5" x2="7" y2="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="2.4" x2="3.82" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="0.5" y1="7" x2="2.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="11.6" x2="3.82" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="7" y1="13.5" x2="7" y2="11.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="11.6" x2="10.18" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="13.5" y1="7" x2="11.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="2.4" x2="10.18" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line></g></svg>
+            </a>
+        </div>
+    </nav>
+</div>
+
+<div class="wrapper post">
+    <main class="page-content" aria-label="Content">
+        <article>
+            <header class="header">
+                <h1 class="header-title">Advanced Python Concepts</h1>
+                
+                
+                <div class="post-meta">
+                    <time datetime="2024-09-11T00:00:00&#43;00:00" itemprop="datePublished"> Sep 11, 2024 </time>
+                </div>
+                
+                
+                <div class="tags-list"><a href="https://byteshifters.com/tags/python/">#Python</a>
+                            </div>
+            </header>
+            
+    
+    <details class="toc" ZgotmplZ>
+        <summary><b></b></summary>
+        <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#decorators"><strong>Decorators</strong></a></li>
+        <li><a href="#generators-and-iterators"><strong>Generators and Iterators</strong></a></li>
+        <li><a href="#context-managers"><strong>Context Managers</strong></a></li>
+        <li><a href="#comprehensions"><strong>Comprehensions</strong></a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    </details>
+            <div class="page-content">
+                <h3 id="decorators"><strong>Decorators</strong></h3>
+<p>Decorators are a way to modify or extend the behavior of functions or classes without changing their code.</p>
+<ul>
+<li>
+<p><strong>Function Decorators</strong><br>
+Function decorators are used to wrap another function, allowing you to execute code before or after the wrapped function, or even modify its behavior.</p>
+<p><strong>Example</strong>:</p>
+<pre tabindex="0"><code>def my_decorator(func):
+    def wrapper():
+        print(&#34;Something is happening before the function is called.&#34;)
+        func()
+        print(&#34;Something is happening after the function is called.&#34;)
+    return wrapper
+
+@my_decorator
+def say_hello():
+    print(&#34;Hello!&#34;)
+
+say_hello()
+# Output:
+# Something is happening before the function is called.
+# Hello!
+# Something is happening after the function is called.
+</code></pre></li>
+<li>
+<p><strong>Class Decorators</strong><br>
+Class decorators work similarly to function decorators but are applied to classes.</p>
+<p><strong>Example</strong>:</p>
+<pre tabindex="0"><code>def class_decorator(cls):
+    cls.decorated = True
+    return cls
+
+@class_decorator
+class MyClass:
+    pass
+
+print(MyClass.decorated)  # Output: True
+</code></pre></li>
+<li>
+<p><strong>Built-in Decorators</strong><br>
+Python provides several built-in decorators:</p>
+<ul>
+<li>
+<p><strong><code>@property</code></strong>: Defines a method as a property, allowing access like an attribute.</p>
+<pre tabindex="0"><code>class MyClass:
+    def __init__(self, value):
+        self._value = value
+
+    @property
+    def value(self):
+        return self._value
+
+    @value.setter
+    def value(self, new_value):
+        self._value = new_value
+
+obj = MyClass(10)
+print(obj.value)  # Output: 10
+obj.value = 20
+print(obj.value)  # Output: 20
+</code></pre></li>
+<li>
+<p><strong><code>@staticmethod</code></strong>: Defines a method that does not require access to the instance (<code>self</code>) or class (<code>cls</code>).</p>
+<pre tabindex="0"><code>class Math:
+    @staticmethod
+    def add(x, y):
+        return x + y
+
+print(Math.add(5, 3))  # Output: 8
+</code></pre></li>
+<li>
+<p><strong><code>@classmethod</code></strong>: Defines a method that takes the class as its first argument (<code>cls</code>), not the instance.</p>
+<pre tabindex="0"><code>class MyClass:
+    @classmethod
+    def create_instance(cls):
+        return cls()
+
+instance = MyClass.create_instance()
+print(type(instance))  # Output: &lt;class &#39;__main__.MyClass&#39;&gt;
+</code></pre></li>
+</ul>
+</li>
+</ul>
+<h3 id="generators-and-iterators"><strong>Generators and Iterators</strong></h3>
+<ul>
+<li>
+<p><strong>Creating Iterators</strong><br>
+An iterator is an object that implements the <code>__iter__()</code> and <code>__next__()</code> methods.</p>
+<p><strong>Example</strong>:</p>
+<pre tabindex="0"><code>class MyIterator:
+    def __init__(self, start, end):
+        self.current = start
+        self.end = end
+
+    def __iter__(self):
+        return self
+
+    def __next__(self):
+        if self.current &gt; self.end:
+            raise StopIteration
+        self.current += 1
+        return self.current - 1
+
+iterator = MyIterator(1, 5)
+for number in iterator:
+    print(number)
+# Output: 1 2 3 4 5
+</code></pre></li>
+<li>
+<p><strong>Generator Functions</strong><br>
+Generators use the <code>yield</code> keyword to produce a sequence of values lazily. They simplify iterator creation and manage state automatically.</p>
+<p><strong>Example</strong>:</p>
+<pre tabindex="0"><code>def count_up_to(max):
+    count = 1
+    while count &lt;= max:
+        yield count
+        count += 1
+
+for number in count_up_to(5):
+    print(number)
+# Output: 1 2 3 4 5
+</code></pre></li>
+</ul>
+<h3 id="context-managers"><strong>Context Managers</strong></h3>
+<p>Context managers are used to manage resources like file streams or network connections. They ensure that resources are properly cleaned up after use.</p>
+<ul>
+<li>
+<p><strong>Using <code>with</code> Statement</strong><br>
+The <code>with</code> statement simplifies exception handling and resource management by automatically handling setup and teardown.</p>
+<p><strong>Example</strong>:</p>
+<pre tabindex="0"><code>with open(&#34;example.txt&#34;, &#34;w&#34;) as file:
+    file.write(&#34;Hello, world!&#34;)
+# The file is automatically closed after the block is executed.
+</code></pre></li>
+<li>
+<p><strong>Creating Custom Context Managers</strong><br>
+You can create custom context managers by defining a class with <code>__enter__</code> and <code>__exit__</code> methods.</p>
+<p><strong>Example</strong>:</p>
+<pre tabindex="0"><code>class MyContextManager:
+    def __enter__(self):
+        print(&#34;Entering the context&#34;)
+        return self
+
+    def __exit__(self, exc_type, exc_value, traceback):
+        print(&#34;Exiting the context&#34;)
+
+with MyContextManager() as cm:
+    print(&#34;Inside the context&#34;)
+# Output:
+# Entering the context
+# Inside the context
+# Exiting the context
+</code></pre></li>
+</ul>
+<h3 id="comprehensions"><strong>Comprehensions</strong></h3>
+<p>Comprehensions provide a concise way to create lists, dictionaries, or sets from iterable data.</p>
+<ul>
+<li>
+<p><strong>List Comprehensions</strong><br>
+List comprehensions allow you to create lists using a single line of code.</p>
+<p><strong>Example</strong>:</p>
+<pre tabindex="0"><code>numbers = [1, 2, 3, 4, 5]
+squares = [x**2 for x in numbers]
+print(squares)  # Output: [1, 4, 9, 16, 25]
+</code></pre></li>
+<li>
+<p><strong>Dictionary Comprehensions</strong><br>
+Dictionary comprehensions create dictionaries using a similar syntax to list comprehensions.</p>
+<p><strong>Example</strong>:</p>
+<pre tabindex="0"><code>numbers = [1, 2, 3, 4, 5]
+square_dict = {x: x**2 for x in numbers}
+print(square_dict)  # Output: {1: 1, 2: 4, 3: 9, 4: 16, 5: 25}
+</code></pre></li>
+<li>
+<p><strong>Set Comprehensions</strong><br>
+Set comprehensions generate sets in a concise manner.</p>
+<p><strong>Example</strong>:</p>
+<pre tabindex="0"><code>numbers = [1, 2, 3, 4, 5]
+square_set = {x**2 for x in numbers}
+print(square_set)  # Output: {1, 4, 9, 16, 25}
+</code></pre></li>
+</ul>
+
+            </div>
+        </article></main>
+</div>
+<footer class="footer">
+    <span class="footer_item"> </span>
+    &nbsp;
+
+    <div class="footer_social-icons">
+<a href="index.xml" target="_blank" rel="noopener noreferrer me"
+    title="Rss">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+    stroke-linecap="round" stroke-linejoin="round">
+    <path d="M4 11a9 9 0 0 1 9 9" />
+    <path d="M4 4a16 16 0 0 1 16 16" />
+    <circle cx="5" cy="19" r="1" />
+</svg>
+</a>
+</div>
+    <small class="footer_copyright">
+        
+        byteshifters.com
+        
+    </small>
+</footer><a href="#" title="" id="totop">
+    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor" stroke="currentColor" viewBox="0 96 960 960">
+    <path d="M283 704.739 234.261 656 480 410.261 725.739 656 677 704.739l-197-197-197 197Z"/>
+</svg>
+
+</a>
+
+
+    
+
+
+
+
+
+
+    
+    <script src="https://byteshifters.com/js/main.min.35f435a5d8eac613c52daa28d8af544a4512337d3e95236e4a4978417b8dcb2f.js" integrity="sha256-NfQ1pdjqxhPFLaoo2K9USkUSM30&#43;lSNuSkl4QXuNyy8="></script>
+
+    
+
+</body>
+</html>

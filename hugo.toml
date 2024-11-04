@@ -1,0 +1,78 @@
+
+baseURL = 'https://byteshifters.com/'
+languageCode = 'en-us'
+title = 'ByteShifters'
+theme = "hugo-blog-awesome"
+
+svg = "transp.png"
+
+# [[params.socialIcons]]
+# name = "github"
+# url = "https://github.com/hugo-sid"
+
+# [[params.socialIcons]]
+# name = "twitter"
+# url = "https://twitter.com"
+
+[[params.socialIcons]]
+name = "Rss"
+url = "index.xml"
+languageCode = 'en-us'
+
+# This defines how dates are formatted
+defaultContentLanguage = "en-gb"
+
+# Enable emojis globally
+enableEmoji = true
+ignoreErrors = ["additional-script-loading-error"] # ignore error of loading additional scripts.
+
+
+[markup]
+  [markup.highlight]
+    noClasses = false
+    style = 'github-dark'
+    tabWidth = 4
+  [markup.goldmark.renderer]
+    unsafe = true
+	[markup.tableOfContents]
+		startLevel = 2 # ToC starts from H2
+		endLevel = 4 # ToC ends at H4
+		ordered = false # generates <ul> instead of <ol>
+
+[menu]
+
+[[menu.main]]
+    name = "Home"
+    url = "/"
+    weight = 1
+
+[[menu.main]]
+    name = "Posts"
+    url = "/posts/"
+    weight = 2
+
+# [[menu.main]]
+#     name = "Tags"
+#     url = "/tags/"
+#     weight = 3
+
+[[menu.main]]
+    name = "Contact"
+    url = "/contact/"
+    weight = 3
+
+[taxonomies]
+  tag = 'tags'
+
+[params.author]
+  avatar = "transp.png" # put the file in assets folder; also ensure that image has same height and width
+  intro = "ByteShifters"
+  name = "ByteShifters"
+  description = "Security researchers that love breaking stuff"
+
+[params]
+  favicon="transp.png"
+  goToTop = true
+
+paginate = 5
+ _build.list = "never"

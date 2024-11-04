@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en-us"><head><meta charset="utf-8">
+<meta http-equiv="content-type" content="text/html">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title itemprop="name">Testing and Debugging | ByteShifters</title>
+<meta property="og:title" content="Testing and Debugging | ByteShifters" />
+<meta name="twitter:title" content="Testing and Debugging | ByteShifters" />
+<meta itemprop="name" content="Testing and Debugging | ByteShifters" />
+<meta name="application-name" content="Testing and Debugging | ByteShifters" />
+<meta property="og:site_name" content="" />
+
+<meta name="description" content="">
+<meta itemprop="description" content="" />
+<meta property="og:description" content="" />
+<meta name="twitter:description" content="" />
+
+<meta property="og:locale" content="en-us" />
+<meta name="language" content="en-us" />
+
+
+
+
+
+    
+    
+    
+
+    <meta property="og:type" content="article" />
+    <meta property="og:article:published_time" content=2024-09-11T00:00:00Z />
+    <meta property="article:published_time" content=2024-09-11T00:00:00Z />
+    <meta property="og:url" content="https://byteshifters.com/posts/programming/python/testing-and-debugging/" />
+
+    
+    <meta property="og:article:author" content="ByteShifters" />
+    <meta property="article:author" content="ByteShifters" />
+    <meta name="author" content="ByteShifters" />
+    
+    
+
+    
+
+    <script defer type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "Article",
+        "headline": "Testing and Debugging",
+        "author": {
+        "@type": "Person",
+        "name": ""
+        },
+        "datePublished": "2024-09-11",
+        "description": "",
+        "wordCount":  527 ,
+        "mainEntityOfPage": "True",
+        "dateModified": "2024-09-11",
+        "image": {
+        "@type": "imageObject",
+        "url": ""
+        },
+        "publisher": {
+        "@type": "Organization",
+        "name": "ByteShifters"
+        }
+    }
+    </script>
+
+
+<meta name="generator" content="Hugo 0.122.0">
+
+    
+    <meta property="og:title" content="Testing and Debugging" />
+<meta property="og:description" content="Unit Testing Writing Test Cases Using unittest and pytest
+Unit testing involves writing test cases to verify that individual parts of your code (functions, methods, etc.) work as expected.
+unittest: A built-in Python module for writing and running tests. Example:
+import unittestdef add(a, b):return a &#43; bclass TestMathFunctions(unittest.TestCase):def test_add(self):self.assertEqual(add(1, 2), 3)self.assertEqual(add(-1, 1), 0)if __name__ == &#39;__main__&#39;:unittest.main() pytest: A third-party testing framework that is more flexible and has a simpler syntax than unittest." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://byteshifters.com/posts/programming/python/testing-and-debugging/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2024-09-11T00:00:00+00:00" />
+<meta property="article:modified_time" content="2024-09-11T00:00:00+00:00" />
+
+
+
+    
+    <meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Testing and Debugging"/>
+<meta name="twitter:description" content="Unit Testing Writing Test Cases Using unittest and pytest
+Unit testing involves writing test cases to verify that individual parts of your code (functions, methods, etc.) work as expected.
+unittest: A built-in Python module for writing and running tests. Example:
+import unittestdef add(a, b):return a &#43; bclass TestMathFunctions(unittest.TestCase):def test_add(self):self.assertEqual(add(1, 2), 3)self.assertEqual(add(-1, 1), 0)if __name__ == &#39;__main__&#39;:unittest.main() pytest: A third-party testing framework that is more flexible and has a simpler syntax than unittest."/>
+
+
+    
+    <link rel="icon" type="image/png+xml" href="/icons/logo32.png">
+
+    <link rel="canonical" href="https://byteshifters.com/posts/programming/python/testing-and-debugging/">
+    <link href="/style.min.a65edcf99b5d9c11dd8dc9c13f2e80eec76933d8449c8579cefe3c64191b71d4.css" rel="stylesheet">
+    <link href="/code-highlight.min.3dea1c7a362e3a7df3392c75d19c1efa95b2e82aa030c322a07a6caf50cb8e9a.css" rel="stylesheet">
+
+    
+    <link rel="icon" type="image/png+xml" href="/icons/logo32.png">
+    
+    
+    <link rel="icon" type="image/png" sizes="32x32" href="/icons/logo32.png">
+    
+
+
+
+
+<link rel="manifest" href="https://byteshifters.com/site.webmanifest">
+
+<meta name="msapplication-config" content="/browserconfig.xml">
+<meta name="msapplication-TileColor" content="#2d89ef">
+<meta name="theme-color" content="#cccccc">
+
+    
+    <link rel="icon" type="image/png"  sizes="32x32" href="/icons/logo32.png">
+
+</head>
+<body data-theme = "" class="notransition">
+
+<script src="/js/theme.min.8961c317c5b88b953fe27525839672c9343f1058ab044696ca225656c8ba2ab0.js" integrity="sha256-iWHDF8W4i5U/4nUlg5ZyyTQ/EFirBEaWyiJWVsi6KrA="></script>
+
+<div class="navbar" role="navigation">
+    <nav class="menu" aria-label="Main Navigation">
+        <a href="https://byteshifters.com/" class="logo">
+            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" 
+viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" 
+stroke-linejoin="round" class="feather feather-home">
+<title></title>
+<path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+<polyline points="9 22 9 12 15 12 15 22"></polyline>
+</svg>
+        </a>
+        <input type="checkbox" id="menu-trigger" class="menu-trigger" />
+        <label for="menu-trigger">
+            <span class="menu-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" stroke="currentColor" fill="none" viewBox="0 0 14 14"><title>Menu</title><path stroke-linecap="round" stroke-linejoin="round" d="M10.595 7L3.40726 7"></path><path stroke-linecap="round" stroke-linejoin="round" d="M10.5096 3.51488L3.49301 3.51488"></path><path stroke-linecap="round" stroke-linejoin="round" d="M10.5096 10.4851H3.49301"></path><path stroke-linecap="round" stroke-linejoin="round" d="M0.5 12.5V1.5C0.5 0.947715 0.947715 0.5 1.5 0.5H12.5C13.0523 0.5 13.5 0.947715 13.5 1.5V12.5C13.5 13.0523 13.0523 13.5 12.5 13.5H1.5C0.947715 13.5 0.5 13.0523 0.5 12.5Z"></path></svg>
+            </span>
+        </label>
+
+        <div class="trigger">
+            <ul class="trigger-container">
+                
+                
+                <li>
+                    <a class="menu-link " href="/">
+                        Home
+                    </a>
+                    
+                </li>
+                
+                <li>
+                    <a class="menu-link " href="/posts/">
+                        Posts
+                    </a>
+                    
+                </li>
+                
+                <li>
+                    <a class="menu-link " href="/contact/">
+                        Contact
+                    </a>
+                    
+                </li>
+                
+                <li class="menu-separator">
+                    <span>|</span>
+                </li>
+                
+                
+            </ul>
+            <a id="mode" href="#">
+                <svg xmlns="http://www.w3.org/2000/svg" class="mode-sunny" width="21" height="21" viewBox="0 0 14 14" stroke-width="1">
+<title>LIGHT</title><g><circle cx="7" cy="7" r="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></circle><line x1="7" y1="0.5" x2="7" y2="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="2.4" x2="3.82" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="0.5" y1="7" x2="2.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="11.6" x2="3.82" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="7" y1="13.5" x2="7" y2="11.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="11.6" x2="10.18" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="13.5" y1="7" x2="11.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="2.4" x2="10.18" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line></g></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" class="mode-moon" width="21" height="21" viewBox="0 0 14 14" stroke-width="1">
+<title>DARK</title><g><circle cx="7" cy="7" r="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></circle><line x1="7" y1="0.5" x2="7" y2="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="2.4" x2="3.82" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="0.5" y1="7" x2="2.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="11.6" x2="3.82" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="7" y1="13.5" x2="7" y2="11.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="11.6" x2="10.18" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="13.5" y1="7" x2="11.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="2.4" x2="10.18" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line></g></svg>
+            </a>
+        </div>
+    </nav>
+</div>
+
+<div class="wrapper post">
+    <main class="page-content" aria-label="Content">
+        <article>
+            <header class="header">
+                <h1 class="header-title">Testing and Debugging</h1>
+                
+                
+                <div class="post-meta">
+                    <time datetime="2024-09-11T00:00:00&#43;00:00" itemprop="datePublished"> Sep 11, 2024 </time>
+                </div>
+                
+                
+                <div class="tags-list"><a href="https://byteshifters.com/tags/python/">#Python</a>
+                            </div>
+            </header>
+            
+    
+    <details class="toc" ZgotmplZ>
+        <summary><b></b></summary>
+        <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#unit-testing"><strong>Unit Testing</strong></a></li>
+        <li><a href="#debugging"><strong>Debugging</strong></a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    </details>
+            <div class="page-content">
+                <h3 id="unit-testing"><strong>Unit Testing</strong></h3>
+<ul>
+<li>
+<p><strong>Writing Test Cases Using <code>unittest</code> and <code>pytest</code></strong><br>
+Unit testing involves writing test cases to verify that individual parts of your code (functions, methods, etc.) work as expected.</p>
+<ul>
+<li>
+<p><strong><code>unittest</code></strong>: A built-in Python module for writing and running tests.
+<strong>Example</strong>:</p>
+<pre tabindex="0"><code>import unittest
+
+def add(a, b):
+    return a + b
+
+class TestMathFunctions(unittest.TestCase):
+    def test_add(self):
+        self.assertEqual(add(1, 2), 3)
+        self.assertEqual(add(-1, 1), 0)
+
+if __name__ == &#39;__main__&#39;:
+    unittest.main()
+</code></pre></li>
+<li>
+<p><strong><code>pytest</code></strong>: A third-party testing framework that is more flexible and has a simpler syntax than <code>unittest</code>.
+<strong>Example</strong>:</p>
+<pre tabindex="0"><code>def add(a, b):
+    return a + b
+
+def test_add():
+    assert add(1, 2) == 3
+    assert add(-1, 1) == 0
+
+# To run the tests, use the command: pytest
+</code></pre></li>
+</ul>
+</li>
+<li>
+<p><strong>Test-Driven Development (TDD)</strong><br>
+TDD is a software development approach where tests are written before the code itself. This ensures that the code is designed to meet the test requirements from the start.</p>
+<p><strong>TDD Workflow</strong>:</p>
+<ol>
+<li>Write a failing test.</li>
+<li>Write the minimum amount of code to pass the test.</li>
+<li>Refactor the code while keeping the test green (passing).</li>
+</ol>
+</li>
+<li>
+<p><strong>Mocking and Patching</strong><br>
+Mocking allows you to replace parts of your system under test with mock objects and make assertions about how they have been used.</p>
+<ul>
+<li><strong>Using <code>unittest.mock</code></strong>:
+<strong>Example</strong>:
+<pre tabindex="0"><code>from unittest.mock import patch
+
+def get_data():
+    # Imagine this function makes an API call
+    return {&#34;key&#34;: &#34;value&#34;}
+
+@patch(&#39;__main__.get_data&#39;, return_value={&#34;key&#34;: &#34;mocked_value&#34;})
+def test_get_data(mock_get):
+    result = get_data()
+    assert result[&#39;key&#39;] == &#39;mocked_value&#39;
+
+# Running this with pytest or unittest will show that the function is successfully mocked.
+</code></pre></li>
+</ul>
+</li>
+</ul>
+<h3 id="debugging"><strong>Debugging</strong></h3>
+<ul>
+<li>
+<p><strong>Using <code>print()</code> for Debugging</strong><br>
+The simplest form of debugging is to insert <code>print()</code> statements in your code to check the flow of execution and the values of variables.</p>
+<p><strong>Example</strong>:</p>
+<pre tabindex="0"><code>def complex_function(x):
+    print(f&#34;x at start: {x}&#34;)
+    y = x * 2
+    print(f&#34;y after multiplication: {y}&#34;)
+    z = y + 5
+    print(f&#34;z after addition: {z}&#34;)
+    return z
+
+complex_function(10)
+</code></pre><p>Output:</p>
+<pre tabindex="0"><code>x at start: 10
+y after multiplication: 20
+z after addition: 25
+</code></pre></li>
+<li>
+<p><strong>Python Debugger: <code>pdb</code></strong><br>
+<code>pdb</code> is Python’s built-in debugger. It allows you to set breakpoints, step through code, inspect variables, and evaluate expressions.</p>
+<p><strong>Example</strong>:</p>
+<pre tabindex="0"><code>import pdb
+
+def complex_function(x):
+    pdb.set_trace()  # Set a breakpoint
+    y = x * 2
+    z = y + 5
+    return z
+
+complex_function(10)
+</code></pre><p>Running the above code will start an interactive debugging session at the point where <code>pdb.set_trace()</code> is called.</p>
+<p>Common <code>pdb</code> commands:</p>
+<ul>
+<li><code>n</code> (next): Continue execution to the next line within the same function.</li>
+<li><code>c</code> (continue): Continue execution until the next breakpoint.</li>
+<li><code>q</code> (quit): Exit the debugger and terminate the program.</li>
+</ul>
+</li>
+<li>
+<p><strong>Logging with the <code>logging</code> Module</strong><br>
+Logging is a more robust alternative to <code>print()</code> for tracking the execution of a program. The <code>logging</code> module provides a flexible framework for emitting log messages from Python programs.</p>
+<p><strong>Example</strong>:</p>
+<pre tabindex="0"><code>import logging
+
+# Configure logging
+logging.basicConfig(level=logging.DEBUG, format=&#39;%(asctime)s - %(levelname)s - %(message)s&#39;)
+
+def complex_function(x):
+    logging.debug(f&#34;x at start: {x}&#34;)
+    y = x * 2
+    logging.info(f&#34;y after multiplication: {y}&#34;)
+    z = y + 5
+    logging.warning(f&#34;z after addition: {z}&#34;)
+    return z
+
+complex_function(10)
+</code></pre><p>Output in the console:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-s" data-lang="s"><span class="line"><span class="cl"><span class="m">2024-08-30</span> <span class="m">12</span><span class="o">:</span><span class="m">00</span><span class="o">:</span><span class="m">00</span> <span class="o">-</span> <span class="n">DEBUG</span> <span class="o">-</span> <span class="n">x</span> <span class="n">at</span> <span class="n">start</span><span class="o">:</span> <span class="m">10</span>
+</span></span><span class="line"><span class="cl"><span class="m">2024-08-30</span> <span class="m">12</span><span class="o">:</span><span class="m">00</span><span class="o">:</span><span class="m">00</span> <span class="o">-</span> <span class="n">INFO</span> <span class="o">-</span> <span class="n">y</span> <span class="n">after</span> <span class="n">multiplication</span><span class="o">:</span> <span class="m">20</span>
+</span></span><span class="line"><span class="cl"><span class="m">2024-08-30</span> <span class="m">12</span><span class="o">:</span><span class="m">00</span><span class="o">:</span><span class="m">00</span> <span class="o">-</span> <span class="n">WARNING</span> <span class="o">-</span> <span class="n">z</span> <span class="n">after</span> <span class="n">addition</span><span class="o">:</span> <span class="m">25</span>
+</span></span></code></pre></div><p>Logging levels include <code>DEBUG</code>, <code>INFO</code>, <code>WARNING</code>, <code>ERROR</code>, and <code>CRITICAL</code>, which can be used to differentiate the severity of log messages.</p>
+</li>
+</ul>
+
+            </div>
+        </article></main>
+</div>
+<footer class="footer">
+    <span class="footer_item"> </span>
+    &nbsp;
+
+    <div class="footer_social-icons">
+<a href="index.xml" target="_blank" rel="noopener noreferrer me"
+    title="Rss">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+    stroke-linecap="round" stroke-linejoin="round">
+    <path d="M4 11a9 9 0 0 1 9 9" />
+    <path d="M4 4a16 16 0 0 1 16 16" />
+    <circle cx="5" cy="19" r="1" />
+</svg>
+</a>
+</div>
+    <small class="footer_copyright">
+        
+        byteshifters.com
+        
+    </small>
+</footer><a href="#" title="" id="totop">
+    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor" stroke="currentColor" viewBox="0 96 960 960">
+    <path d="M283 704.739 234.261 656 480 410.261 725.739 656 677 704.739l-197-197-197 197Z"/>
+</svg>
+
+</a>
+
+
+    
+
+
+
+
+
+
+    
+    <script src="https://byteshifters.com/js/main.min.35f435a5d8eac613c52daa28d8af544a4512337d3e95236e4a4978417b8dcb2f.js" integrity="sha256-NfQ1pdjqxhPFLaoo2K9USkUSM30&#43;lSNuSkl4QXuNyy8="></script>
+
+    
+
+</body>
+</html>

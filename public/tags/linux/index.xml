@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Linux on ByteShifters</title>
+    <link>https://byteshifters.com/tags/linux/</link>
+    <description>Recent content in Linux on ByteShifters</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 13 Sep 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://byteshifters.com/tags/linux/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Linux Syscalls Table</title>
+      <link>https://byteshifters.com/posts/linux/syscalls-table/</link>
+      <pubDate>Fri, 13 Sep 2024 00:00:00 +0000</pubDate>
+      
+      <guid>https://byteshifters.com/posts/linux/syscalls-table/</guid>
+      
+      <description>Overview This table lists the Linux system call numbers for the x86-64 architecture, starting from 2013, and provides detailed information such as the syscall name, arguments, and direct links to their manual pages and implementation in the kernel source code.
+Data Source The data is extracted from the syscall_64.tbl file in the Linux 6.7 kernel source and the syscalls.h header file. The syscalls themselves are implemented as functions named in the Entry Point column and generated using the DEFINE_SYSCALLx macros.</description>
+      
+    </item>
+    
+  </channel>
+</rss>

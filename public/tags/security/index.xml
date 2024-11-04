@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Security on ByteShifters</title>
+    <link>https://byteshifters.com/tags/security/</link>
+    <description>Recent content in Security on ByteShifters</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 03 Oct 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://byteshifters.com/tags/security/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Introduction to Advanced SQL Injection Techniques</title>
+      <link>https://byteshifters.com/posts/hacking/sql-injections/introduction/</link>
+      <pubDate>Thu, 03 Oct 2024 00:00:00 +0000</pubDate>
+      
+      <guid>https://byteshifters.com/posts/hacking/sql-injections/introduction/</guid>
+      
+      <description>Introduction to Advanced SQL Injection Techniques In the ever-evolving landscape of web security, SQL injection (SQLi) remains one of the most prevalent and effective attack vectors. Understanding the various techniques and strategies for exploiting SQLi vulnerabilities is essential for both attackers and defenders. This document introduces several key topics related to advanced SQL injection techniques, highlighting methods to extract sensitive information, bypass web application firewalls (WAFs), and generate errors from databases.</description>
+      
+    </item>
+    
+  </channel>
+</rss>

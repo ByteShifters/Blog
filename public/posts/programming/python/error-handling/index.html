@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en-us"><head><meta charset="utf-8">
+<meta http-equiv="content-type" content="text/html">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title itemprop="name">Error Handling and Exceptions | ByteShifters</title>
+<meta property="og:title" content="Error Handling and Exceptions | ByteShifters" />
+<meta name="twitter:title" content="Error Handling and Exceptions | ByteShifters" />
+<meta itemprop="name" content="Error Handling and Exceptions | ByteShifters" />
+<meta name="application-name" content="Error Handling and Exceptions | ByteShifters" />
+<meta property="og:site_name" content="" />
+
+<meta name="description" content="">
+<meta itemprop="description" content="" />
+<meta property="og:description" content="" />
+<meta name="twitter:description" content="" />
+
+<meta property="og:locale" content="en-us" />
+<meta name="language" content="en-us" />
+
+
+
+
+
+    
+    
+    
+
+    <meta property="og:type" content="article" />
+    <meta property="og:article:published_time" content=2024-09-11T00:00:00Z />
+    <meta property="article:published_time" content=2024-09-11T00:00:00Z />
+    <meta property="og:url" content="https://byteshifters.com/posts/programming/python/error-handling/" />
+
+    
+    <meta property="og:article:author" content="ByteShifters" />
+    <meta property="article:author" content="ByteShifters" />
+    <meta name="author" content="ByteShifters" />
+    
+    
+
+    
+
+    <script defer type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "Article",
+        "headline": "Error Handling and Exceptions",
+        "author": {
+        "@type": "Person",
+        "name": ""
+        },
+        "datePublished": "2024-09-11",
+        "description": "",
+        "wordCount":  387 ,
+        "mainEntityOfPage": "True",
+        "dateModified": "2024-09-11",
+        "image": {
+        "@type": "imageObject",
+        "url": ""
+        },
+        "publisher": {
+        "@type": "Organization",
+        "name": "ByteShifters"
+        }
+    }
+    </script>
+
+
+<meta name="generator" content="Hugo 0.122.0">
+
+    
+    <meta property="og:title" content="Error Handling and Exceptions" />
+<meta property="og:description" content="Understanding Exceptions Exceptions are errors that occur during the execution of a program. Understanding common exceptions can help you handle errors more effectively.
+Common Exceptions: IndexError: Raised when trying to access an element from a list using an index that is out of range.
+my_list = [1, 2, 3]item = my_list[5] # Raises IndexError KeyError: Raised when trying to access a key in a dictionary that does not exist." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://byteshifters.com/posts/programming/python/error-handling/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2024-09-11T00:00:00+00:00" />
+<meta property="article:modified_time" content="2024-09-11T00:00:00+00:00" />
+
+
+
+    
+    <meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Error Handling and Exceptions"/>
+<meta name="twitter:description" content="Understanding Exceptions Exceptions are errors that occur during the execution of a program. Understanding common exceptions can help you handle errors more effectively.
+Common Exceptions: IndexError: Raised when trying to access an element from a list using an index that is out of range.
+my_list = [1, 2, 3]item = my_list[5] # Raises IndexError KeyError: Raised when trying to access a key in a dictionary that does not exist."/>
+
+
+    
+    <link rel="icon" type="image/png+xml" href="/icons/logo32.png">
+
+    <link rel="canonical" href="https://byteshifters.com/posts/programming/python/error-handling/">
+    <link href="/style.min.a65edcf99b5d9c11dd8dc9c13f2e80eec76933d8449c8579cefe3c64191b71d4.css" rel="stylesheet">
+    <link href="/code-highlight.min.3dea1c7a362e3a7df3392c75d19c1efa95b2e82aa030c322a07a6caf50cb8e9a.css" rel="stylesheet">
+
+    
+    <link rel="icon" type="image/png+xml" href="/icons/logo32.png">
+    
+    
+    <link rel="icon" type="image/png" sizes="32x32" href="/icons/logo32.png">
+    
+
+
+
+
+<link rel="manifest" href="https://byteshifters.com/site.webmanifest">
+
+<meta name="msapplication-config" content="/browserconfig.xml">
+<meta name="msapplication-TileColor" content="#2d89ef">
+<meta name="theme-color" content="#cccccc">
+
+    
+    <link rel="icon" type="image/png"  sizes="32x32" href="/icons/logo32.png">
+
+</head>
+<body data-theme = "" class="notransition">
+
+<script src="/js/theme.min.8961c317c5b88b953fe27525839672c9343f1058ab044696ca225656c8ba2ab0.js" integrity="sha256-iWHDF8W4i5U/4nUlg5ZyyTQ/EFirBEaWyiJWVsi6KrA="></script>
+
+<div class="navbar" role="navigation">
+    <nav class="menu" aria-label="Main Navigation">
+        <a href="https://byteshifters.com/" class="logo">
+            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" 
+viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" 
+stroke-linejoin="round" class="feather feather-home">
+<title></title>
+<path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+<polyline points="9 22 9 12 15 12 15 22"></polyline>
+</svg>
+        </a>
+        <input type="checkbox" id="menu-trigger" class="menu-trigger" />
+        <label for="menu-trigger">
+            <span class="menu-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" stroke="currentColor" fill="none" viewBox="0 0 14 14"><title>Menu</title><path stroke-linecap="round" stroke-linejoin="round" d="M10.595 7L3.40726 7"></path><path stroke-linecap="round" stroke-linejoin="round" d="M10.5096 3.51488L3.49301 3.51488"></path><path stroke-linecap="round" stroke-linejoin="round" d="M10.5096 10.4851H3.49301"></path><path stroke-linecap="round" stroke-linejoin="round" d="M0.5 12.5V1.5C0.5 0.947715 0.947715 0.5 1.5 0.5H12.5C13.0523 0.5 13.5 0.947715 13.5 1.5V12.5C13.5 13.0523 13.0523 13.5 12.5 13.5H1.5C0.947715 13.5 0.5 13.0523 0.5 12.5Z"></path></svg>
+            </span>
+        </label>
+
+        <div class="trigger">
+            <ul class="trigger-container">
+                
+                
+                <li>
+                    <a class="menu-link " href="/">
+                        Home
+                    </a>
+                    
+                </li>
+                
+                <li>
+                    <a class="menu-link " href="/posts/">
+                        Posts
+                    </a>
+                    
+                </li>
+                
+                <li>
+                    <a class="menu-link " href="/contact/">
+                        Contact
+                    </a>
+                    
+                </li>
+                
+                <li class="menu-separator">
+                    <span>|</span>
+                </li>
+                
+                
+            </ul>
+            <a id="mode" href="#">
+                <svg xmlns="http://www.w3.org/2000/svg" class="mode-sunny" width="21" height="21" viewBox="0 0 14 14" stroke-width="1">
+<title>LIGHT</title><g><circle cx="7" cy="7" r="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></circle><line x1="7" y1="0.5" x2="7" y2="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="2.4" x2="3.82" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="0.5" y1="7" x2="2.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="11.6" x2="3.82" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="7" y1="13.5" x2="7" y2="11.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="11.6" x2="10.18" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="13.5" y1="7" x2="11.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="2.4" x2="10.18" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line></g></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" class="mode-moon" width="21" height="21" viewBox="0 0 14 14" stroke-width="1">
+<title>DARK</title><g><circle cx="7" cy="7" r="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></circle><line x1="7" y1="0.5" x2="7" y2="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="2.4" x2="3.82" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="0.5" y1="7" x2="2.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="11.6" x2="3.82" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="7" y1="13.5" x2="7" y2="11.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="11.6" x2="10.18" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="13.5" y1="7" x2="11.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="2.4" x2="10.18" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line></g></svg>
+            </a>
+        </div>
+    </nav>
+</div>
+
+<div class="wrapper post">
+    <main class="page-content" aria-label="Content">
+        <article>
+            <header class="header">
+                <h1 class="header-title">Error Handling and Exceptions</h1>
+                
+                
+                <div class="post-meta">
+                    <time datetime="2024-09-11T00:00:00&#43;00:00" itemprop="datePublished"> Sep 11, 2024 </time>
+                </div>
+                
+                
+                <div class="tags-list"><a href="https://byteshifters.com/tags/python/">#Python</a>
+                            </div>
+            </header>
+            
+    
+    <details class="toc" ZgotmplZ>
+        <summary><b></b></summary>
+        <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#understanding-exceptions"><strong>Understanding Exceptions</strong></a></li>
+        <li><a href="#handling-exceptions"><strong>Handling Exceptions</strong></a></li>
+        <li><a href="#custom-exceptions"><strong>Custom Exceptions</strong></a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    </details>
+            <div class="page-content">
+                <h3 id="understanding-exceptions"><strong>Understanding Exceptions</strong></h3>
+<p>Exceptions are errors that occur during the execution of a program. Understanding common exceptions can help you handle errors more effectively.</p>
+<ul>
+<li><strong>Common Exceptions</strong>:
+<ul>
+<li>
+<p><strong><code>IndexError</code></strong>: Raised when trying to access an element from a list using an index that is out of range.</p>
+<pre tabindex="0"><code>my_list = [1, 2, 3]
+item = my_list[5]  # Raises IndexError
+</code></pre></li>
+<li>
+<p><strong><code>KeyError</code></strong>: Raised when trying to access a key in a dictionary that does not exist.</p>
+<pre tabindex="0"><code>my_dict = {&#34;name&#34;: &#34;Alice&#34;}
+value = my_dict[&#34;age&#34;]  # Raises KeyError
+</code></pre></li>
+<li>
+<p><strong><code>TypeError</code></strong>: Raised when an operation or function is applied to an object of inappropriate type.</p>
+<pre tabindex="0"><code>result = &#34;hello&#34; + 5  # Raises TypeError
+</code></pre></li>
+<li>
+<p><strong><code>ValueError</code></strong>: Raised when a function receives an argument of the right type but inappropriate value.</p>
+<pre tabindex="0"><code>number = int(&#34;abc&#34;)  # Raises ValueError
+</code></pre></li>
+<li>
+<p><strong><code>FileNotFoundError</code></strong>: Raised when trying to open a file that does not exist.</p>
+<pre tabindex="0"><code>file = open(&#34;nonexistent_file.txt&#34;)  # Raises FileNotFoundError
+</code></pre></li>
+</ul>
+</li>
+</ul>
+<h3 id="handling-exceptions"><strong>Handling Exceptions</strong></h3>
+<p>You can handle exceptions using <code>try</code> and <code>except</code> blocks. This allows your program to continue executing even if an error occurs.</p>
+<ul>
+<li>
+<p><strong>Using <code>try</code>, <code>except</code>, <code>finally</code>, <code>else</code></strong>:</p>
+<ul>
+<li><strong><code>try</code></strong>: Block of code where you anticipate an exception might occur.</li>
+<li><strong><code>except</code></strong>: Block of code that will execute if an exception occurs in the <code>try</code> block.</li>
+<li><strong><code>else</code></strong>: Block of code that will execute if no exception occurs in the <code>try</code> block.</li>
+<li><strong><code>finally</code></strong>: Block of code that will execute regardless of whether an exception occurs or not.</li>
+</ul>
+<p><strong>Example</strong>:</p>
+<pre tabindex="0"><code>try:
+    file = open(&#34;example.txt&#34;, &#34;r&#34;)
+    content = file.read()
+except FileNotFoundError:
+    print(&#34;File not found.&#34;)
+except IOError:
+    print(&#34;An I/O error occurred.&#34;)
+else:
+    print(&#34;File read successfully.&#34;)
+finally:
+    file.close()
+    print(&#34;File closed.&#34;)
+</code></pre></li>
+<li>
+<p><strong>Raising Exceptions</strong>:
+You can raise exceptions deliberately using the <code>raise</code> keyword. This is useful for creating custom error messages or controlling program flow.</p>
+<p><strong>Example</strong>:</p>
+<pre tabindex="0"><code>def divide(x, y):
+    if y == 0:
+        raise ValueError(&#34;Cannot divide by zero!&#34;)
+    return x / y
+
+try:
+    result = divide(10, 0)
+except ValueError as e:
+    print(e)  # Prints &#34;Cannot divide by zero!&#34;
+</code></pre></li>
+</ul>
+<h3 id="custom-exceptions"><strong>Custom Exceptions</strong></h3>
+<p>You can create your own exception classes by subclassing the built-in <code>Exception</code> class. This is useful for defining exceptions that are specific to your application.</p>
+<ul>
+<li>
+<p><strong>Creating Custom Exception Classes</strong>:</p>
+<p><strong>Example</strong>:</p>
+<pre tabindex="0"><code>class CustomError(Exception):
+    &#34;&#34;&#34;Base class for other exceptions&#34;&#34;&#34;
+    pass
+
+class SpecificError(CustomError):
+    &#34;&#34;&#34;Raised for specific conditions&#34;&#34;&#34;
+    def __init__(self, message):
+        self.message = message
+        super().__init__(self.message)
+
+def test(value):
+    if value &lt; 0:
+        raise SpecificError(&#34;Negative value error!&#34;)
+    return value
+
+try:
+    test(-1)
+except SpecificError as e:
+    print(e)  # Prints &#34;Negative value error!&#34;
+</code></pre></li>
+</ul>
+
+            </div>
+        </article></main>
+</div>
+<footer class="footer">
+    <span class="footer_item"> </span>
+    &nbsp;
+
+    <div class="footer_social-icons">
+<a href="index.xml" target="_blank" rel="noopener noreferrer me"
+    title="Rss">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+    stroke-linecap="round" stroke-linejoin="round">
+    <path d="M4 11a9 9 0 0 1 9 9" />
+    <path d="M4 4a16 16 0 0 1 16 16" />
+    <circle cx="5" cy="19" r="1" />
+</svg>
+</a>
+</div>
+    <small class="footer_copyright">
+        
+        byteshifters.com
+        
+    </small>
+</footer><a href="#" title="" id="totop">
+    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor" stroke="currentColor" viewBox="0 96 960 960">
+    <path d="M283 704.739 234.261 656 480 410.261 725.739 656 677 704.739l-197-197-197 197Z"/>
+</svg>
+
+</a>
+
+
+    
+
+
+
+
+
+
+    
+    <script src="https://byteshifters.com/js/main.min.35f435a5d8eac613c52daa28d8af544a4512337d3e95236e4a4978417b8dcb2f.js" integrity="sha256-NfQ1pdjqxhPFLaoo2K9USkUSM30&#43;lSNuSkl4QXuNyy8="></script>
+
+    
+
+</body>
+</html>

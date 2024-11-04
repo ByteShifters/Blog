@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Architecture on ByteShifters</title>
+    <link>https://byteshifters.com/tags/architecture/</link>
+    <description>Recent content in Architecture on ByteShifters</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 21 Sep 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://byteshifters.com/tags/architecture/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Introduction to ARM Architecture</title>
+      <link>https://byteshifters.com/posts/programming/introduction-to-arm-architecture/</link>
+      <pubDate>Sat, 21 Sep 2024 00:00:00 +0000</pubDate>
+      
+      <guid>https://byteshifters.com/posts/programming/introduction-to-arm-architecture/</guid>
+      
+      <description>Introduction to ARM Architecture ARM is a widely-used architecture in various devices due to its efficiency and power-saving features. Understanding ARM assembly provides you with the ability to write low-level code that directly interacts with hardware.
+ARM Versions ARM has several versions, including ARMv7 (32-bit) and ARMv8 (64-bit). Each version introduces new instructions and capabilities.
+Basic Concepts Registers Registers are crucial for ARM assembly programming. Each register has specific roles:</description>
+      
+    </item>
+    
+  </channel>
+</rss>

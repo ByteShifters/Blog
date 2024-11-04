@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>C2 on ByteShifters</title>
+    <link>https://byteshifters.com/tags/c2/</link>
+    <description>Recent content in C2 on ByteShifters</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 04 Oct 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://byteshifters.com/tags/c2/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Domain Generation Algorithms and Automatic Domain Registration in C2</title>
+      <link>https://byteshifters.com/posts/system-security/malware-techniques/domain-name-generation-and-registration-in-c2/</link>
+      <pubDate>Fri, 04 Oct 2024 00:00:00 +0000</pubDate>
+      
+      <guid>https://byteshifters.com/posts/system-security/malware-techniques/domain-name-generation-and-registration-in-c2/</guid>
+      
+      <description>Domain Generation Algorithms and Automatic Domain Registration Domain Generation Algorithms (DGAs) are critical tools used in various applications, including both legitimate and malicious domains. This blog post discusses how DGAs function and demonstrates how to automatically register the generated domains using the Namecheap API.
+What is a Domain Generation Algorithm (DGA)? A Domain Generation Algorithm (DGA) is a technique used primarily in malware to generate domain names that are used for command and control (C2) operations.</description>
+      
+    </item>
+    
+  </channel>
+</rss>

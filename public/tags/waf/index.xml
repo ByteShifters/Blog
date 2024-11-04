@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>WAF on ByteShifters</title>
+    <link>https://byteshifters.com/tags/waf/</link>
+    <description>Recent content in WAF on ByteShifters</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 03 Oct 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://byteshifters.com/tags/waf/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>WAF Bypass Techniques for SQL Injection</title>
+      <link>https://byteshifters.com/posts/hacking/sql-injections/waf-bypass-techniques-for-sqli/</link>
+      <pubDate>Thu, 03 Oct 2024 00:00:00 +0000</pubDate>
+      
+      <guid>https://byteshifters.com/posts/hacking/sql-injections/waf-bypass-techniques-for-sqli/</guid>
+      
+      <description>WAF Bypass Techniques for SQL Injection Below are various methods to bypass WAFs and execute SQL injection attacks. Each technique takes advantage of different obfuscation, encoding, and manipulation strategies to evade detection.
+1. Using Encoding and Obfuscation URL Encoding %27%20UNION%20SELECT%20NULL,NULL,NULL-- Encode parts of the payload to bypass basic keyword detection mechanisms used by WAFs.
+Double URL Encoding %2527%2520UNION%2520SELECT%2520NULL,NULL,NULL-- Double encode the payload to evade more sophisticated detection mechanisms.
+Hex Encoding &amp;#39; UNION SELECT 0x61646D696E, 0x70617373776F7264 -- Use hexadecimal encoding for the payload to obscure the SQL commands.</description>
+      
+    </item>
+    
+  </channel>
+</rss>

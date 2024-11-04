@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>C on ByteShifters</title>
+    <link>https://byteshifters.com/tags/c/</link>
+    <description>Recent content in C on ByteShifters</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 21 Sep 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://byteshifters.com/tags/c/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Introduction to x64 ASM</title>
+      <link>https://byteshifters.com/posts/programming/x64-asm/introduction-to-x64-asm/</link>
+      <pubDate>Sat, 21 Sep 2024 00:00:00 +0000</pubDate>
+      
+      <guid>https://byteshifters.com/posts/programming/x64-asm/introduction-to-x64-asm/</guid>
+      
+      <description>1. Introduction to Assembly and x64 Architecture What is Assembly Language? Assembly language is a low-level programming language that is closely related to machine code. Each instruction corresponds directly to machine instructions executed by the CPU. Unlike high-level languages, assembly is architecture-specific, meaning that assembly code written for one architecture (e.g., x86) won&amp;rsquo;t work on another (e.g., ARM).
+In this tutorial, we&amp;rsquo;ll focus on x64 assembly, the 64-bit extension of the x86 architecture.</description>
+      
+    </item>
+    
+    <item>
+      <title>Advanced C Programming Best Practices</title>
+      <link>https://byteshifters.com/posts/programming/c/best-practices-in-c/</link>
+      <pubDate>Mon, 29 Jul 2024 00:00:00 +0000</pubDate>
+      
+      <guid>https://byteshifters.com/posts/programming/c/best-practices-in-c/</guid>
+      
+      <description>Introduction C programming is foundational for systems-level development and applications that demand high performance and low-level memory management. This document provides a comprehensive guide to writing secure, maintainable, and efficient C code, informed by practices used in industry-leading organizations like NASA and Google.
+Secure Coding Practices Input Validation Always validate inputs to avoid vulnerabilities such as buffer overflows and injection attacks.
+Input Type Recommended Practices Strings Use strncpy, snprintf for safer handling.</description>
+      
+    </item>
+    
+  </channel>
+</rss>

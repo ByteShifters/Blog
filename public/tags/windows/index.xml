@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Windows on ByteShifters</title>
+    <link>https://byteshifters.com/tags/windows/</link>
+    <description>Recent content in Windows on ByteShifters</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 17 Sep 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://byteshifters.com/tags/windows/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Introduction to Windows Syscalls</title>
+      <link>https://byteshifters.com/posts/windows/syscalls-in-windows/</link>
+      <pubDate>Tue, 17 Sep 2024 00:00:00 +0000</pubDate>
+      
+      <guid>https://byteshifters.com/posts/windows/syscalls-in-windows/</guid>
+      
+      <description>Introduction to Syscalls in Windows System calls, or syscalls, are the primary means through which applications interact with the operating system (OS). They provide a controlled interface for programs to request services from the OS kernel, such as file operations, process management, and communication. This introduction will delve into Windows system calls, their structure, advanced usage, performance considerations, and best practices.
+What are System Calls? System calls act as a bridge between user applications and the kernel, allowing applications to execute privileged operations safely.</description>
+      
+    </item>
+    
+  </channel>
+</rss>

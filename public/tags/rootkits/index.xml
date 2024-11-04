@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Rootkits on ByteShifters</title>
+    <link>https://byteshifters.com/tags/rootkits/</link>
+    <description>Recent content in Rootkits on ByteShifters</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 04 Oct 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://byteshifters.com/tags/rootkits/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Domain Generation Algorithms and Automatic Domain Registration in C2</title>
+      <link>https://byteshifters.com/posts/system-security/malware-techniques/domain-name-generation-and-registration-in-c2/</link>
+      <pubDate>Fri, 04 Oct 2024 00:00:00 +0000</pubDate>
+      
+      <guid>https://byteshifters.com/posts/system-security/malware-techniques/domain-name-generation-and-registration-in-c2/</guid>
+      
+      <description>Domain Generation Algorithms and Automatic Domain Registration Domain Generation Algorithms (DGAs) are critical tools used in various applications, including both legitimate and malicious domains. This blog post discusses how DGAs function and demonstrates how to automatically register the generated domains using the Namecheap API.
+What is a Domain Generation Algorithm (DGA)? A Domain Generation Algorithm (DGA) is a technique used primarily in malware to generate domain names that are used for command and control (C2) operations.</description>
+      
+    </item>
+    
+    <item>
+      <title>Custom linux kernel Hooks with eBPF</title>
+      <link>https://byteshifters.com/posts/programming/ebpf/custom-ebpf-hooks-linux/custom-ebpf-hooks-in-linux-kernel/</link>
+      <pubDate>Wed, 02 Oct 2024 00:00:00 +0000</pubDate>
+      
+      <guid>https://byteshifters.com/posts/programming/ebpf/custom-ebpf-hooks-linux/custom-ebpf-hooks-in-linux-kernel/</guid>
+      
+      <description>Introduction to eBPF: Developing Custom Hooks in the Linux Kernel eBPF (Extended Berkeley Packet Filter) is a powerful Linux kernel technology that enables the development of custom tracing, networking, and security tools. By creating highly efficient and flexible hooks into the kernel, eBPF allows for deep insights into system behavior and high-performance packet filtering.
+In this guide, we’ll cover the fundamentals of developing eBPF hooks, exploring the tools required, and providing code snippets to help you get started on your journey with eBPF.</description>
+      
+    </item>
+    
+    <item>
+      <title>Introduction to Windows Syscalls</title>
+      <link>https://byteshifters.com/posts/windows/syscalls-in-windows/</link>
+      <pubDate>Tue, 17 Sep 2024 00:00:00 +0000</pubDate>
+      
+      <guid>https://byteshifters.com/posts/windows/syscalls-in-windows/</guid>
+      
+      <description>Introduction to Syscalls in Windows System calls, or syscalls, are the primary means through which applications interact with the operating system (OS). They provide a controlled interface for programs to request services from the OS kernel, such as file operations, process management, and communication. This introduction will delve into Windows system calls, their structure, advanced usage, performance considerations, and best practices.
+What are System Calls? System calls act as a bridge between user applications and the kernel, allowing applications to execute privileged operations safely.</description>
+      
+    </item>
+    
+    <item>
+      <title>Hooking `getdents64` to Hide Directories in Linux</title>
+      <link>https://byteshifters.com/posts/system-security/malware-techniques/hide-dir-with-syscall-hooks/</link>
+      <pubDate>Wed, 05 Jun 2024 00:00:00 +0000</pubDate>
+      
+      <guid>https://byteshifters.com/posts/system-security/malware-techniques/hide-dir-with-syscall-hooks/</guid>
+      
+      <description>Hooking getdents64 to Hide Directories in Linux Syscall hooking is a technique used in operating system development to intercept system calls made by user-space applications. This allows developers to modify or monitor the behavior of those calls without altering the application code. One common use case is hiding files or directories, which can be useful for security applications or debugging.
+Use Cases Use Case Description Security Monitoring Intercept system calls to monitor suspicious activity.</description>
+      
+    </item>
+    
+  </channel>
+</rss>

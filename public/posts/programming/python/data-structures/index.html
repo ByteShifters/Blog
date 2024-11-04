@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en-us"><head><meta charset="utf-8">
+<meta http-equiv="content-type" content="text/html">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title itemprop="name">Data Structures in Python | ByteShifters</title>
+<meta property="og:title" content="Data Structures in Python | ByteShifters" />
+<meta name="twitter:title" content="Data Structures in Python | ByteShifters" />
+<meta itemprop="name" content="Data Structures in Python | ByteShifters" />
+<meta name="application-name" content="Data Structures in Python | ByteShifters" />
+<meta property="og:site_name" content="" />
+
+<meta name="description" content="">
+<meta itemprop="description" content="" />
+<meta property="og:description" content="" />
+<meta name="twitter:description" content="" />
+
+<meta property="og:locale" content="en-us" />
+<meta name="language" content="en-us" />
+
+
+
+
+
+    
+    
+    
+
+    <meta property="og:type" content="article" />
+    <meta property="og:article:published_time" content=2024-09-11T00:00:00Z />
+    <meta property="article:published_time" content=2024-09-11T00:00:00Z />
+    <meta property="og:url" content="https://byteshifters.com/posts/programming/python/data-structures/" />
+
+    
+    <meta property="og:article:author" content="ByteShifters" />
+    <meta property="article:author" content="ByteShifters" />
+    <meta name="author" content="ByteShifters" />
+    
+    
+
+    
+
+    <script defer type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "Article",
+        "headline": "Data Structures in Python",
+        "author": {
+        "@type": "Person",
+        "name": ""
+        },
+        "datePublished": "2024-09-11",
+        "description": "",
+        "wordCount":  740 ,
+        "mainEntityOfPage": "True",
+        "dateModified": "2024-09-11",
+        "image": {
+        "@type": "imageObject",
+        "url": ""
+        },
+        "publisher": {
+        "@type": "Organization",
+        "name": "ByteShifters"
+        }
+    }
+    </script>
+
+
+<meta name="generator" content="Hugo 0.122.0">
+
+    
+    <meta property="og:title" content="Data Structures in Python" />
+<meta property="og:description" content="Lists Lists are ordered collections of items which can be of different types.
+Creating Lists
+You can create a list by placing items inside square brackets [], separated by commas.
+my_list = [1, 2, 3, &#34;apple&#34;, &#34;banana&#34;] Accessing Elements
+You can access elements of a list using index numbers, starting from 0 for the first element.
+first_item = my_list[0] # first_item is 1 Slicing
+You can extract a part of a list by slicing it." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://byteshifters.com/posts/programming/python/data-structures/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2024-09-11T00:00:00+00:00" />
+<meta property="article:modified_time" content="2024-09-11T00:00:00+00:00" />
+
+
+
+    
+    <meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Data Structures in Python"/>
+<meta name="twitter:description" content="Lists Lists are ordered collections of items which can be of different types.
+Creating Lists
+You can create a list by placing items inside square brackets [], separated by commas.
+my_list = [1, 2, 3, &#34;apple&#34;, &#34;banana&#34;] Accessing Elements
+You can access elements of a list using index numbers, starting from 0 for the first element.
+first_item = my_list[0] # first_item is 1 Slicing
+You can extract a part of a list by slicing it."/>
+
+
+    
+    <link rel="icon" type="image/png+xml" href="/icons/logo32.png">
+
+    <link rel="canonical" href="https://byteshifters.com/posts/programming/python/data-structures/">
+    <link href="/style.min.a65edcf99b5d9c11dd8dc9c13f2e80eec76933d8449c8579cefe3c64191b71d4.css" rel="stylesheet">
+    <link href="/code-highlight.min.3dea1c7a362e3a7df3392c75d19c1efa95b2e82aa030c322a07a6caf50cb8e9a.css" rel="stylesheet">
+
+    
+    <link rel="icon" type="image/png+xml" href="/icons/logo32.png">
+    
+    
+    <link rel="icon" type="image/png" sizes="32x32" href="/icons/logo32.png">
+    
+
+
+
+
+<link rel="manifest" href="https://byteshifters.com/site.webmanifest">
+
+<meta name="msapplication-config" content="/browserconfig.xml">
+<meta name="msapplication-TileColor" content="#2d89ef">
+<meta name="theme-color" content="#cccccc">
+
+    
+    <link rel="icon" type="image/png"  sizes="32x32" href="/icons/logo32.png">
+
+</head>
+<body data-theme = "" class="notransition">
+
+<script src="/js/theme.min.8961c317c5b88b953fe27525839672c9343f1058ab044696ca225656c8ba2ab0.js" integrity="sha256-iWHDF8W4i5U/4nUlg5ZyyTQ/EFirBEaWyiJWVsi6KrA="></script>
+
+<div class="navbar" role="navigation">
+    <nav class="menu" aria-label="Main Navigation">
+        <a href="https://byteshifters.com/" class="logo">
+            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" 
+viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" 
+stroke-linejoin="round" class="feather feather-home">
+<title></title>
+<path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+<polyline points="9 22 9 12 15 12 15 22"></polyline>
+</svg>
+        </a>
+        <input type="checkbox" id="menu-trigger" class="menu-trigger" />
+        <label for="menu-trigger">
+            <span class="menu-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" stroke="currentColor" fill="none" viewBox="0 0 14 14"><title>Menu</title><path stroke-linecap="round" stroke-linejoin="round" d="M10.595 7L3.40726 7"></path><path stroke-linecap="round" stroke-linejoin="round" d="M10.5096 3.51488L3.49301 3.51488"></path><path stroke-linecap="round" stroke-linejoin="round" d="M10.5096 10.4851H3.49301"></path><path stroke-linecap="round" stroke-linejoin="round" d="M0.5 12.5V1.5C0.5 0.947715 0.947715 0.5 1.5 0.5H12.5C13.0523 0.5 13.5 0.947715 13.5 1.5V12.5C13.5 13.0523 13.0523 13.5 12.5 13.5H1.5C0.947715 13.5 0.5 13.0523 0.5 12.5Z"></path></svg>
+            </span>
+        </label>
+
+        <div class="trigger">
+            <ul class="trigger-container">
+                
+                
+                <li>
+                    <a class="menu-link " href="/">
+                        Home
+                    </a>
+                    
+                </li>
+                
+                <li>
+                    <a class="menu-link " href="/posts/">
+                        Posts
+                    </a>
+                    
+                </li>
+                
+                <li>
+                    <a class="menu-link " href="/contact/">
+                        Contact
+                    </a>
+                    
+                </li>
+                
+                <li class="menu-separator">
+                    <span>|</span>
+                </li>
+                
+                
+            </ul>
+            <a id="mode" href="#">
+                <svg xmlns="http://www.w3.org/2000/svg" class="mode-sunny" width="21" height="21" viewBox="0 0 14 14" stroke-width="1">
+<title>LIGHT</title><g><circle cx="7" cy="7" r="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></circle><line x1="7" y1="0.5" x2="7" y2="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="2.4" x2="3.82" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="0.5" y1="7" x2="2.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="11.6" x2="3.82" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="7" y1="13.5" x2="7" y2="11.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="11.6" x2="10.18" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="13.5" y1="7" x2="11.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="2.4" x2="10.18" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line></g></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" class="mode-moon" width="21" height="21" viewBox="0 0 14 14" stroke-width="1">
+<title>DARK</title><g><circle cx="7" cy="7" r="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></circle><line x1="7" y1="0.5" x2="7" y2="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="2.4" x2="3.82" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="0.5" y1="7" x2="2.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="11.6" x2="3.82" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="7" y1="13.5" x2="7" y2="11.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="11.6" x2="10.18" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="13.5" y1="7" x2="11.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="2.4" x2="10.18" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line></g></svg>
+            </a>
+        </div>
+    </nav>
+</div>
+
+<div class="wrapper post">
+    <main class="page-content" aria-label="Content">
+        <article>
+            <header class="header">
+                <h1 class="header-title">Data Structures in Python</h1>
+                
+                
+                <div class="post-meta">
+                    <time datetime="2024-09-11T00:00:00&#43;00:00" itemprop="datePublished"> Sep 11, 2024 </time>
+                </div>
+                
+                
+                <div class="tags-list"><a href="https://byteshifters.com/tags/python/">#Python</a>
+                            </div>
+            </header>
+            
+    
+    <details class="toc" ZgotmplZ>
+        <summary><b></b></summary>
+        <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#lists"><strong>Lists</strong></a></li>
+        <li><a href="#tuples"><strong>Tuples</strong></a></li>
+        <li><a href="#dictionaries"><strong>Dictionaries</strong></a></li>
+        <li><a href="#sets"><strong>Sets</strong></a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    </details>
+            <div class="page-content">
+                <h3 id="lists"><strong>Lists</strong></h3>
+<p>Lists are ordered collections of items which can be of different types.</p>
+<ul>
+<li>
+<p><strong>Creating Lists</strong><br>
+You can create a list by placing items inside square brackets <code>[]</code>, separated by commas.</p>
+<pre tabindex="0"><code>my_list = [1, 2, 3, &#34;apple&#34;, &#34;banana&#34;]
+</code></pre></li>
+<li>
+<p><strong>Accessing Elements</strong><br>
+You can access elements of a list using index numbers, starting from <code>0</code> for the first element.</p>
+<pre tabindex="0"><code>first_item = my_list[0]  # first_item is 1
+</code></pre></li>
+<li>
+<p><strong>Slicing</strong><br>
+You can extract a part of a list by slicing it. Slicing is done by specifying a range of indices.</p>
+<pre tabindex="0"><code>sub_list = my_list[1:4]  # sub_list is [2, 3, &#34;apple&#34;]
+</code></pre></li>
+<li>
+<p><strong>List Methods</strong></p>
+<ul>
+<li>
+<p><strong><code>append()</code></strong>: Adds an item to the end of the list.</p>
+<pre tabindex="0"><code>my_list.append(&#34;cherry&#34;)  # my_list becomes [1, 2, 3, &#34;apple&#34;, &#34;banana&#34;, &#34;cherry&#34;]
+</code></pre></li>
+<li>
+<p><strong><code>extend()</code></strong>: Adds elements from another list to the end of the current list.</p>
+<pre tabindex="0"><code>my_list.extend([4, 5])  # my_list becomes [1, 2, 3, &#34;apple&#34;, &#34;banana&#34;, &#34;cherry&#34;, 4, 5]
+</code></pre></li>
+<li>
+<p><strong><code>insert()</code></strong>: Inserts an item at a specified index.</p>
+<pre tabindex="0"><code>my_list.insert(1, &#34;orange&#34;)  # my_list becomes [1, &#34;orange&#34;, 2, 3, &#34;apple&#34;, &#34;banana&#34;, &#34;cherry&#34;, 4, 5]
+</code></pre></li>
+<li>
+<p><strong><code>remove()</code></strong>: Removes the first occurrence of an item.</p>
+<pre tabindex="0"><code>my_list.remove(&#34;apple&#34;)  # my_list becomes [1, &#34;orange&#34;, 2, 3, &#34;banana&#34;, &#34;cherry&#34;, 4, 5]
+</code></pre></li>
+<li>
+<p><strong><code>pop()</code></strong>: Removes and returns the item at a specified index. If no index is specified, it removes and returns the last item.</p>
+<pre tabindex="0"><code>last_item = my_list.pop()  # last_item is 5; my_list becomes [1, &#34;orange&#34;, 2, 3, &#34;banana&#34;, &#34;cherry&#34;, 4]
+</code></pre></li>
+<li>
+<p><strong><code>sort()</code></strong>: Sorts the list in ascending order. Works with lists of numbers or strings.</p>
+<pre tabindex="0"><code>my_list = [3, 1, 4, 2]
+my_list.sort()  # my_list becomes [1, 2, 3, 4]
+</code></pre></li>
+<li>
+<p><strong><code>reverse()</code></strong>: Reverses the order of the list.</p>
+<pre tabindex="0"><code>my_list.reverse()  # my_list becomes [4, 3, 2, 1]
+</code></pre></li>
+</ul>
+</li>
+</ul>
+<h3 id="tuples"><strong>Tuples</strong></h3>
+<p>Tuples are similar to lists but are immutable (cannot be changed after creation).</p>
+<ul>
+<li>
+<p><strong>Creating Tuples</strong><br>
+You can create a tuple by placing items inside parentheses <code>()</code>, separated by commas.</p>
+<pre tabindex="0"><code>my_tuple = (1, 2, 3, &#34;apple&#34;, &#34;banana&#34;)
+</code></pre></li>
+<li>
+<p><strong>Accessing Elements</strong><br>
+Accessing elements in a tuple is the same as with lists, using index numbers.</p>
+<pre tabindex="0"><code>first_item = my_tuple[0]  # first_item is 1
+</code></pre></li>
+<li>
+<p><strong>Tuple Operations</strong><br>
+Although tuples are immutable, you can perform operations like concatenation and repetition.</p>
+<pre tabindex="0"><code>new_tuple = my_tuple + (&#34;cherry&#34;,)  # new_tuple is (1, 2, 3, &#34;apple&#34;, &#34;banana&#34;, &#34;cherry&#34;)
+repeated_tuple = my_tuple * 2  # repeated_tuple is (1, 2, 3, &#34;apple&#34;, &#34;banana&#34;, 1, 2, 3, &#34;apple&#34;, &#34;banana&#34;)
+</code></pre></li>
+</ul>
+<h3 id="dictionaries"><strong>Dictionaries</strong></h3>
+<p>Dictionaries are unordered collections of key-value pairs.</p>
+<ul>
+<li>
+<p><strong>Creating Dictionaries</strong><br>
+You can create a dictionary by placing key-value pairs inside curly braces <code>{}</code>, separated by commas.</p>
+<pre tabindex="0"><code>my_dict = {&#34;name&#34;: &#34;Alice&#34;, &#34;age&#34;: 25, &#34;city&#34;: &#34;New York&#34;}
+</code></pre></li>
+<li>
+<p><strong>Accessing Values</strong><br>
+You can access values in a dictionary by using their corresponding keys.</p>
+<pre tabindex="0"><code>name = my_dict[&#34;name&#34;]  # name is &#34;Alice&#34;
+</code></pre></li>
+<li>
+<p><strong>Dictionary Methods</strong></p>
+<ul>
+<li>
+<p><strong><code>get()</code></strong>: Returns the value for a specified key. If the key does not exist, it returns <code>None</code> or a specified default value.</p>
+<pre tabindex="0"><code>age = my_dict.get(&#34;age&#34;)  # age is 25
+country = my_dict.get(&#34;country&#34;, &#34;Unknown&#34;)  # country is &#34;Unknown&#34;
+</code></pre></li>
+<li>
+<p><strong><code>keys()</code></strong>: Returns a view object that displays a list of all the keys in the dictionary.</p>
+<pre tabindex="0"><code>keys = my_dict.keys()  # keys is dict_keys([&#39;name&#39;, &#39;age&#39;, &#39;city&#39;])
+</code></pre></li>
+<li>
+<p><strong><code>values()</code></strong>: Returns a view object that displays a list of all the values in the dictionary.</p>
+<pre tabindex="0"><code>values = my_dict.values()  # values is dict_values([&#39;Alice&#39;, 25, &#39;New York&#39;])
+</code></pre></li>
+<li>
+<p><strong><code>items()</code></strong>: Returns a view object that displays a list of key-value pairs as tuples.</p>
+<pre tabindex="0"><code>items = my_dict.items()  # items is dict_items([(&#39;name&#39;, &#39;Alice&#39;), (&#39;age&#39;, 25), (&#39;city&#39;, &#39;New York&#39;)])
+</code></pre></li>
+<li>
+<p><strong><code>update()</code></strong>: Updates the dictionary with elements from another dictionary or an iterable of key-value pairs.</p>
+<pre tabindex="0"><code>my_dict.update({&#34;age&#34;: 26, &#34;country&#34;: &#34;USA&#34;})  # my_dict becomes {&#39;name&#39;: &#39;Alice&#39;, &#39;age&#39;: 26, &#39;city&#39;: &#39;New York&#39;, &#39;country&#39;: &#39;USA&#39;}
+</code></pre></li>
+</ul>
+</li>
+</ul>
+<h3 id="sets"><strong>Sets</strong></h3>
+<p>Sets are unordered collections of unique items.</p>
+<ul>
+<li>
+<p><strong>Creating Sets</strong><br>
+You can create a set by placing items inside curly braces <code>{}</code>, separated by commas.</p>
+<pre tabindex="0"><code>my_set = {1, 2, 3, &#34;apple&#34;, &#34;banana&#34;}
+</code></pre></li>
+<li>
+<p><strong>Basic Operations</strong>
+Sets automatically remove duplicates, and you cannot access elements by index because they are unordered.</p>
+<pre tabindex="0"><code>my_set = {1, 2, 3, 3, &#34;apple&#34;, &#34;banana&#34;}  # my_set becomes {1, 2, 3, &#39;apple&#39;, &#39;banana&#39;}
+</code></pre></li>
+<li>
+<p><strong>Set Methods</strong></p>
+<ul>
+<li>
+<p><strong><code>add()</code></strong>: Adds an element to the set.</p>
+<pre tabindex="0"><code>my_set.add(&#34;cherry&#34;)  # my_set becomes {1, 2, 3, &#39;apple&#39;, &#39;banana&#39;, &#39;cherry&#39;}
+</code></pre></li>
+<li>
+<p><strong><code>remove()</code></strong>: Removes a specified element from the set. Raises a <code>KeyError</code> if the element is not found.</p>
+<pre tabindex="0"><code>my_set.remove(&#34;banana&#34;)  # my_set becomes {1, 2, 3, &#39;apple&#39;, &#39;cherry&#39;}
+</code></pre></li>
+<li>
+<p><strong><code>union()</code></strong>: Returns a new set containing all elements from both sets (no duplicates).</p>
+<pre tabindex="0"><code>set1 = {1, 2, 3}
+set2 = {3, 4, 5}
+union_set = set1.union(set2)  # union_set is {1, 2, 3, 4, 5}
+</code></pre></li>
+<li>
+<p><strong><code>intersection()</code></strong>: Returns a new set containing only the elements that are common to both sets.</p>
+<pre tabindex="0"><code>intersection_set = set1.intersection(set2)  # intersection_set is {3}
+</code></pre></li>
+</ul>
+</li>
+</ul>
+
+            </div>
+        </article></main>
+</div>
+<footer class="footer">
+    <span class="footer_item"> </span>
+    &nbsp;
+
+    <div class="footer_social-icons">
+<a href="index.xml" target="_blank" rel="noopener noreferrer me"
+    title="Rss">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+    stroke-linecap="round" stroke-linejoin="round">
+    <path d="M4 11a9 9 0 0 1 9 9" />
+    <path d="M4 4a16 16 0 0 1 16 16" />
+    <circle cx="5" cy="19" r="1" />
+</svg>
+</a>
+</div>
+    <small class="footer_copyright">
+        
+        byteshifters.com
+        
+    </small>
+</footer><a href="#" title="" id="totop">
+    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor" stroke="currentColor" viewBox="0 96 960 960">
+    <path d="M283 704.739 234.261 656 480 410.261 725.739 656 677 704.739l-197-197-197 197Z"/>
+</svg>
+
+</a>
+
+
+    
+
+
+
+
+
+
+    
+    <script src="https://byteshifters.com/js/main.min.35f435a5d8eac613c52daa28d8af544a4512337d3e95236e4a4978417b8dcb2f.js" integrity="sha256-NfQ1pdjqxhPFLaoo2K9USkUSM30&#43;lSNuSkl4QXuNyy8="></script>
+
+    
+
+</body>
+</html>
