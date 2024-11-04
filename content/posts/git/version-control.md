@@ -11,7 +11,7 @@ toc: true
 Git is a powerful distributed version control system that enables multiple developers to collaborate on projects, track changes, and manage code effectively. It maintains a complete history of changes, making it easy to revert to previous versions when necessary.
 
 
-### Installing Git
+### Installing Git  
 - **Windows**: Download the installer from [git-scm.com](https://git-scm.com/).
 - **macOS**: Install via Homebrew:
   ```
