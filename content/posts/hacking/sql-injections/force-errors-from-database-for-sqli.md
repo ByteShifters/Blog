@@ -4,6 +4,8 @@ tags: ['Hacking', 'SQLi']
 date: 2024-10-03
 toc: true
 unlisted: true
+author: 'Ren'
+authorlink: 'https://about.0x0060.dev/'
 ---
 
 ## MSSQL  

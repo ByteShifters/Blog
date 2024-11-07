@@ -4,6 +4,8 @@ tags: ['Python']
 date: 2024-09-11
 draft: false
 toc: true
+author: 'Ren'
+authorlink: 'https://about.0x0060.dev/'
 ---
 
 # Python Roadmap: From Zero to Hero & Production Code

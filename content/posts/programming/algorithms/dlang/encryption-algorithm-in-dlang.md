@@ -2,6 +2,8 @@
 title: "Custom Encryption Algorithm in Dlang"
 tags: ['Dlang', 'Low level', 'Malware']
 date: 2024-10-04
+author: 'Ren'
+authorlink: 'https://about.0x0060.dev/'
 toc: true
 ---
 # Implementing a Custom Encryption Algorithm in D Language

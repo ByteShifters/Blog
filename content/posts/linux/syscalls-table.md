@@ -2,6 +2,8 @@
 title: "Linux Syscalls Table"
 tags: ['Linux', 'Low level', 'Syscalls']
 date: 2024-09-13
+author: 'Ren'
+authorlink: 'https://about.0x0060.dev/'
 toc: true
 ---
 

@@ -5,6 +5,8 @@ date: 2024-09-11
 draft: false
 toc: true
 unlisted: true
+author: 'Ren'
+authorlink: 'https://about.0x0060.dev/'
 ---
 
 ### **Introduction to Web Frameworks**

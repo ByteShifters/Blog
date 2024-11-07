@@ -2,6 +2,8 @@
 title: "Advanced C Programming Best Practices"
 tags: ['C', 'Low level']
 date: 2024-07-29
+author: 'Ren'
+authorlink: 'https://about.0x0060.dev/'
 toc: true
 ---
 

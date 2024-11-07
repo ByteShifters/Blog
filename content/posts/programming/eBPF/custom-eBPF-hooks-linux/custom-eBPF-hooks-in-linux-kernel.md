@@ -2,6 +2,8 @@
 title: "Custom linux kernel Hooks with eBPF"
 tags: ['System Security', 'Low level', 'Rootkits', 'Malware']
 date: 2024-10-02
+author: 'Ren'
+authorlink: 'https://about.0x0060.dev/'
 toc: true
 ---
 

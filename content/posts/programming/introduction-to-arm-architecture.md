@@ -2,6 +2,8 @@
 title: "Introduction to ARM Architecture"
 tags: ['ASM', 'ARM', 'Architecture', 'Low level']
 date: 2024-09-21
+author: 'Ren'
+authorlink: 'https://about.0x0060.dev/'
 toc: true
 ---
 

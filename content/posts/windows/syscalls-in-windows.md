@@ -2,8 +2,11 @@
 title: "Introduction to Windows Syscalls"
 tags: ['Windows', 'Low level', 'Malware', 'Rootkits']
 date: 2024-09-17
+author: 'Ren'
+authorlink: 'https://about.0x0060.dev/'
 toc: true
 ---
+
 
 # Introduction to Syscalls in Windows
 

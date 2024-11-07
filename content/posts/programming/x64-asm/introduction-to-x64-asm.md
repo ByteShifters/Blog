@@ -2,6 +2,8 @@
 title: "Introduction to x64 ASM"
 tags: ['C', 'Low level', 'ASM']
 date: 2024-09-21
+author: 'Ren'
+authorlink: 'https://about.0x0060.dev/'
 toc: true
 ---
 

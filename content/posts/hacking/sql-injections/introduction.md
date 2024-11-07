@@ -3,6 +3,8 @@ title: "Introduction to Advanced SQL Injection Techniques"
 tags: ['Hacking', 'SQL Injection', 'Security']
 date: 2024-10-03
 toc: true
+author: 'Ren'
+authorlink: 'https://about.0x0060.dev/'
 ---
 
 ## Introduction to Advanced SQL Injection Techniques
